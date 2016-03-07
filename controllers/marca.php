@@ -53,7 +53,6 @@ class Marca extends Controller {
 		$data = array(
 			'id_marca' => $_POST["id_marca"], 
 			'name' => $_POST["name"], 
-			'id_produto' => $_POST["id_produto"], 
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -66,11 +65,8 @@ class Marca extends Controller {
 	*/
 	public function edit( $id )
 	{
-		$data = array(
-			"id_marca" 	=> $id,
-			'id_marca' => $_POST["id_marca"], 
+		$data = array( 
 			'name' => $_POST["name"], 
-			'id_produto' => $_POST["id_produto"], 
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

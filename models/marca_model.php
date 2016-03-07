@@ -13,7 +13,6 @@ class Marca_Model extends Model
 	*/
 	private $marca;
 	private $name;
-	private $produto;
 
 	public function __construct()
 	{
@@ -21,7 +20,6 @@ class Marca_Model extends Model
 
 		$this->id_marca = '';
 		$this->name = '';
-		$this->id_produto = '';
 	}
 
 	/** 
@@ -37,10 +35,7 @@ class Marca_Model extends Model
 		$this->name = $name;
 	}
 
-	public function setId_produto( $id_produto )
-	{
-		$this->id_produto = $id_produto;
-	}
+	
 
 	/** 
 	* Metodos get's
@@ -55,10 +50,7 @@ class Marca_Model extends Model
 		return $this->name;
 	}
 
-	public function getId_produto()
-	{
-		return $this->id_produto;
-	}
+	
 
 
 	/** 
@@ -167,7 +159,6 @@ class Marca_Model extends Model
 	{
 		$this->setId_marca( $row["id_marca"] );
 		$this->setName( $row["name"] );
-		$this->setId_produto( $row["id_produto"] );
 
 		return $this;
 	}

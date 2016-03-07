@@ -36,7 +36,7 @@
 	<tr>
 		<th>Id_marca </th>
 		<th>Name </th>
-		<th>Id_produto </th>
+		
 		<th></th>
 	</tr>
 	</thead>
@@ -45,7 +45,7 @@
 	<tr>
  		<td><?php echo $marca->getId_marca(); ?></td>
 		<td><?php echo $marca->getName(); ?></td>
-		<td><?php echo $marca->getId_produto(); ?></td>
+		
 		<td align="right">
 			<a href="<?php echo URL;?>marca/form/<?php echo $marca->getId_marca();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>marca/delete/<?php echo $marca->getId_marca();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>

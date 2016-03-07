@@ -132,8 +132,8 @@ class Fornecedor_Model extends Model
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where id_fornecedor like :id "; // Configurar o like com o campo necessario da tabela 
-			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
+			$sql .= "where name like :name "; // Configurar o like com o campo necessario da tabela 
+			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
 		}
 		else
 			$result = $this->db->select( $sql );

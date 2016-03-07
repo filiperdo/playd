@@ -62,7 +62,7 @@
 			<a href="<?php echo URL;?>peca/form/<?php echo $peca->getId_peca();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>peca/delete/<?php echo $peca->getId_peca();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
 		</td>
-		</tr>
+	</tr>
 	<?php } ?>
 	</tbody>
 </table>

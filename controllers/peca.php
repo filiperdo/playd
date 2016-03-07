@@ -30,11 +30,35 @@ class Peca extends Controller {
 		$this->view->obj = $this->model;
 		
 		/*************************************
+		 * Instancia do fornecedor
+		 */
+		require 'models/fornecedor_model.php';
+		$objFornecedor = new Fornecedor_Model();
+		$this->view->listarFornecedor = $objFornecedor->listarFornecedor();
+		/******************************************/
+		
+		/*************************************
 		 * Instancia do produto
 		 */
 		require 'models/produto_model.php';
 		$objProduto = new Produto_Model();
 		$this->view->listarProduto = $objProduto->listarProduto();
+		/******************************************/
+		
+		/*************************************
+		 * Instancia da marca
+		 */
+		require 'models/marca_model.php';
+		$objMarca = new Marca_Model();
+		$this->view->listarMarca = $objMarca->listarMarca();
+		/******************************************/
+		
+		/*************************************
+		 * Instancia do status
+		 */
+		require 'models/statuspeca_model.php';
+		$objStatus = new Statuspeca_Model();
+		$this->view->listarStatus = $objStatus->listarStatuspeca();
 		/******************************************/
 		
 		if( $id ) 

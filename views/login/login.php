@@ -67,7 +67,7 @@
 	  
       <form action="<?php echo URL?>login/run" class="form-signin" method="post" id="formLogin">
       <input type="hidden" name="action" value="autenticarUsuario">
-        <h2 class="form-signin-heading" align="center"><!-- <img src="../img/img_logo.png" width="216" height="89" alt=" "> --></h2>
+        <h2 class="form-signin-heading" align="center"><img src="<?php echo URL; ?>public/img/logo-play-display-pq.jpg"  alt=" "></h2>
         
 		<?php if (isset($_GET['st'])) { $objAlerta = new Alerta($_GET['st']); } ?> 
 		

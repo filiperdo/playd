@@ -20,6 +20,7 @@ class Peca_Model extends Model
 	private $fornecedor;
 	private $marca;
 	private $statuspeca;
+	private $produto;
 
 	public function __construct()
 	{
@@ -34,6 +35,7 @@ class Peca_Model extends Model
 		$this->id_fornecedor = '';
 		$this->id_marca = '';
 		$this->id_statuspeca = '';
+		$this->id_produto = '';
 	}
 
 	/** 
@@ -84,6 +86,11 @@ class Peca_Model extends Model
 		$this->id_statuspeca = $id_statuspeca;
 	}
 
+	public function setId_produto( $id_produto )
+	{
+		$this->id_produto = $id_produto;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -132,6 +139,10 @@ class Peca_Model extends Model
 		return $this->id_statuspeca;
 	}
 
+	public function getId_produto()
+	{
+		return $this->id_produto;
+	}
 
 	/** 
 	* Metodo create
@@ -246,6 +257,7 @@ class Peca_Model extends Model
 		$this->setId_fornecedor( $row["id_fornecedor"] );
 		$this->setId_marca( $row["id_marca"] );
 		$this->setId_statuspeca( $row["id_statuspeca"] );
+		$this->setId_produto( $row["id_produto"] );
 
 		return $this;
 	}

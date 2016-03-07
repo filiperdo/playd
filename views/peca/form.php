@@ -20,6 +20,15 @@
 <input type="hidden" name="idPeca" value="<?=$this->obj->getId_peca()?>" />
 
 <div class="form-group">
+	<label for="fornecedor">Fornecedor</label>
+	<select name="produto" class="form-control">
+	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
+		<option value=""><?php echo $fornecedor->getName();?></option>
+	<?php } ?>
+	</select>
+</div>
+
+<div class="form-group">
 	<label for="produto">Produto</label> 
 	<select name="produto" class="form-control">
 	<?php foreach( $this->listarProduto as $produto ) { ?>
@@ -29,10 +38,19 @@
 </div>
 
 <div class="form-group">
+	<label for="marca">Marca</label> 
+	<select name="marca" class="form-control">
+	<?php foreach( $this->listarMarca as $marca ) { ?>
+		<option value=""><?php echo $marca->getName();?></option>
+	<?php } ?>
+	</select>
+</div>
+
+<div class="form-group">
 	<label for="name">Name</label> 
 		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>
-
+<!-- 
 <div class="form-group">
 	<label for="codigo">Codigo</label> 
 		<input type="text" name="codigo" id="codigo"  class="form-control" required="required" value="<?=$this->obj->getCodigo()?>" />
@@ -42,20 +60,14 @@
 	<label for="qrcode">Qrcode</label> 
 		<input type="text" name="qrcode" id="qrcode"  class="form-control" required="required" value="<?=$this->obj->getQrcode()?>" />
 </div>
-
+ -->
 <div class="form-group">
-	<label for="id_fornecedor">Fornecedor</label> 
-	<input type="text" name="id_fornecedor" id="id_fornecedor"  class="form-control" required="required" value="<?=$this->obj->getId_fornecedor()?>" />
-</div>
-
-<div class="form-group">
-	<label for="id_marca">Marca</label> 
-	<input type="text" name="id_marca" id="id_marca"  class="form-control" required="required" value="<?=$this->obj->getId_marca()?>" />
-</div>
-
-<div class="form-group">
-	<label for="id_statuspeca">Statuspeca</label> 
-		<input type="text" name="id_statuspeca" id="id_statuspeca"  class="form-control" required="required" value="<?=$this->obj->getId_statuspeca()?>" />
+	<label for="status">Status</label> 
+	<select name="status" class="form-control">
+	<?php foreach( $this->listarStatus as $status ) { ?>
+		<option value=""><?php echo $status->getName();?></option>
+	<?php } ?>
+	</select>
 </div>
 
 <div class="form-group">

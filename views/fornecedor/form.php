@@ -19,11 +19,6 @@
 <input type="hidden" name="idFornecedor" value="<?=$this->obj->getId_fornecedor()?>" />
 
 <div class="form-group">
-	<label for="id_fornecedor">Id_fornecedor</label> 
-		<input type="text" name="id_fornecedor" id="id_fornecedor"  class="form-control" required="required" value="<?=$this->obj->getId_fornecedor()?>" />
-</div>
-
-<div class="form-group">
 	<label for="name">Name</label> 
 		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>

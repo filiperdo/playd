@@ -18,20 +18,12 @@
 <div class="col-md-6 col-sm-6 col-lg-6">
 <input type="hidden" name="idMarca" value="<?=$this->obj->getId_marca()?>" />
 
-<div class="form-group">
-	<label for="id_marca">Id_marca</label> 
-		<input type="text" name="id_marca" id="id_marca"  class="form-control" required="required" value="<?=$this->obj->getId_marca()?>" />
-</div>
 
 <div class="form-group">
 	<label for="name">Name</label> 
 		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>
 
-<div class="form-group">
-	<label for="id_produto">Id_produto</label> 
-		<input type="text" name="id_produto" id="id_produto"  class="form-control" required="required" value="<?=$this->obj->getId_produto()?>" />
-</div>
 
 <div class="form-group">
 	<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" />
