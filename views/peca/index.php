@@ -34,7 +34,6 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Id_peca </th>
 		<th>Name </th>
 		<th>Codigo </th>
 		<th>Qrcode </th>
@@ -42,14 +41,13 @@
 		<th>Id_user </th>
 		<th>Id_fornecedor </th>
 		<th>Id_marca </th>
-		<th>Id_statuspeca </th>
+		<th>Status </th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach( $this->listarPeca as $peca ) { ?>
 	<tr>
- 		<td><?php echo $peca->getId_peca(); ?></td>
 		<td><?php echo $peca->getName(); ?></td>
 		<td><?php echo $peca->getCodigo(); ?></td>
 		<td><?php echo $peca->getQrcode(); ?></td>

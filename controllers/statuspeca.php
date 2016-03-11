@@ -4,7 +4,7 @@ class Statuspeca extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-		//Auth::handleLogin();
+		Auth::handleLogin();
 	}
 
 	/** 
@@ -51,7 +51,6 @@ class Statuspeca extends Controller {
 	public function create()
 	{
 		$data = array(
-			'id_statuspeca' => $_POST["id_statuspeca"], 
 			'name' => $_POST["name"], 
 		);
 
@@ -66,8 +65,6 @@ class Statuspeca extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			"id_statuspeca" 	=> $id,
-			'id_statuspeca' => $_POST["id_statuspeca"], 
 			'name' => $_POST["name"], 
 		);
 

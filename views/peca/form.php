@@ -47,9 +47,15 @@
 </div>
 
 <div class="form-group">
-	<label for="name">Name</label> 
+	<label for="name">Nome</label> 
 		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>
+
+<div class="form-group">
+	<label for="quantidade">Quantidade</label> 
+		<input type="text" name="quantidade" id="quantidade"  class="form-control" required="required" value="" />
+</div>
+
 <!-- 
 <div class="form-group">
 	<label for="codigo">Codigo</label> 

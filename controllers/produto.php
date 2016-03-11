@@ -4,7 +4,7 @@ class Produto extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-		//Auth::handleLogin();
+		Auth::handleLogin();
 	}
 
 	/** 
@@ -51,7 +51,6 @@ class Produto extends Controller {
 	public function create()
 	{
 		$data = array(
-			'id_produto' => $_POST["id_produto"], 
 			'name' => $_POST["name"], 
 		);
 
@@ -66,8 +65,6 @@ class Produto extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			"id_produto" 	=> $id,
-			'id_produto' => $_POST["id_produto"], 
 			'name' => $_POST["name"], 
 		);
 
