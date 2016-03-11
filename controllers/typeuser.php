@@ -4,7 +4,7 @@ class Typeuser extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-		//Auth::handleLogin();
+		Auth::handleLogin();
 	}
 
 	/** 
@@ -51,7 +51,6 @@ class Typeuser extends Controller {
 	public function create()
 	{
 		$data = array(
-			'id_typeuser' => $_POST["id_typeuser"], 
 			'name' => $_POST["name"], 
 		);
 
@@ -66,8 +65,6 @@ class Typeuser extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			"id_typeuser" 	=> $id,
-			'id_typeuser' => $_POST["id_typeuser"], 
 			'name' => $_POST["name"], 
 		);
 

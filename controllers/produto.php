@@ -4,7 +4,7 @@ class Produto extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-		//Auth::handleLogin();
+		Auth::handleLogin();
 	}
 
 	/** 
@@ -50,9 +50,8 @@ class Produto extends Controller {
 	*/
 	public function create()
 	{
-		$data = array(
-			'id_produto' => $_POST["id_produto"], 
-			'name' => $_POST["name"], 
+		$data = array( 
+			'name' 			=> $_POST["name"], 
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -66,8 +65,6 @@ class Produto extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			"id_produto" 	=> $id,
-			'id_produto' => $_POST["id_produto"], 
 			'name' => $_POST["name"], 
 		);
 

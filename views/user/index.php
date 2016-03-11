@@ -39,7 +39,7 @@
 		<th>Email </th>
 		<th>Login </th>
 		<th>Password </th>
-		<th>Id_typeuser </th>
+		<th>Tipo </th>
 		<th></th>
 	</tr>
 	</thead>
@@ -50,8 +50,8 @@
 		<td><?php echo $user->getName(); ?></td>
 		<td><?php echo $user->getEmail(); ?></td>
 		<td><?php echo $user->getLogin(); ?></td>
-		<td><?php echo $user->getPassword(); ?></td>
-		<td><?php echo $user->getId_typeuser(); ?></td>
+		<td><?php echo '*****'; ?></td>
+		<td><?php echo $user->getTypeuser()->getName(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>user/form/<?php echo $user->getId_user();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>user/delete/<?php echo $user->getId_user();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
