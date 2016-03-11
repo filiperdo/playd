@@ -4,7 +4,11 @@ class Fornecedor extends Controller {
 
 	public function __construct() {
 		parent::__construct();
+<<<<<<< HEAD
 		Auth::handleLogin();
+=======
+		//Auth::handleLogin();
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -50,9 +54,16 @@ class Fornecedor extends Controller {
 	*/
 	public function create()
 	{
+<<<<<<< HEAD
 		$data = array( 
 			'name' 	=> $_POST["name"], 
 			'cep' 	=> $_POST["cep"], 
+=======
+		$data = array(
+			'id_fornecedor' => $_POST["id_fornecedor"], 
+			'name' => $_POST["name"], 
+			'cep' => $_POST["cep"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -65,9 +76,17 @@ class Fornecedor extends Controller {
 	*/
 	public function edit( $id )
 	{
+<<<<<<< HEAD
 		$data = array( 
 			'name' 	=> $_POST["name"], 
 			'cep' 	=> $_POST["cep"], 
+=======
+		$data = array(
+			"id_fornecedor" 	=> $id,
+			'id_fornecedor' => $_POST["id_fornecedor"], 
+			'name' => $_POST["name"], 
+			'cep' => $_POST["cep"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

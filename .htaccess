@@ -2,7 +2,11 @@ php_flag display_errors on
 php_value error_reporting 9999
 
 RewriteEngine On
+<<<<<<< HEAD
 RewriteBase /playdisplay/
+=======
+RewriteBase /playd/
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

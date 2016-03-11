@@ -4,7 +4,11 @@ class Statuspeca extends Controller {
 
 	public function __construct() {
 		parent::__construct();
+<<<<<<< HEAD
 		Auth::handleLogin();
+=======
+		//Auth::handleLogin();
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -51,6 +55,10 @@ class Statuspeca extends Controller {
 	public function create()
 	{
 		$data = array(
+<<<<<<< HEAD
+=======
+			'id_statuspeca' => $_POST["id_statuspeca"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 			'name' => $_POST["name"], 
 		);
 
@@ -65,6 +73,11 @@ class Statuspeca extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
+<<<<<<< HEAD
+=======
+			"id_statuspeca" 	=> $id,
+			'id_statuspeca' => $_POST["id_statuspeca"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 			'name' => $_POST["name"], 
 		);
 

@@ -4,7 +4,11 @@ class Marca extends Controller {
 
 	public function __construct() {
 		parent::__construct();
+<<<<<<< HEAD
 		Auth::handleLogin();
+=======
+		//Auth::handleLogin();
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -50,7 +54,12 @@ class Marca extends Controller {
 	*/
 	public function create()
 	{
+<<<<<<< HEAD
 		$data = array(		
+=======
+		$data = array(
+			'id_marca' => $_POST["id_marca"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 			'name' => $_POST["name"], 
 		);
 

@@ -34,7 +34,11 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
+<<<<<<< HEAD
 		
+=======
+		<th>Id_user </th>
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		<th>Name </th>
 		<th>Email </th>
 		<th>Login </th>
@@ -46,11 +50,19 @@
 	<tbody>
 	<?php foreach( $this->listarUser as $user ) { ?>
 	<tr>
+<<<<<<< HEAD
  		
 		<td><?php echo $user->getName(); ?></td>
 		<td><?php echo $user->getEmail(); ?></td>
 		<td><?php echo $user->getLogin(); ?></td>
 		<td><?php echo '*******'; ?></td>
+=======
+ 		<td><?php echo $user->getId_user(); ?></td>
+		<td><?php echo $user->getName(); ?></td>
+		<td><?php echo $user->getEmail(); ?></td>
+		<td><?php echo $user->getLogin(); ?></td>
+		<td><?php echo $user->getPassword(); ?></td>
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		<td><?php echo $user->getId_typeuser(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>user/form/<?php echo $user->getId_user();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>

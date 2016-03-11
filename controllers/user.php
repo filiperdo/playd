@@ -4,7 +4,11 @@ class User extends Controller {
 
 	public function __construct() {
 		parent::__construct();
+<<<<<<< HEAD
 		Auth::handleLogin();
+=======
+		//Auth::handleLogin();
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -51,11 +55,20 @@ class User extends Controller {
 	public function create()
 	{
 		$data = array(
+<<<<<<< HEAD
 			'name' 			=> $_POST["name"], 
 			'email' 		=> $_POST["email"], 
 			'login' 		=> $_POST["login"], 
 			'password' 		=> $_POST["password"], 
 			'id_typeuser' 	=> $_POST["id_typeuser"], 
+=======
+			'id_user' => $_POST["id_user"], 
+			'name' => $_POST["name"], 
+			'email' => $_POST["email"], 
+			'login' => $_POST["login"], 
+			'password' => $_POST["password"], 
+			'id_typeuser' => $_POST["id_typeuser"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -69,11 +82,21 @@ class User extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
+<<<<<<< HEAD
 			'name' 				=> $_POST["name"], 
 			'email'				=> $_POST["email"], 
 			'login' 			=> $_POST["login"], 
 			'password' 			=> $_POST["password"], 
 			'id_typeuser' 		=> $_POST["id_typeuser"], 
+=======
+			"id_user" 	=> $id,
+			'id_user' => $_POST["id_user"], 
+			'name' => $_POST["name"], 
+			'email' => $_POST["email"], 
+			'login' => $_POST["login"], 
+			'password' => $_POST["password"], 
+			'id_typeuser' => $_POST["id_typeuser"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

@@ -4,7 +4,11 @@ class Typeuser extends Controller {
 
 	public function __construct() {
 		parent::__construct();
+<<<<<<< HEAD
 		Auth::handleLogin();
+=======
+		//Auth::handleLogin();
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -51,7 +55,12 @@ class Typeuser extends Controller {
 	public function create()
 	{
 		$data = array(
+<<<<<<< HEAD
 			'name' 			=> $_POST["name"], 
+=======
+			'id_typeuser' => $_POST["id_typeuser"], 
+			'name' => $_POST["name"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -65,6 +74,11 @@ class Typeuser extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
+<<<<<<< HEAD
+=======
+			"id_typeuser" 	=> $id,
+			'id_typeuser' => $_POST["id_typeuser"], 
+>>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 			'name' => $_POST["name"], 
 		);
 
