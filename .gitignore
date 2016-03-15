@@ -3,3 +3,4 @@ _files
 .project
 .buildpath
 config.php
+builder.php

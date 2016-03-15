@@ -4,7 +4,7 @@
  * Classe Fornecedor
  * @author __ 
  *
- * Data: 02/03/2016
+ * Data: 15/03/2016
  */
 class Fornecedor_Model extends Model
 {
@@ -13,7 +13,12 @@ class Fornecedor_Model extends Model
 	*/
 	private $fornecedor;
 	private $name;
-	private $cep;
+	private $telefone;
+	private $email;
+	private $banco;
+	private $cidade;
+	private $estado;
+	private $date;
 
 	public function __construct()
 	{
@@ -21,7 +26,12 @@ class Fornecedor_Model extends Model
 
 		$this->id_fornecedor = '';
 		$this->name = '';
-		$this->cep = '';
+		$this->telefone = '';
+		$this->email = '';
+		$this->banco = '';
+		$this->cidade = '';
+		$this->estado = '';
+		$this->date = '';
 	}
 
 	/** 
@@ -37,9 +47,34 @@ class Fornecedor_Model extends Model
 		$this->name = $name;
 	}
 
-	public function setCep( $cep )
+	public function setTelefone( $telefone )
 	{
-		$this->cep = $cep;
+		$this->telefone = $telefone;
+	}
+
+	public function setEmail( $email )
+	{
+		$this->email = $email;
+	}
+
+	public function setBanco( $banco )
+	{
+		$this->banco = $banco;
+	}
+
+	public function setCidade( $cidade )
+	{
+		$this->cidade = $cidade;
+	}
+
+	public function setEstado( $estado )
+	{
+		$this->estado = $estado;
+	}
+
+	public function setDate( $date )
+	{
+		$this->date = $date;
 	}
 
 	/** 
@@ -55,9 +90,34 @@ class Fornecedor_Model extends Model
 		return $this->name;
 	}
 
-	public function getCep()
+	public function getTelefone()
 	{
-		return $this->cep;
+		return $this->telefone;
+	}
+
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	public function getBanco()
+	{
+		return $this->banco;
+	}
+
+	public function getCidade()
+	{
+		return $this->cidade;
+	}
+
+	public function getEstado()
+	{
+		return $this->estado;
+	}
+
+	public function getDate()
+	{
+		return $this->date;
 	}
 
 
@@ -132,8 +192,8 @@ class Fornecedor_Model extends Model
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where name like :name "; // Configurar o like com o campo necessario da tabela 
-			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
+			$sql .= "where id_fornecedor like :id "; // Configurar o like com o campo necessario da tabela 
+			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
 		}
 		else
 			$result = $this->db->select( $sql );
@@ -167,7 +227,12 @@ class Fornecedor_Model extends Model
 	{
 		$this->setId_fornecedor( $row["id_fornecedor"] );
 		$this->setName( $row["name"] );
-		$this->setCep( $row["cep"] );
+		$this->setTelefone( $row["telefone"] );
+		$this->setEmail( $row["email"] );
+		$this->setBanco( $row["banco"] );
+		$this->setCidade( $row["cidade"] );
+		$this->setEstado( $row["estado"] );
+		$this->setDate( $row["date"] );
 
 		return $this;
 	}
