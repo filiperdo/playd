@@ -19,11 +19,6 @@
 <input type="hidden" name="idUser" value="<?=$this->obj->getId_user()?>" />
 
 <div class="form-group">
-	<label for="id_user">Id_user</label> 
-		<input type="text" name="id_user" id="id_user"  class="form-control" required="required" value="<?=$this->obj->getId_user()?>" />
-</div>
-
-<div class="form-group">
 	<label for="name">Name</label> 
 		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>
@@ -44,8 +39,12 @@
 </div>
 
 <div class="form-group">
-	<label for="id_typeuser">Id_typeuser</label> 
-		<input type="text" name="id_typeuser" id="id_typeuser"  class="form-control" required="required" value="<?=$this->obj->getId_typeuser()?>" />
+	<label for="id_typeuser">Tipo</label> 
+	<select class="form-control" name="id_typeuser">
+		<?php foreach ( $this->listarTypeuser as $typeuser ){?>
+		<option value="<?php echo $typeuser->getId_typeuser();?>"><?php echo $typeuser->getName();?></option>
+		<?php } ?>
+	</select>
 </div>
 
 <div class="form-group">

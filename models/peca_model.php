@@ -12,30 +12,27 @@ class Peca_Model extends Model
 	* Atributos Private 
 	*/
 	private $peca;
-	private $name;
 	private $codigo;
 	private $qrcode;
 	private $date;
 	private $user;
 	private $fornecedor;
-	private $marca;
-	private $statuspeca;
 	private $produto;
+	private $statuspeca;
 
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->id_peca = '';
-		$this->name = '';
 		$this->codigo = '';
 		$this->qrcode = '';
 		$this->date = '';
 		$this->id_user = '';
 		$this->id_fornecedor = '';
-		$this->id_marca = '';
-		$this->id_statuspeca = '';
 		$this->id_produto = '';
+		$this->id_statuspeca = '';
+
 	}
 
 	/** 
@@ -44,11 +41,6 @@ class Peca_Model extends Model
 	public function setId_peca( $id_peca )
 	{
 		$this->id_peca = $id_peca;
-	}
-
-	public function setName( $name )
-	{
-		$this->name = $name;
 	}
 
 	public function setCodigo( $codigo )
@@ -76,19 +68,14 @@ class Peca_Model extends Model
 		$this->id_fornecedor = $id_fornecedor;
 	}
 
-	public function setId_marca( $id_marca )
+	public function setId_produto( $id_produto )
 	{
-		$this->id_marca = $id_marca;
+		$this->id_produto = $id_produto;
 	}
 
 	public function setId_statuspeca( $id_statuspeca )
 	{
 		$this->id_statuspeca = $id_statuspeca;
-	}
-
-	public function setId_produto( $id_produto )
-	{
-		$this->id_produto = $id_produto;
 	}
 	
 	/** 
@@ -97,11 +84,6 @@ class Peca_Model extends Model
 	public function getId_peca()
 	{
 		return $this->id_peca;
-	}
-
-	public function getName()
-	{
-		return $this->name;
 	}
 
 	public function getCodigo()
@@ -129,19 +111,14 @@ class Peca_Model extends Model
 		return $this->id_fornecedor;
 	}
 
-	public function getId_marca()
+	public function getId_produto()
 	{
-		return $this->id_marca;
+		return $this->id_produto;
 	}
 
 	public function getId_statuspeca()
 	{
 		return $this->id_statuspeca;
-	}
-
-	public function getId_produto()
-	{
-		return $this->id_produto;
 	}
 
 	/** 
@@ -249,15 +226,13 @@ class Peca_Model extends Model
 	private function montarObjeto( $row )
 	{
 		$this->setId_peca( $row["id_peca"] );
-		$this->setName( $row["name"] );
 		$this->setCodigo( $row["codigo"] );
 		$this->setQrcode( $row["qrcode"] );
 		$this->setDate( $row["date"] );
 		$this->setId_user( $row["id_user"] );
 		$this->setId_fornecedor( $row["id_fornecedor"] );
-		$this->setId_marca( $row["id_marca"] );
-		$this->setId_statuspeca( $row["id_statuspeca"] );
 		$this->setId_produto( $row["id_produto"] );
+		$this->setId_statuspeca( $row["id_statuspeca"] );
 
 		return $this;
 	}

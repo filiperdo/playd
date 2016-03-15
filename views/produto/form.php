@@ -19,8 +19,12 @@
 <input type="hidden" name="idProduto" value="<?=$this->obj->getId_produto()?>" />
 
 <div class="form-group">
-	<label for="id_produto">Id_produto</label> 
-		<input type="text" name="id_produto" id="id_produto"  class="form-control" required="required" value="<?=$this->obj->getId_produto()?>" />
+	<label for="marca">Marca</label> 
+	<select name="marca" class="form-control">
+		<?php foreach ( $this->listarMarca as $marca ){ ?>
+		<option value="<?php echo $marca->getId_marca();?>"><?php echo $marca->getName();?></option>
+		<?php } ?>
+	</select>
 </div>
 
 <div class="form-group">

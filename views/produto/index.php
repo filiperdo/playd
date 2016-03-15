@@ -34,16 +34,17 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Id_produto </th>
-		<th>Name </th>
+		
+		<th>Nome </th>
+		<th>Marca </th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach( $this->listarProduto as $produto ) { ?>
 	<tr>
- 		<td><?php echo $produto->getId_produto(); ?></td>
 		<td><?php echo $produto->getName(); ?></td>
+		<td><?php echo $produto->getId_marca(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>produto/form/<?php echo $produto->getId_produto();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>produto/delete/<?php echo $produto->getId_produto();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>

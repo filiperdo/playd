@@ -4,11 +4,7 @@ class Peca extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-<<<<<<< HEAD
 		Auth::handleLogin();
-=======
-		//Auth::handleLogin();
->>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -87,13 +83,11 @@ class Peca extends Controller {
 	public function create()
 	{
 		$data = array(
-			'name' 				=> $_POST["name"], 
 			'codigo' 			=> $_POST["codigo"], 
 			'qrcode' 			=> $_POST["qrcode"], 
-			'date' 				=> $_POST["date"], 
 			'id_user' 			=> $_POST["id_user"], 
 			'id_fornecedor' 	=> $_POST["id_fornecedor"], 
-			'id_marca' 			=> $_POST["id_marca"], 
+			'id_produto' 		=> $_POST["id_produto"], 
 			'id_statuspeca' 	=> $_POST["id_statuspeca"], 
 		);
 
@@ -108,11 +102,10 @@ class Peca extends Controller {
 	public function edit( $id )
 	{
 		$data = array( 
-			'name' 				=> $_POST["name"], 
 			'codigo' 			=> $_POST["codigo"], 
 			'qrcode' 			=> $_POST["qrcode"], 
 			'id_fornecedor' 	=> $_POST["id_fornecedor"], 
-			'id_marca' 			=> $_POST["id_marca"], 
+			'id_produto'		=> $_POST["id_produto"], 
 			'id_statuspeca' 	=> $_POST["id_statuspeca"], 
 		);
 

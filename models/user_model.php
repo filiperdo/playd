@@ -58,7 +58,7 @@ class User_Model extends Model
 		$this->password = $password;
 	}
 
-	public function setId_typeuser( $id_typeuser )
+	public function setTypeuser( Typeuser_Model $id_typeuser )
 	{
 		$this->id_typeuser = $id_typeuser;
 	}
@@ -91,7 +91,7 @@ class User_Model extends Model
 		return $this->password;
 	}
 
-	public function getId_typeuser()
+	public function getTypeuser()
 	{
 		return $this->id_typeuser;
 	}
@@ -206,7 +206,12 @@ class User_Model extends Model
 		$this->setEmail( $row["email"] );
 		$this->setLogin( $row["login"] );
 		$this->setPassword( $row["password"] );
-		$this->setId_typeuser( $row["id_typeuser"] );
+		
+		require 'typeuser_model.php';
+		$objTypeUser = new Typeuser_Model();
+		$objTypeUser->obterTypeuser( $row["id_typeuser"] );
+		
+		$this->setTypeuser( $objTypeUser );
 
 		return $this;
 	}

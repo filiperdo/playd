@@ -13,6 +13,7 @@ class Produto_Model extends Model
 	*/
 	private $produto;
 	private $name;
+	private $id_marca;
 
 	public function __construct()
 	{
@@ -20,6 +21,7 @@ class Produto_Model extends Model
 
 		$this->id_produto = '';
 		$this->name = '';
+		$this->id_marca = '';
 	}
 
 	/** 
@@ -35,6 +37,11 @@ class Produto_Model extends Model
 		$this->name = $name;
 	}
 
+	public function setId_marca( $id_marca )
+	{
+		$this->id_marca = $id_marca;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -48,6 +55,10 @@ class Produto_Model extends Model
 		return $this->name;
 	}
 
+	public function getId_marca()
+	{
+		return $this->id_marca;
+	}
 
 	/** 
 	* Metodo create
@@ -120,8 +131,8 @@ class Produto_Model extends Model
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where id_produto like :id "; // Configurar o like com o campo necessario da tabela 
-			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
+			$sql .= "where name like :name "; // Configurar o like com o campo necessario da tabela 
+			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
 		}
 		else
 			$result = $this->db->select( $sql );
@@ -155,6 +166,7 @@ class Produto_Model extends Model
 	{
 		$this->setId_produto( $row["id_produto"] );
 		$this->setName( $row["name"] );
+		$this->setId_marca( $row['id_marca'] );
 
 		return $this;
 	}

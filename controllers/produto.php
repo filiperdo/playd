@@ -4,11 +4,7 @@ class Produto extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-<<<<<<< HEAD
 		Auth::handleLogin();
-=======
-		//Auth::handleLogin();
->>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 	}
 
 	/** 
@@ -33,6 +29,14 @@ class Produto extends Controller {
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
 
+		/*************************************
+		 * Instancia da marca
+		 */
+		require 'models/marca_model.php';
+		$objMarca = new Marca_Model();
+		$this->view->listarMarca = $objMarca->listarMarca();
+		/******************************************/
+		
 		if( $id ) 
 		{
 			$this->view->title = "Editar Produto";
@@ -54,12 +58,9 @@ class Produto extends Controller {
 	*/
 	public function create()
 	{
-		$data = array(
-<<<<<<< HEAD
-=======
-			'id_produto' => $_POST["id_produto"], 
->>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
-			'name' => $_POST["name"], 
+		$data = array( 
+			'name' 		=> $_POST["name"],
+			'id_marca'	=> $_POST['marca']	
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -73,12 +74,8 @@ class Produto extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-<<<<<<< HEAD
-=======
-			"id_produto" 	=> $id,
-			'id_produto' => $_POST["id_produto"], 
->>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
-			'name' => $_POST["name"], 
+			'name' 		=> $_POST["name"],
+			'id_marca'	=> $_POST['marca']
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

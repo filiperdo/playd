@@ -4,7 +4,7 @@ class Logpeca extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-		//Auth::handleLogin();
+		Auth::handleLogin();
 	}
 
 	/** 
@@ -51,18 +51,10 @@ class Logpeca extends Controller {
 	public function create()
 	{
 		$data = array(
-<<<<<<< HEAD
 			'color' 		=> $_POST["color"], 
 			'date' 			=> $_POST["date"], 
 			'id_peca' 		=> $_POST["id_peca"], 
 			'id_user' 		=> $_POST["id_user"], 
-=======
-			'id_logpeca' => $_POST["id_logpeca"], 
-			'color' => $_POST["color"], 
-			'date' => $_POST["date"], 
-			'id_peca' => $_POST["id_peca"], 
-			'id_user' => $_POST["id_user"], 
->>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -76,19 +68,10 @@ class Logpeca extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-<<<<<<< HEAD
-			'color' 		=> $_POST["color"], 
-			'date' 			=> $_POST["date"], 
-			'id_peca' 		=> $_POST["id_peca"], 
-			'id_user' 		=> $_POST["id_user"], 
-=======
-			"id_logpeca" 	=> $id,
-			'id_logpeca' => $_POST["id_logpeca"], 
-			'color' => $_POST["color"], 
-			'date' => $_POST["date"], 
-			'id_peca' => $_POST["id_peca"], 
-			'id_user' => $_POST["id_user"], 
->>>>>>> 34b1e18370ba8688d6d719a3c6276197d1a13910
+			'color' 			=> $_POST["color"], 
+			'date' 				=> $_POST["date"], 
+			'id_peca' 			=> $_POST["id_peca"], 
+			'id_user' 			=> $_POST["id_user"], 
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
