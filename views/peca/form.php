@@ -29,15 +29,6 @@
 </div>
 
 <div class="form-group">
-	<label for="produto">Produto</label> 
-	<select name="produto" class="form-control">
-	<?php foreach( $this->listarProduto as $produto ) { ?>
-		<option value=""><?php echo $produto->getName();?></option>
-	<?php } ?>
-	</select>
-</div>
-
-<div class="form-group">
 	<label for="marca">Marca</label> 
 	<select name="marca" class="form-control">
 	<?php foreach( $this->listarMarca as $marca ) { ?>
@@ -47,8 +38,12 @@
 </div>
 
 <div class="form-group">
-	<label for="name">Name</label> 
-		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
+	<label for="produto">Produto</label> 
+	<select name="produto" class="form-control">
+	<?php foreach( $this->listarProduto as $produto ) { ?>
+		<option value=""><?php echo $produto->getName();?></option>
+	<?php } ?>
+	</select>
 </div>
 
 <div class="form-group">
@@ -66,7 +61,7 @@
 	<label for="qrcode">Qrcode</label> 
 		<input type="text" name="qrcode" id="qrcode"  class="form-control" required="required" value="<?=$this->obj->getQrcode()?>" />
 </div>
- -->
+
 <div class="form-group">
 	<label for="status">Status</label> 
 	<select name="status" class="form-control">
@@ -75,7 +70,7 @@
 	<?php } ?>
 	</select>
 </div>
-
+ -->
 <div class="form-group">
 	<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" />
 	<a href="<?php echo URL; ?>peca" class="btn btn-info">Cancelar</a>

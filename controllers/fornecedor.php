@@ -51,8 +51,12 @@ class Fornecedor extends Controller {
 	public function create()
 	{
 		$data = array(
-			'name' 	=> $_POST["name"], 
-			'cep' 	=> $_POST["cep"], 
+			'name' => $_POST["name"], 
+			'telefone' => $_POST["telefone"], 
+			'email' => $_POST["email"], 
+			'banco' => $_POST["banco"], 
+			'cidade' => $_POST["cidade"], 
+			'estado' => $_POST["estado"], 
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -66,8 +70,12 @@ class Fornecedor extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			'name' 	=> $_POST["name"], 
-			'cep' 	=> $_POST["cep"], 
+			'name' => $_POST["name"], 
+			'telefone' => $_POST["telefone"], 
+			'email' => $_POST["email"], 
+			'banco' => $_POST["banco"], 
+			'cidade' => $_POST["cidade"], 
+			'estado' => $_POST["estado"], 
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

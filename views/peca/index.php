@@ -34,11 +34,8 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Id_peca </th>
-		<th>Name </th>
 		<th>Codigo </th>
-		<th>Qrcode </th>
-		<th>Date </th>
+		<th>Data </th>
 		<th>Id_user </th>
 		<th>Id_fornecedor </th>
 		<th>Id_marca </th>
@@ -50,13 +47,10 @@
 	<?php foreach( $this->listarPeca as $peca ) { ?>
 	<tr>
  		<td><?php echo $peca->getId_peca(); ?></td>
-		<td><?php echo $peca->getName(); ?></td>
-		<td><?php echo $peca->getCodigo(); ?></td>
-		<td><?php echo $peca->getQrcode(); ?></td>
 		<td><?php echo $peca->getDate(); ?></td>
 		<td><?php echo $peca->getId_user(); ?></td>
 		<td><?php echo $peca->getId_fornecedor(); ?></td>
-		<td><?php echo $peca->getId_marca(); ?></td>
+		<td><?php echo $peca->getId_produto(); ?></td>
 		<td><?php echo $peca->getId_statuspeca(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>peca/form/<?php echo $peca->getId_peca();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
