@@ -34,18 +34,20 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Id_fornecedor </th>
 		<th>Name </th>
-		<th>Cep </th>
+		<th>Telefone </th>
+		<th>email </th>
+		<th>Cidade </th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
 	<tr>
- 		<td><?php echo $fornecedor->getId_fornecedor(); ?></td>
-		<td><?php echo $fornecedor->getName(); ?></td>
-		<td><?php echo $fornecedor->getCep(); ?></td>
+ 		<td><?php echo $fornecedor->getName(); ?></td>
+		<td><?php echo $fornecedor->getTelefone(); ?></td>
+		<td><?php echo $fornecedor->getEmail(); ?></td>
+		<td><?php echo $fornecedor->getCidade() . ' / '. $fornecedor->getEstado(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>fornecedor/form/<?php echo $fornecedor->getId_fornecedor();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>fornecedor/delete/<?php echo $fornecedor->getId_fornecedor();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>

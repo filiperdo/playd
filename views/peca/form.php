@@ -51,33 +51,13 @@
 	<input type="text" name="quantidade" id="quantidade"  class="form-control" required="required" value="" />
 </div>
 
-<!-- 
-<div class="form-group">
-	<label for="codigo">Codigo</label> 
-		<input type="text" name="codigo" id="codigo"  class="form-control" required="required" value="<?=$this->obj->getCodigo()?>" />
-</div>
-
-<div class="form-group">
-	<label for="qrcode">Qrcode</label> 
-		<input type="text" name="qrcode" id="qrcode"  class="form-control" required="required" value="<?=$this->obj->getQrcode()?>" />
-</div>
-
-<div class="form-group">
-	<label for="status">Status</label> 
-	<select name="status" class="form-control">
-	<?php foreach( $this->listarStatus as $status ) { ?>
-		<option value=""><?php echo $status->getName();?></option>
-	<?php } ?>
-	</select>
-</div>
- -->
 <div class="form-group">
 	<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" />
 	<a href="<?php echo URL; ?>peca" class="btn btn-info">Cancelar</a>
 </div>
 
-
 </div>
 </div>
 
 </form>
+

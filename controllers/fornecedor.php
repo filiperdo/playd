@@ -12,7 +12,7 @@ class Fornecedor extends Controller {
 	*/
 	public function index()
 	{
-		$this->view->title = "Fornecedor";
+		$this->view->title = "Fornecedores";
 		$this->view->listarFornecedor = $this->model->listarFornecedor();
 
 		$this->view->render( "header" );

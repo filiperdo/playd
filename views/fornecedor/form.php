@@ -24,8 +24,28 @@
 </div>
 
 <div class="form-group">
-	<label for="cep">Cep</label> 
-		<input type="text" name="cep" id="cep"  class="form-control" required="required" value="<?=$this->obj->getCep()?>" />
+	<label for="telefone">Telefone</label> 
+	<input type="text" name="telefone" id="telefone"  class="form-control" required="required" value="<?=$this->obj->getTelefone()?>" />
+</div>
+
+<div class="form-group">
+	<label for="email">E-mail</label> 
+	<input type="text" name="email" id="email"  class="form-control" required="required" value="<?=$this->obj->getEmail()?>" />
+</div>
+
+<div class="form-group">
+	<label for="banco">Dados bancários</label> 
+	<input type="text" name="banco" id="banco"  class="form-control" required="required" value="<?=$this->obj->getBanco()?>" />
+</div>
+
+<div class="form-group">
+	<label for="cidade">Cidade</label> 
+	<input type="text" name="cidade" id="cidade"  class="form-control" required="required" value="<?=$this->obj->getCidade()?>" />
+</div>
+
+<div class="form-group">
+	<label for="estado">Estado</label> 
+	<input type="text" name="estado" id="estado"  class="form-control" required="required" value="<?=$this->obj->getEstado()?>" />
 </div>
 
 <div class="form-group">
