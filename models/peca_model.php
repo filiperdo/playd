@@ -29,7 +29,7 @@ class Peca_Model extends Model
 		$this->qrcode = '';
 		$this->date = '';
 		$this->id_user = '';
-		$this->id_fornecedor = '';
+		$this->fornecedor = '';
 		$this->id_produto = '';
 		$this->id_statuspeca = '';
 
@@ -63,9 +63,9 @@ class Peca_Model extends Model
 		$this->id_user = $id_user;
 	}
 
-	public function setId_fornecedor( $id_fornecedor )
+	public function setFornecedor( Fornecedor_Model $fornecedor )
 	{
-		$this->id_fornecedor = $id_fornecedor;
+		$this->fornecedor = $fornecedor;
 	}
 
 	public function setId_produto( $id_produto )
@@ -106,9 +106,9 @@ class Peca_Model extends Model
 		return $this->id_user;
 	}
 
-	public function getId_fornecedor()
+	public function getFornecedor()
 	{
-		return $this->id_fornecedor;
+		return $this->fornecedor;
 	}
 
 	public function getId_produto()
@@ -188,15 +188,19 @@ class Peca_Model extends Model
 	public function listarPeca()
 	{
 		$sql  = "select * ";
-		$sql .= "from peca ";
+		$sql .= "from peca as p ";
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where id_peca like :id "; // Configurar o like com o campo necessario da tabela 
+			$sql .= "where id_peca like :id "; // Configurar o like com o campo necessario da tabela
+			$sql .= 'order by p.id_peca desc ';
 			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
 		}
 		else
+		{
+			$sql .= 'order by p.id_peca desc ';
 			$result = $this->db->select( $sql );
+		}
 
 		return $this->montarLista($result);
 	}
@@ -230,8 +234,13 @@ class Peca_Model extends Model
 		$this->setQrcode( $row["qrcode"] );
 		$this->setDate( $row["date"] );
 		$this->setId_user( $row["id_user"] );
-		$this->setId_fornecedor( $row["id_fornecedor"] );
+		
+		require_once 'models/fornecedor_model.php';
+		$objFornecedor = new Fornecedor_Model();
+		$this->setFornecedor( $objFornecedor->obterFornecedor( $row["id_fornecedor"] ) );
+		
 		$this->setId_produto( $row["id_produto"] );
+		
 		$this->setId_statuspeca( $row["id_statuspeca"] );
 
 		return $this;

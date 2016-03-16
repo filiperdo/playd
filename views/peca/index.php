@@ -35,22 +35,22 @@
 	<thead>
 	<tr>
 		<th>Codigo </th>
+		<th>Produto/Marca </th>
+		<th>Fornecedor </th>
+		<th>User </th>
 		<th>Data </th>
-		<th>Id_user </th>
-		<th>Id_fornecedor </th>
-		<th>Id_marca </th>
-		<th>Id_statuspeca </th>
+		<th>Status </th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach( $this->listarPeca as $peca ) { ?>
 	<tr>
- 		<td><?php echo $peca->getId_peca(); ?></td>
-		<td><?php echo $peca->getDate(); ?></td>
-		<td><?php echo $peca->getId_user(); ?></td>
-		<td><?php echo $peca->getId_fornecedor(); ?></td>
+ 		<td><?php echo str_pad( $peca->getId_peca(), 3, "0", STR_PAD_LEFT); ?></td>
 		<td><?php echo $peca->getId_produto(); ?></td>
+		<td><?php echo $peca->getFornecedor()->getName(); ?></td>
+		<td><?php echo $peca->getId_user(); ?></td>
+		<td><?php echo Data::formataDataRetiraHora($peca->getDate()); ?></td>
 		<td><?php echo $peca->getId_statuspeca(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>peca/form/<?php echo $peca->getId_peca();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>

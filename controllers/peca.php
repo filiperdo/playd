@@ -14,7 +14,8 @@ class Peca extends Controller {
 	{
 		$this->view->title = "Peça";
 		$this->view->listarPeca = $this->model->listarPeca();
-
+		
+		
 		$this->view->render( "header" );
 		$this->view->render( "peca/index" );
 		$this->view->render( "footer" );
@@ -27,6 +28,7 @@ class Peca extends Controller {
 	{
 		$this->view->title = "Cadastrar Peça";
 		$this->view->action = "create";
+		$this->view->js[] = 'peca.form.js';
 		$this->view->obj = $this->model;
 		
 		/*************************************
@@ -82,17 +84,22 @@ class Peca extends Controller {
 	*/
 	public function create()
 	{
-		$data = array(
-			'codigo' 			=> $_POST["codigo"], 
-			'qrcode' 			=> $_POST["qrcode"], 
-			'id_user' 			=> $_POST["id_user"], 
-			'id_fornecedor' 	=> $_POST["id_fornecedor"], 
-			'id_produto' 		=> $_POST["id_produto"], 
-			'id_statuspeca' 	=> $_POST["id_statuspeca"], 
-		);
-
-		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
-
+		require_once 'models/statuspeca_model.php';
+		
+		for( $i = 0; $i < $_POST['quantidade']; $i++ )
+		{
+			$data = array(
+				'id_user' 			=> Session::get('userid'), 
+				'id_fornecedor' 	=> $_POST["fornecedor"], 
+				'id_produto' 		=> $_POST["produto"], 
+				'id_statuspeca' 	=> Statuspeca_Model::EM_ABERTO, 
+			);
+	
+			//var_dump($data);
+			
+			$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
+		
+		}
 		header("location: " . URL . "peca?st=".$msg);
 	}
 
@@ -122,5 +129,27 @@ class Peca extends Controller {
 		$this->model->delete( $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
 		header("location: " . URL . "peca?st=".$msg);
+	}
+	
+	/**
+	 * 
+	 * @param unknown $id_marca
+	 */
+	public function listProdByMarca( $id_marca )
+	{
+		require 'models/produto_model.php';
+		$objProduto = new Produto_Model();
+		
+		$html  = '';
+		
+		foreach( $objProduto->listarProdutoPorMarca( $id_marca ) as $produto )
+		{
+			$html .= '<option value="' . $produto->getId_produto() . '"> ';
+			$html .= $produto->getName(); 
+			$html .= '</option>';
+		}
+
+		ini_set('default_charset', 'ISO-8859-1');
+		echo $html;
 	}
 }

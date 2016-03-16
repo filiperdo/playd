@@ -8,6 +8,13 @@
  */
 class Statuspeca_Model extends Model
 {
+	const EM_ABERTO = 1;
+	const PRONTO_VERDE = 2;
+	const PRONTO_AMARELO = 3;
+	const QUEBRADO = 4;
+	const AGUARDANDO_FLEX = 5;
+	const ENTREGUE = 6;
+	
 	/** 
 	* Atributos Private 
 	*/

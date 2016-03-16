@@ -52,7 +52,7 @@ class Produto_Model extends Model
 
 	public function getName()
 	{
-		return $this->name;
+		return strtoupper( $this->name );
 	}
 
 	public function getId_marca()
@@ -140,6 +140,20 @@ class Produto_Model extends Model
 		return $this->montarLista($result);
 	}
 
+	/**
+	 * Metodo listarProdutoPorMarca
+	 */
+	public function listarProdutoPorMarca( $id_marca )
+	{
+		$sql  = "select * ";
+		$sql .= "from produto as p ";
+		$sql .= 'where p.id_marca = ' . $id_marca . ' ';
+		
+		$result = $this->db->select( $sql );
+		
+		return $this->montarLista($result);
+	}
+	
 	/** 
 	* Metodo montarLista
 	*/

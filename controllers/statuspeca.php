@@ -2,13 +2,6 @@
 
 class Statuspeca extends Controller {
 
-	const EM_ABERTO = 1;
-	const PRONTO_VERDE = 2;
-	const PRONTO_AMARELO = 3;
-	const QUEBRADO = 4;
-	const AGUARDANDO_FLEX = 5;
-	const ENTREGUE = 6;
-	
 	public function __construct() {
 		parent::__construct();
 		Auth::handleLogin();

@@ -21,28 +21,27 @@
 
 <div class="form-group">
 	<label for="fornecedor">Fornecedor</label>
-	<select name="produto" class="form-control">
+	<select name="fornecedor" class="form-control">
 	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
-		<option value=""><?php echo $fornecedor->getName();?></option>
+		<option value="<?php echo $fornecedor->getId_fornecedor();?>"><?php echo $fornecedor->getName();?></option>
 	<?php } ?>
 	</select>
 </div>
 
 <div class="form-group">
 	<label for="marca">Marca</label> 
-	<select name="marca" class="form-control">
+	<select name="marca" id="marca" class="form-control">
+	<option value="0" disabled="disabled" selected="selected">Selecione uma marca</option>
 	<?php foreach( $this->listarMarca as $marca ) { ?>
-		<option value=""><?php echo $marca->getName();?></option>
+		<option value="<?php echo $marca->getId_marca();?>"><?php echo $marca->getName();?></option>
 	<?php } ?>
 	</select>
 </div>
 
 <div class="form-group">
 	<label for="produto">Produto</label> 
-	<select name="produto" class="form-control">
-	<?php foreach( $this->listarProduto as $produto ) { ?>
-		<option value=""><?php echo $produto->getName();?></option>
-	<?php } ?>
+	<select name="produto" id="produto" class="form-control">
+	
 	</select>
 </div>
 

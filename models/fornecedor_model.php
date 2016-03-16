@@ -8,7 +8,7 @@
  */
 class Fornecedor_Model extends Model
 {
-	/** 
+	/**
 	* Atributos Private 
 	*/
 	private $fornecedor;
