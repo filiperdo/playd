@@ -13,7 +13,7 @@ class Produto_Model extends Model
 	*/
 	private $produto;
 	private $name;
-	private $id_marca;
+	private $marca;
 
 	public function __construct()
 	{
@@ -21,7 +21,7 @@ class Produto_Model extends Model
 
 		$this->id_produto = '';
 		$this->name = '';
-		$this->id_marca = '';
+		$this->marca = '';
 	}
 
 	/** 
@@ -37,9 +37,9 @@ class Produto_Model extends Model
 		$this->name = $name;
 	}
 
-	public function setId_marca( $id_marca )
+	public function setMarca( Marca_Model $marca )
 	{
-		$this->id_marca = $id_marca;
+		$this->marca = $marca;
 	}
 	
 	/** 
@@ -55,9 +55,9 @@ class Produto_Model extends Model
 		return strtoupper( $this->name );
 	}
 
-	public function getId_marca()
+	public function getMarca()
 	{
-		return $this->id_marca;
+		return $this->marca;
 	}
 
 	/** 
@@ -180,7 +180,10 @@ class Produto_Model extends Model
 	{
 		$this->setId_produto( $row["id_produto"] );
 		$this->setName( $row["name"] );
-		$this->setId_marca( $row['id_marca'] );
+		
+		require_once 'models/marca_model.php';
+		$objMarca = new Marca_Model();
+		$this->setMarca( $objMarca->obterMarca( $row['id_marca'] ) );
 
 		return $this;
 	}

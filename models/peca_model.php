@@ -28,10 +28,10 @@ class Peca_Model extends Model
 		$this->codigo = '';
 		$this->qrcode = '';
 		$this->date = '';
-		$this->id_user = '';
+		$this->user = '';
 		$this->fornecedor = '';
-		$this->id_produto = '';
-		$this->id_statuspeca = '';
+		$this->produto = '';
+		$this->statuspeca = '';
 
 	}
 
@@ -57,10 +57,10 @@ class Peca_Model extends Model
 	{
 		$this->date = $date;
 	}
-
-	public function setId_user( $id_user )
+	/*
+	public function setUser( User_Model $user )
 	{
-		$this->id_user = $id_user;
+		$this->user = $user;
 	}
 
 	public function setFornecedor( Fornecedor_Model $fornecedor )
@@ -68,14 +68,35 @@ class Peca_Model extends Model
 		$this->fornecedor = $fornecedor;
 	}
 
-	public function setId_produto( $id_produto )
+	public function setProduto( Produto_Model $produto )
 	{
-		$this->id_produto = $id_produto;
+		$this->produto = $produto;
 	}
 
-	public function setId_statuspeca( $id_statuspeca )
+	public function setStatuspeca( Statuspeca_Model $statuspeca )
 	{
-		$this->id_statuspeca = $id_statuspeca;
+		$this->statuspeca = $statuspeca;
+	}
+	*/
+	
+	public function setUser( $user )
+	{
+		$this->user = $user;
+	}
+	
+	public function setFornecedor( $fornecedor )
+	{
+		$this->fornecedor = $fornecedor;
+	}
+	
+	public function setProduto( $produto )
+	{
+		$this->produto = $produto;
+	}
+	
+	public function setStatuspeca( $statuspeca )
+	{
+		$this->statuspeca = $statuspeca;
 	}
 	
 	/** 
@@ -101,9 +122,9 @@ class Peca_Model extends Model
 		return $this->date;
 	}
 
-	public function getId_user()
+	public function getUser()
 	{
-		return $this->id_user;
+		return $this->user;
 	}
 
 	public function getFornecedor()
@@ -111,14 +132,14 @@ class Peca_Model extends Model
 		return $this->fornecedor;
 	}
 
-	public function getId_produto()
+	public function getProduto()
 	{
-		return $this->id_produto;
+		return $this->produto;
 	}
 
-	public function getId_statuspeca()
+	public function getStatuspeca()
 	{
-		return $this->id_statuspeca;
+		return $this->statuspeca;
 	}
 
 	/** 
@@ -233,16 +254,40 @@ class Peca_Model extends Model
 		$this->setCodigo( $row["codigo"] );
 		$this->setQrcode( $row["qrcode"] );
 		$this->setDate( $row["date"] );
-		$this->setId_user( $row["id_user"] );
+	
+		
+		require_once 'models/user_model.php';
+		$objUser = new User_Model();
+		$this->setUser( $objUser->obterUser( $row["id_user"] ) );
 		
 		require_once 'models/fornecedor_model.php';
 		$objFornecedor = new Fornecedor_Model();
 		$this->setFornecedor( $objFornecedor->obterFornecedor( $row["id_fornecedor"] ) );
 		
-		$this->setId_produto( $row["id_produto"] );
+		require_once 'models/produto_model.php';
+		$objProduto = new Produto_Model();
+		$this->setProduto( $objProduto->obterProduto( $row["id_produto"] ) );
 		
-		$this->setId_statuspeca( $row["id_statuspeca"] );
-
+		require_once 'models/statuspeca_model.php';
+		$objStatus = new Statuspeca_Model();
+		$this->setStatuspeca( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
+		
+		/*require 'models/user_model.php';
+		$objUser = new User_Model();
+		$this->setUser( $objUser->obterUser( $row["id_user"] ) );
+	
+		require 'models/fornecedor_model.php';
+		$objFornecedor = new Fornecedor_Model();
+		$this->setFornecedor( $objFornecedor->obterFornecedor( $row["id_fornecedor"] ) );
+		
+		require 'models/produto_model.php';
+		$objProduto = new Produto_Model();
+		$this->setProduto( $objProduto->obterProduto( $row["id_produto"] ) );
+		
+		require 'models/statuspeca_model.php';
+		$objStatus = new Statuspeca_Model();
+		$this->setStatuspeca( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
+		*/
 		return $this;
 	}
 }

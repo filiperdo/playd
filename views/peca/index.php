@@ -47,11 +47,11 @@
 	<?php foreach( $this->listarPeca as $peca ) { ?>
 	<tr>
  		<td><?php echo str_pad( $peca->getId_peca(), 3, "0", STR_PAD_LEFT); ?></td>
-		<td><?php echo $peca->getId_produto(); ?></td>
+		<td><?php echo $peca->getProduto()->getName(); ?></td>
 		<td><?php echo $peca->getFornecedor()->getName(); ?></td>
-		<td><?php echo $peca->getId_user(); ?></td>
+		<td><?php echo $peca->getUser()->getName(); ?></td>
 		<td><?php echo Data::formataDataRetiraHora($peca->getDate()); ?></td>
-		<td><?php echo $peca->getId_statuspeca(); ?></td>
+		<td><?php echo $peca->getStatuspeca()->getName(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>peca/form/<?php echo $peca->getId_peca();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>peca/delete/<?php echo $peca->getId_peca();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>

@@ -12,7 +12,7 @@ class Peca extends Controller {
 	*/
 	public function index()
 	{
-		$this->view->title = "Peça";
+		$this->view->title = "Peças";
 		$this->view->listarPeca = $this->model->listarPeca();
 		
 		
@@ -34,7 +34,7 @@ class Peca extends Controller {
 		/*************************************
 		 * Instancia do fornecedor
 		 */
-		require 'models/fornecedor_model.php';
+		require_once 'models/fornecedor_model.php';
 		$objFornecedor = new Fornecedor_Model();
 		$this->view->listarFornecedor = $objFornecedor->listarFornecedor();
 		/******************************************/
@@ -42,7 +42,7 @@ class Peca extends Controller {
 		/*************************************
 		 * Instancia do produto
 		 */
-		require 'models/produto_model.php';
+		require_once 'models/produto_model.php';
 		$objProduto = new Produto_Model();
 		$this->view->listarProduto = $objProduto->listarProduto();
 		/******************************************/
@@ -50,7 +50,7 @@ class Peca extends Controller {
 		/*************************************
 		 * Instancia da marca
 		 */
-		require 'models/marca_model.php';
+		require_once 'models/marca_model.php';
 		$objMarca = new Marca_Model();
 		$this->view->listarMarca = $objMarca->listarMarca();
 		/******************************************/
@@ -58,7 +58,7 @@ class Peca extends Controller {
 		/*************************************
 		 * Instancia do status
 		 */
-		require 'models/statuspeca_model.php';
+		require_once 'models/statuspeca_model.php';
 		$objStatus = new Statuspeca_Model();
 		$this->view->listarStatus = $objStatus->listarStatuspeca();
 		/******************************************/

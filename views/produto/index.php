@@ -44,7 +44,7 @@
 	<?php foreach( $this->listarProduto as $produto ) { ?>
 	<tr>
 		<td><?php echo $produto->getName(); ?></td>
-		<td><?php echo $produto->getId_marca(); ?></td>
+		<td><?php echo $produto->getMarca()->getName(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>produto/form/<?php echo $produto->getId_produto();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>produto/delete/<?php echo $produto->getId_produto();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
