@@ -86,6 +86,7 @@ class Peca extends Controller {
 	{
 		require_once 'models/statuspeca_model.php';
 		
+		
 		for( $i = 0; $i < $_POST['quantidade']; $i++ )
 		{
 			$data = array(
@@ -95,10 +96,8 @@ class Peca extends Controller {
 				'id_statuspeca' 	=> Statuspeca_Model::EM_ABERTO, 
 			);
 	
-			//var_dump($data);
-			
 			$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
-		
+			
 		}
 		header("location: " . URL . "peca?st=".$msg);
 	}
@@ -115,7 +114,9 @@ class Peca extends Controller {
 			'id_produto'		=> $_POST["id_produto"], 
 			'id_statuspeca' 	=> $_POST["id_statuspeca"], 
 		);
-
+		
+		// Chamar metodo de log para edicao das pecas
+		
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
 		header("location: " . URL . "peca?st=".$msg);

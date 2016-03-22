@@ -35,7 +35,7 @@
 	<thead>
 	<tr>
 		<th>Codigo </th>
-		<th>Produto/Marca </th>
+		<th>Produto / Marca </th>
 		<th>Fornecedor </th>
 		<th>User </th>
 		<th>Data </th>
@@ -47,7 +47,7 @@
 	<?php foreach( $this->listarPeca as $peca ) { ?>
 	<tr>
  		<td><?php echo str_pad( $peca->getId_peca(), 3, "0", STR_PAD_LEFT); ?></td>
-		<td><?php echo $peca->getProduto()->getName(); ?></td>
+		<td><?php echo $peca->getProduto()->getName() . ' / ' . $peca->getProduto()->getMarca()->getName(); ?></td>
 		<td><?php echo $peca->getFornecedor()->getName(); ?></td>
 		<td><?php echo $peca->getUser()->getName(); ?></td>
 		<td><?php echo Data::formataDataRetiraHora($peca->getDate()); ?></td>

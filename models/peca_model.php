@@ -57,27 +57,6 @@ class Peca_Model extends Model
 	{
 		$this->date = $date;
 	}
-	/*
-	public function setUser( User_Model $user )
-	{
-		$this->user = $user;
-	}
-
-	public function setFornecedor( Fornecedor_Model $fornecedor )
-	{
-		$this->fornecedor = $fornecedor;
-	}
-
-	public function setProduto( Produto_Model $produto )
-	{
-		$this->produto = $produto;
-	}
-
-	public function setStatuspeca( Statuspeca_Model $statuspeca )
-	{
-		$this->statuspeca = $statuspeca;
-	}
-	*/
 	
 	public function setUser( $user )
 	{
@@ -149,11 +128,31 @@ class Peca_Model extends Model
 	{
 		$this->db->beginTransaction();
 
-		if( !$id = $this->db->insert( "peca", $data ) ){
+		if( !$id_peca = $this->db->insert( "peca", $data ) ){
 			$this->db->rollBack();
 			return false;
 		}
+		
+		/************************************
+		 * Inicio do Datalog
+		 */
+		require_once 'logpeca_model.php';
+		$objLog = new Logpeca_Model();
 
+		$data_log = array(
+			'id_peca' 		=> $id_peca,
+			'id_user' 		=> Session::get('userid'),
+			'id_statuspeca' => Statuspeca_Model::EM_ABERTO,
+		);
+		
+		if( !$id = $this->db->insert( "logpeca", $data_log ) ){
+			$this->db->rollBack();
+			return false;
+		}
+		/**
+		 * Fim Datalog
+		 *************************************/
+		
 		$this->db->commit();
 		return true;
 	}
@@ -170,6 +169,26 @@ class Peca_Model extends Model
 			return false;
 		}
 
+		/************************************
+		 * Inicio do Datalog
+		 */
+		require_once 'logpeca_model.php';
+		$objLog = new Logpeca_Model();
+		
+		$data_log = array(
+			'id_peca' 		=> $id,
+			'id_user' 		=> Session::get('userid'),
+			'id_statuspeca' => $data['id_statuspeca']
+		);
+		
+		if( !$id_datalog = $this->db->insert( "logpeca", $data_log ) ){
+			$this->db->rollBack();
+			return false;
+		}
+		/**
+		 * Fim Datalog
+		 *************************************/
+		
 		$this->db->commit();
 		return $update;
 	}
@@ -255,7 +274,6 @@ class Peca_Model extends Model
 		$this->setQrcode( $row["qrcode"] );
 		$this->setDate( $row["date"] );
 	
-		
 		require_once 'models/user_model.php';
 		$objUser = new User_Model();
 		$this->setUser( $objUser->obterUser( $row["id_user"] ) );
@@ -272,23 +290,8 @@ class Peca_Model extends Model
 		$objStatus = new Statuspeca_Model();
 		$this->setStatuspeca( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
 		
-		/*require 'models/user_model.php';
-		$objUser = new User_Model();
-		$this->setUser( $objUser->obterUser( $row["id_user"] ) );
-	
-		require 'models/fornecedor_model.php';
-		$objFornecedor = new Fornecedor_Model();
-		$this->setFornecedor( $objFornecedor->obterFornecedor( $row["id_fornecedor"] ) );
-		
-		require 'models/produto_model.php';
-		$objProduto = new Produto_Model();
-		$this->setProduto( $objProduto->obterProduto( $row["id_produto"] ) );
-		
-		require 'models/statuspeca_model.php';
-		$objStatus = new Statuspeca_Model();
-		$this->setStatuspeca( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
-		*/
 		return $this;
 	}
+	
 }
 ?>
