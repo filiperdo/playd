@@ -14,7 +14,15 @@ class Peca extends Controller {
 	{
 		$this->view->title = "Peças";
 		$this->view->listarPeca = $this->model->listarPeca();
+		$this->view->js[] = 'peca.index.js';
 		
+		/*************************************
+		 * Instancia do status
+		 */
+		require_once 'models/statuspeca_model.php';
+		$objStatus = new Statuspeca_Model();
+		$this->view->listarStatus = $objStatus->listarStatuspeca();
+		/******************************************/
 		
 		$this->view->render( "header" );
 		$this->view->render( "peca/index" );
@@ -93,7 +101,8 @@ class Peca extends Controller {
 				'id_user' 			=> Session::get('userid'), 
 				'id_fornecedor' 	=> $_POST["fornecedor"], 
 				'id_produto' 		=> $_POST["produto"], 
-				'id_statuspeca' 	=> Statuspeca_Model::EM_ABERTO, 
+				'id_statuspeca' 	=> Statuspeca_Model::EM_ABERTO,
+				'valor'				=> $_POST['valor']
 			);
 	
 			$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -107,9 +116,8 @@ class Peca extends Controller {
 	*/
 	public function edit( $id )
 	{
-		$data = array( 
-			'codigo' 			=> $_POST["codigo"], 
-			'qrcode' 			=> $_POST["qrcode"], 
+		$data = array(  
+			'valor' 			=> $_POST["valor"], 
 			'id_fornecedor' 	=> $_POST["id_fornecedor"], 
 			'id_produto'		=> $_POST["id_produto"], 
 			'id_statuspeca' 	=> $_POST["id_statuspeca"], 
@@ -119,6 +127,17 @@ class Peca extends Controller {
 		
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
+		header("location: " . URL . "peca?st=".$msg);
+	}
+	
+	public function editStatus()
+	{
+		$data = array(
+			'id_statuspeca' 	=> $_POST["status"],
+		);
+		
+		$this->model->edit( $data, $_POST['idPeca'] ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
+		
 		header("location: " . URL . "peca?st=".$msg);
 	}
 

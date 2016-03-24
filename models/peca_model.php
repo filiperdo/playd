@@ -13,7 +13,7 @@ class Peca_Model extends Model
 	*/
 	private $peca;
 	private $codigo;
-	private $qrcode;
+	private $valor;
 	private $date;
 	private $user;
 	private $fornecedor;
@@ -26,7 +26,7 @@ class Peca_Model extends Model
 
 		$this->id_peca = '';
 		$this->codigo = '';
-		$this->qrcode = '';
+		$this->valor = '';
 		$this->date = '';
 		$this->user = '';
 		$this->fornecedor = '';
@@ -48,9 +48,9 @@ class Peca_Model extends Model
 		$this->codigo = $codigo;
 	}
 
-	public function setQrcode( $qrcode )
+	public function setValor( $valor )
 	{
-		$this->qrcode = $qrcode;
+		$this->valor = $valor;
 	}
 
 	public function setDate( $date )
@@ -91,9 +91,9 @@ class Peca_Model extends Model
 		return $this->codigo;
 	}
 
-	public function getQrcode()
+	public function getValor()
 	{
-		return $this->qrcode;
+		return $this->valor;
 	}
 
 	public function getDate()
@@ -168,19 +168,35 @@ class Peca_Model extends Model
 			$this->db->rollBack();
 			return false;
 		}
-
+		
+		$this->db->commit();
+		return $update;
+	}
+	
+	/**
+	 * Metodo edit
+	 */
+	public function editStatus( $data, $id )
+	{
+		$this->db->beginTransaction();
+	
+		if( !$update = $this->db->update("peca", $data, "id_peca = {$id} ") ){
+			$this->db->rollBack();
+			return false;
+		}
+	
 		/************************************
 		 * Inicio do Datalog
 		 */
 		require_once 'logpeca_model.php';
 		$objLog = new Logpeca_Model();
-		
+	
 		$data_log = array(
-			'id_peca' 		=> $id,
-			'id_user' 		=> Session::get('userid'),
-			'id_statuspeca' => $data['id_statuspeca']
+				'id_peca' 		=> $id,
+				'id_user' 		=> Session::get('userid'),
+				'id_statuspeca' => $data['id_statuspeca']
 		);
-		
+	
 		if( !$id_datalog = $this->db->insert( "logpeca", $data_log ) ){
 			$this->db->rollBack();
 			return false;
@@ -188,11 +204,11 @@ class Peca_Model extends Model
 		/**
 		 * Fim Datalog
 		 *************************************/
-		
+	
 		$this->db->commit();
 		return $update;
 	}
-
+	
 	/** 
 	* Metodo delete
 	*/
@@ -271,7 +287,7 @@ class Peca_Model extends Model
 	{
 		$this->setId_peca( $row["id_peca"] );
 		$this->setCodigo( $row["codigo"] );
-		$this->setQrcode( $row["qrcode"] );
+		$this->setValor( $row["valor"] );
 		$this->setDate( $row["date"] );
 	
 		require_once 'models/user_model.php';

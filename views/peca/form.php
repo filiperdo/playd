@@ -51,6 +51,11 @@
 </div>
 
 <div class="form-group">
+	<label for="valor">Valor</label> 
+	<input type="text" name="valor" id="valor"  class="form-control" required="required" value="" />
+</div>
+
+<div class="form-group">
 	<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" />
 	<a href="<?php echo URL; ?>peca" class="btn btn-info">Cancelar</a>
 </div>
