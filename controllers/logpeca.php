@@ -88,4 +88,27 @@ class Logpeca extends Controller {
 
 		header("location: " . URL . "logpeca?st=".$msg);
 	}
+	
+	/**
+	 * Lista os logs de uma peca
+	 * Montando uma tr para exibir via ajax
+	 * @param unknown $id_peca
+	 */
+	public function listLogAjax( $id_peca )
+	{
+		$html  = '';
+	
+		foreach ( $this->model->listarLogpeca( $id_peca ) as $log )
+		{
+			$html .= '<tr>';
+			$html .= '<td> ' . $log->getStatus()->getName() . '</td>';
+			$html .= '<td> ' . Data::formataDataRetiraHora($log->getDate()) . '</td>';
+			$html .= '<td> ' . $log->getId_user() . '</td>';
+			$html .= '</tr>';
+		}
+	
+		ini_set('default_charset', 'ISO-8859-1');
+		echo $html;
+	}
+	
 }

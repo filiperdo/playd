@@ -136,7 +136,7 @@ class Peca extends Controller {
 			'id_statuspeca' 	=> $_POST["status"],
 		);
 		
-		$this->model->edit( $data, $_POST['idPeca'] ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
+		$this->model->editStatus( $data, $_POST['idPeca'] ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 		
 		header("location: " . URL . "peca?st=".$msg);
 	}
@@ -172,4 +172,6 @@ class Peca extends Controller {
 		ini_set('default_charset', 'ISO-8859-1');
 		echo $html;
 	}
+	
+	
 }
