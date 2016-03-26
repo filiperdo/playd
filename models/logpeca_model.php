@@ -151,8 +151,9 @@ class Logpeca_Model extends Model
 	public function obterLogpeca( $id_logpeca )
 	{
 		$sql  = "select * ";
-		$sql .= "from logpeca ";
+		$sql .= "from logpeca as l ";
 		$sql .= "where id_logpeca = :id ";
+		
 
 		$result = $this->db->select( $sql, array("id" => $id_logpeca) );
 		return $this->montarObjeto( $result[0] );
@@ -165,7 +166,8 @@ class Logpeca_Model extends Model
 	{
 		$sql  = "select * ";
 		$sql .= "from logpeca as l ";
-		$sql .= 'where l.id_peca = ' . $id_peca;
+		$sql .= 'where l.id_peca = ' . $id_peca . ' ';
+		$sql .= 'order by l.date desc ';
 		
 		$result = $this->db->select( $sql );
 

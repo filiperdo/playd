@@ -250,17 +250,31 @@ class Peca_Model extends Model
 		{
 			$sql .= "where id_peca like :id "; // Configurar o like com o campo necessario da tabela
 			$sql .= 'order by p.id_peca desc ';
+			$sql .= 'limit 50 ';
 			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
 		}
 		else
 		{
 			$sql .= 'order by p.id_peca desc ';
+			$sql .= 'limit 50 ';
 			$result = $this->db->select( $sql );
 		}
 
+		
+		
 		return $this->montarLista($result);
 	}
 
+	public function getTotalByStatus( $id_status )
+	{
+		$sql  = 'select count(*) as total ';
+		$sql .= 'from peca as p ';
+		$sql .= 'where p.id_statuspeca = :id_status ';
+		
+		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
+		return $result[0];
+	}
+	
 	/** 
 	* Metodo montarLista
 	*/
