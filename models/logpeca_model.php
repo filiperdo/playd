@@ -16,6 +16,7 @@ class Logpeca_Model extends Model
 	private $date;
 	private $peca;
 	private $user;
+	private $status;
 
 	public function __construct()
 	{
@@ -26,6 +27,7 @@ class Logpeca_Model extends Model
 		$this->date = '';
 		$this->id_peca = '';
 		$this->id_user = '';
+		$this->status = '';
 	}
 
 	/** 
@@ -56,6 +58,11 @@ class Logpeca_Model extends Model
 		$this->id_user = $id_user;
 	}
 
+	public function setStatus( Statuspeca_Model $status )
+	{
+		$this->status = $status;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -82,6 +89,11 @@ class Logpeca_Model extends Model
 	public function getId_user()
 	{
 		return $this->id_user;
+	}
+	
+	public function getStatus()
+	{
+		return $this->status;
 	}
 
 
@@ -139,8 +151,9 @@ class Logpeca_Model extends Model
 	public function obterLogpeca( $id_logpeca )
 	{
 		$sql  = "select * ";
-		$sql .= "from logpeca ";
+		$sql .= "from logpeca as l ";
 		$sql .= "where id_logpeca = :id ";
+		
 
 		$result = $this->db->select( $sql, array("id" => $id_logpeca) );
 		return $this->montarObjeto( $result[0] );
@@ -149,22 +162,20 @@ class Logpeca_Model extends Model
 	/** 
 	* Metodo listarLogpeca
 	*/
-	public function listarLogpeca()
+	public function listarLogpeca( $id_peca )
 	{
 		$sql  = "select * ";
-		$sql .= "from logpeca ";
-
-		if ( isset( $_POST["like"] ) )
-		{
-			$sql .= "where id_logpeca like :id "; // Configurar o like com o campo necessario da tabela 
-			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
-		}
-		else
-			$result = $this->db->select( $sql );
+		$sql .= "from logpeca as l ";
+		$sql .= 'where l.id_peca = ' . $id_peca . ' ';
+		$sql .= 'order by l.date desc ';
+		
+		$result = $this->db->select( $sql );
 
 		return $this->montarLista($result);
 	}
 
+	
+	
 	/** 
 	* Metodo montarLista
 	*/
@@ -194,7 +205,11 @@ class Logpeca_Model extends Model
 		$this->setDate( $row["date"] );
 		$this->setId_peca( $row["id_peca"] );
 		$this->setId_user( $row["id_user"] );
-
+		
+		require_once 'models/statuspeca_model.php';
+		$objStatus = new Statuspeca_Model();
+		$this->setStatus( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
+		
 		return $this;
 	}
 }

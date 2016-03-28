@@ -168,19 +168,35 @@ class Peca_Model extends Model
 			$this->db->rollBack();
 			return false;
 		}
-
+		
+		$this->db->commit();
+		return $update;
+	}
+	
+	/**
+	 * Metodo edit
+	 */
+	public function editStatus( $data, $id )
+	{
+		$this->db->beginTransaction();
+	
+		if( !$update = $this->db->update("peca", $data, "id_peca = {$id} ") ){
+			$this->db->rollBack();
+			return false;
+		}
+	
 		/************************************
 		 * Inicio do Datalog
 		 */
 		require_once 'logpeca_model.php';
 		$objLog = new Logpeca_Model();
-		
+	
 		$data_log = array(
-			'id_peca' 		=> $id,
-			'id_user' 		=> Session::get('userid'),
-			'id_statuspeca' => $data['id_statuspeca']
+				'id_peca' 		=> $id,
+				'id_user' 		=> Session::get('userid'),
+				'id_statuspeca' => $data['id_statuspeca']
 		);
-		
+	
 		if( !$id_datalog = $this->db->insert( "logpeca", $data_log ) ){
 			$this->db->rollBack();
 			return false;
@@ -188,11 +204,11 @@ class Peca_Model extends Model
 		/**
 		 * Fim Datalog
 		 *************************************/
-		
+	
 		$this->db->commit();
 		return $update;
 	}
-
+	
 	/** 
 	* Metodo delete
 	*/
@@ -234,17 +250,31 @@ class Peca_Model extends Model
 		{
 			$sql .= "where id_peca like :id "; // Configurar o like com o campo necessario da tabela
 			$sql .= 'order by p.id_peca desc ';
+			$sql .= 'limit 50 ';
 			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
 		}
 		else
 		{
 			$sql .= 'order by p.id_peca desc ';
+			$sql .= 'limit 50 ';
 			$result = $this->db->select( $sql );
 		}
 
+		
+		
 		return $this->montarLista($result);
 	}
 
+	public function getTotalByStatus( $id_status )
+	{
+		$sql  = 'select count(*) as total ';
+		$sql .= 'from peca as p ';
+		$sql .= 'where p.id_statuspeca = :id_status ';
+		
+		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
+		return $result[0];
+	}
+	
 	/** 
 	* Metodo montarLista
 	*/
@@ -271,7 +301,7 @@ class Peca_Model extends Model
 	{
 		$this->setId_peca( $row["id_peca"] );
 		$this->setCodigo( $row["codigo"] );
-		$this->setvalor( $row["valor"] );
+		$this->setValor( $row["valor"] );
 		$this->setDate( $row["date"] );
 	
 		require_once 'models/user_model.php';

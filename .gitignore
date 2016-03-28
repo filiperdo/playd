@@ -4,3 +4,4 @@ _files
 .buildpath
 config.php
 builder.php
+.htaccess
