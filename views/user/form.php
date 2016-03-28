@@ -41,9 +41,9 @@
 <div class="form-group">
 	<label for="id_typeuser">Tipo</label> 
 	<select class="form-control" name="id_typeuser">
-		<?php foreach ( $this->listarTypeuser as $typeuser ){?>
-		<option value="<?php echo $typeuser->getId_typeuser();?>"><?php echo $typeuser->getName();?></option>
-		<?php } ?>
+		
+		<option value="2" selected="selected">Administrador</option>
+		
 	</select>
 </div>
 
