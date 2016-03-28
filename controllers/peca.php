@@ -109,7 +109,7 @@ class Peca extends Controller {
 	{
 		$data = array( 
 			'codigo' 			=> $_POST["codigo"], 
-			'qrcode' 			=> $_POST["qrcode"], 
+			'valor' 			=> $_POST["valor"], 
 			'id_fornecedor' 	=> $_POST["id_fornecedor"], 
 			'id_produto'		=> $_POST["id_produto"], 
 			'id_statuspeca' 	=> $_POST["id_statuspeca"], 

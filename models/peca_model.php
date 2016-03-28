@@ -13,7 +13,7 @@ class Peca_Model extends Model
 	*/
 	private $peca;
 	private $codigo;
-	private $qrcode;
+	private $valor;
 	private $date;
 	private $user;
 	private $fornecedor;
@@ -26,7 +26,7 @@ class Peca_Model extends Model
 
 		$this->id_peca = '';
 		$this->codigo = '';
-		$this->qrcode = '';
+		$this->valor = '';
 		$this->date = '';
 		$this->user = '';
 		$this->fornecedor = '';
@@ -48,9 +48,9 @@ class Peca_Model extends Model
 		$this->codigo = $codigo;
 	}
 
-	public function setQrcode( $qrcode )
+	public function setValor( $valor )
 	{
-		$this->qrcode = $qrcode;
+		$this->valor = $valor;
 	}
 
 	public function setDate( $date )
@@ -91,9 +91,9 @@ class Peca_Model extends Model
 		return $this->codigo;
 	}
 
-	public function getQrcode()
+	public function getValor()
 	{
-		return $this->qrcode;
+		return $this->valor;
 	}
 
 	public function getDate()
@@ -271,7 +271,7 @@ class Peca_Model extends Model
 	{
 		$this->setId_peca( $row["id_peca"] );
 		$this->setCodigo( $row["codigo"] );
-		$this->setQrcode( $row["qrcode"] );
+		$this->setvalor( $row["valor"] );
 		$this->setDate( $row["date"] );
 	
 		require_once 'models/user_model.php';
