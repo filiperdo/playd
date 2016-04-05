@@ -94,12 +94,12 @@ class Peca extends Controller {
 	{
 		require_once 'models/statuspeca_model.php';
 		
-		
 		for( $i = 0; $i < $_POST['quantidade']; $i++ )
 		{
 			$data = array(
-				'id_user' 			=> Session::get('userid'), 
-				'id_fornecedor' 	=> $_POST["fornecedor"], 
+				'id_user' 			=> Session::get('userid'),
+				'fornecedor'		=> $_POST['nome_fornecedor'], 
+				'id_fornecedor' 	=> $_POST["id_fornecedor"], 
 				'id_produto' 		=> $_POST["produto"], 
 				'id_statuspeca' 	=> Statuspeca_Model::EM_ABERTO,
 				'valor'				=> $_POST['valor']
@@ -134,7 +134,7 @@ class Peca extends Controller {
 	public function editStatus()
 	{
 		$data = array(
-			'id_statuspeca' 	=> $_POST["status"],
+			'id_statuspeca' => $_POST["status"],
 		);
 		
 		$this->model->editStatus( $data, $_POST['idPeca'] ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

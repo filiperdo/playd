@@ -6,7 +6,7 @@ $(document).ready(function(){
 		
 		$('#myModalLabel').html('Editar peca: ' + $(this).attr('id') );
 		
-		$('#logPecaAjax').load('http://localhost/playdisplay/logpeca/listLogAjax/' + $(this).attr('id'));
+		$('#logPecaAjax').load('http://localhost/playd/logpeca/listLogAjax/' + $(this).attr('id'));
 	});
-		
+	
 });

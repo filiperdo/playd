@@ -125,13 +125,7 @@ class Statuspeca_Model extends Model
 		$sql  = "select * ";
 		$sql .= "from statuspeca ";
 
-		if ( isset( $_POST["like"] ) )
-		{
-			$sql .= "where id_statuspeca like :id "; // Configurar o like com o campo necessario da tabela 
-			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
-		}
-		else
-			$result = $this->db->select( $sql );
+		$result = $this->db->select( $sql );
 
 		return $this->montarLista($result);
 	}

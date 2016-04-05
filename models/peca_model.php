@@ -14,6 +14,7 @@ class Peca_Model extends Model
 	private $peca;
 	private $codigo;
 	private $valor;
+	private $nome_fornecedor;
 	private $date;
 	private $user;
 	private $fornecedor;
@@ -27,6 +28,7 @@ class Peca_Model extends Model
 		$this->id_peca = '';
 		$this->codigo = '';
 		$this->valor = '';
+		$this->nome_fornecedor = '';
 		$this->date = '';
 		$this->user = '';
 		$this->fornecedor = '';
@@ -53,6 +55,11 @@ class Peca_Model extends Model
 		$this->valor = $valor;
 	}
 
+	public function setNomeFornecedor( $nome_fornecedor )
+	{
+		$this->nome_fornecedor = $nome_fornecedor;
+	}
+	
 	public function setDate( $date )
 	{
 		$this->date = $date;
@@ -94,6 +101,11 @@ class Peca_Model extends Model
 	public function getValor()
 	{
 		return $this->valor;
+	}
+	
+	public function getNomeFornecedor()
+	{
+		return $this->nome_fornecedor;
 	}
 
 	public function getDate()
@@ -185,7 +197,7 @@ class Peca_Model extends Model
 			return false;
 		}
 	
-		/************************************
+		/**
 		 * Inicio do Datalog
 		 */
 		require_once 'logpeca_model.php';
@@ -215,7 +227,10 @@ class Peca_Model extends Model
 	public function delete( $id )
 	{
 		$this->db->beginTransaction();
-
+		
+		/**
+		 * Deleta a peca
+		 */
 		if( !$delete = $this->db->delete("peca", "id_peca = {$id} ") ){ 
 			$this->db->rollBack();
 			return false;
@@ -250,13 +265,13 @@ class Peca_Model extends Model
 		{
 			$sql .= "where id_peca like :id "; // Configurar o like com o campo necessario da tabela
 			$sql .= 'order by p.id_peca desc ';
-			$sql .= 'limit 50 ';
+			$sql .= 'limit 100 ';
 			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
 		}
 		else
 		{
 			$sql .= 'order by p.id_peca desc ';
-			$sql .= 'limit 50 ';
+			$sql .= 'limit 100 ';
 			$result = $this->db->select( $sql );
 		}
 
@@ -302,6 +317,7 @@ class Peca_Model extends Model
 		$this->setId_peca( $row["id_peca"] );
 		$this->setCodigo( $row["codigo"] );
 		$this->setValor( $row["valor"] );
+		$this->setNomeFornecedor( $row['fornecedor'] );
 		$this->setDate( $row["date"] );
 	
 		require_once 'models/user_model.php';

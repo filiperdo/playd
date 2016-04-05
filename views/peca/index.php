@@ -50,7 +50,7 @@
 		<td align="left">
 			<button type="button" class="btn btn-primary btn-sm btn-editStatus" id="<?php echo $peca->getId_peca(); ?>" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-pencil"></i></button>
 			<!-- <a href="<?php echo URL;?>peca/form/<?php echo $peca->getId_peca();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>  -->
-			<!-- <a href="<?php echo URL;?>peca/delete/<?php echo $peca->getId_peca();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a> -->
+			<a href="<?php echo URL;?>peca/delete/<?php echo $peca->getId_peca();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
 		</td>
  		<td><?php echo str_pad( $peca->getId_peca(), 3, "0", STR_PAD_LEFT); ?></td>
 		<td><?php echo $peca->getProduto()->getName() . ' / ' . $peca->getProduto()->getMarca()->getName(); ?></td>
@@ -59,13 +59,10 @@
 		<td><?php echo $peca->getUser()->getName(); ?></td>
 		<td><?php echo Data::formataDataRetiraHora($peca->getDate()); ?></td>
 		
-		
 	</tr>
 	<?php } ?>
 	</tbody>
 </table>
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
