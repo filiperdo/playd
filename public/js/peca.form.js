@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	$('#marca').change(function(){
-		$('#produto').load('http://localhost/playdisplay/peca/listProdByMarca/' + $(this).val());
+		$('#produto').load('http://www.playdisplay.com.br/system/peca/listProdByMarca/' + $(this).val());
 	});
 		
 });
