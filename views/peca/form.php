@@ -18,10 +18,12 @@
 
 <div class="col-md-6 col-sm-6 col-lg-6">
 <input type="hidden" name="idPeca" value="<?=$this->obj->getId_peca()?>" />
+<input type="hidden" name="nome_fornecedor" id="nome_fornecedor" value="" />
 
 <div class="form-group">
-	<label for="fornecedor">Fornecedor</label>
-	<select name="fornecedor" class="form-control">
+	<label for="id_fornecedor">Fornecedor</label>
+	<select name="id_fornecedor" id="id_fornecedor" class="form-control">
+	<option value="" disabled="disabled" selected="selected">Selecione o fornecedor</option>
 	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
 		<option value="<?php echo $fornecedor->getId_fornecedor();?>"><?php echo $fornecedor->getName();?></option>
 	<?php } ?>

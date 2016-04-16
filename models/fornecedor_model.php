@@ -87,7 +87,7 @@ class Fornecedor_Model extends Model
 
 	public function getName()
 	{
-		return $this->name;
+		return strtoupper($this->name);
 	}
 
 	public function getTelefone()

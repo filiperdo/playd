@@ -7,6 +7,7 @@ $(document).ready(function(){
 		$('#myModalLabel').html('Editar peca: ' + $(this).attr('id') );
 		
 		$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
+
 	});
-		
+	
 });
