@@ -6,11 +6,11 @@
 			<div class="col-lg-6 col-md-6">
 				<ol class="breadcrumb">
 					<li><a href="index.php">Home</a></li>
-					<li class="active"><a href="<?php echo URL;?>fornecedor"><?php echo $this->title; ?></a></li>
+					<li class="active"><a href="<?php echo URL;?>estado"><?php echo $this->title; ?></a></li>
 				</ol>
 			</div>
 			<div class="col-lg-4 col-md-3">
-			<form name="form-search" action="<?php echo URL;?>fornecedor" method="post">
+			<form name="form-search" action="<?php echo URL;?>estado" method="post">
 				<div class="form-group input-group">
 					<input type="text" class="form-control" required="required" name="like" id="busca">
 					<span class="input-group-btn">
@@ -22,7 +22,7 @@
 				</form>
 			</div>
 			<div class="col-lg-2 col-md-2">
-				<a href="<?php echo URL;?>fornecedor/form" class="btn btn-success">Cadastrar <?php echo $this->title; ?></a>
+				<a href="<?php echo URL;?>estado/form" class="btn btn-success">Cadastrar <?php echo $this->title; ?></a>
 			</div>
 		</div>
 	</div>
@@ -34,25 +34,21 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
+		<th>Id_estado </th>
 		<th>Name </th>
-		<th>Pecas </th>
-		<th>Telefone </th>
-		<th>email </th>
-		<th>Cidade </th>
+		<th>Uf </th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
+	<?php foreach( $this->listarEstado as $estado ) { ?>
 	<tr>
- 		<td><?php echo $fornecedor->getName(); ?></td>
- 		<td><?php echo $fornecedor->pecas['total']; ?></td>
-		<td><?php echo $fornecedor->getTelefone(); ?></td>
-		<td><?php echo $fornecedor->getEmail(); ?></td>
-		<td><?php echo $fornecedor->getCidade()->getName() . ' / '. $fornecedor->getCidade()->getEstado()->getUf(); ?></td>
+ 		<td><?php echo $estado->getId_estado(); ?></td>
+		<td><?php echo $estado->getName(); ?></td>
+		<td><?php echo $estado->getUf(); ?></td>
 		<td align="right">
-			<a href="<?php echo URL;?>fornecedor/form/<?php echo $fornecedor->getId_fornecedor();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
-			<a href="<?php echo URL;?>fornecedor/delete/<?php echo $fornecedor->getId_fornecedor();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
+			<a href="<?php echo URL;?>estado/form/<?php echo $estado->getId_estado();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+			<a href="<?php echo URL;?>estado/delete/<?php echo $estado->getId_estado();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
 		</td>
 		</tr>
 	<?php } ?>

@@ -29,6 +29,20 @@ class Fornecedor extends Controller {
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
 
+		/**
+		 * Instancia da classe Estado
+		 */
+		require_once 'models/estado_model.php';
+		$objEstado = new Estado_Model();
+		$this->view->listarEstado = $objEstado->listarEstadosUtilizados();
+		
+		/**
+		 * Instancia da classe Cidade
+		 */
+		require_once 'models/cidade_model.php';
+		$objCidade = new Cidade_Model();
+		$this->view->listarCidade = $objCidade->listarCidadePorEstado( 25 ); // Sao paulo
+		
 		if( $id ) 
 		{
 			$this->view->title = "Editar Fornecedor";
@@ -51,12 +65,14 @@ class Fornecedor extends Controller {
 	public function create()
 	{
 		$data = array(
-			'name' => $_POST["name"], 
-			'telefone' => $_POST["telefone"], 
-			'email' => $_POST["email"], 
-			'banco' => $_POST["banco"], 
-			'cidade' => $_POST["cidade"], 
-			'estado' => $_POST["estado"], 
+			'name' 			=> $_POST["name"], 
+			'telefone' 		=> $_POST["telefone"], 
+			'email' 		=> $_POST["email"], 
+			'banco' 		=> $_POST["banco"], 
+			/* 'cidade' 	=> $_POST["cidade"], 
+			'estado' 		=> $_POST["estado"],  */
+			'endereco' 		=> $_POST["endereco"],
+			'id_cidade' 	=> $_POST["cidade"],
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -74,8 +90,10 @@ class Fornecedor extends Controller {
 			'telefone' => $_POST["telefone"], 
 			'email' => $_POST["email"], 
 			'banco' => $_POST["banco"], 
-			'cidade' => $_POST["cidade"], 
-			'estado' => $_POST["estado"], 
+			/* 'cidade' => $_POST["cidade"], 
+			'estado' => $_POST["estado"],  */
+			'endereco' => $_POST["endereco"],
+			'id_cidade' => $_POST["cidade"],
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

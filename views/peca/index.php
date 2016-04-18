@@ -91,6 +91,11 @@
 				<?php } ?>
 				</select>
 			</div>
+			
+			<div class="form-group" id="gp-cor" style="display: none">
+				<label for="cor">Cor da peça</label> 
+				<input type="text" name="cor" class="form-control" value="" />
+			</div>
 		
 		</div>
 		

@@ -135,6 +135,7 @@ class Peca extends Controller {
 	{
 		$data = array(
 			'id_statuspeca' => $_POST["status"],
+			'cor'			=> isset( $_POST['cor'] ) ? $_POST['cor'] : NULL
 		);
 		
 		$this->model->editStatus( $data, $_POST['idPeca'] ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

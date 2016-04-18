@@ -38,23 +38,44 @@
 	<input type="text" name="banco" id="banco"  class="form-control" required="required" value="<?=$this->obj->getBanco()?>" />
 </div>
 
-<div class="form-group">
-	<label for="cidade">Cidade</label> 
-	<input type="text" name="cidade" id="cidade"  class="form-control" required="required" value="<?=$this->obj->getCidade()?>" />
-</div>
+</div><!-- col-md-6 col-sm-6 col-lg-6 -->
+
+<div class="col-md-6 col-sm-6 col-lg-6">
 
 <div class="form-group">
-	<label for="estado">Estado</label> 
-	<input type="text" name="estado" id="estado"  class="form-control" required="required" value="<?=$this->obj->getEstado()?>" />
+	<label for="estado">Estado</label>
+	<select name="estado" class="form-control" required="required">
+		<?php foreach( $this->listarEstado as $estado ){?>
+		<option value="<?php echo $estado->getId_estado(); ?>"><?php echo $estado->getName(); ?></option>
+		<?php } ?>
+	</select>
 </div>
 
 <div class="form-group">
-	<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" />
-	<a href="<?php echo URL; ?>fornecedor" class="btn btn-info">Cancelar</a>
+	<label for="cidade">Cidade</label>
+	<select name="cidade" class="form-control" required="required">
+		<?php foreach( $this->listarCidade as $cidade ){?>
+		<option value="<?php echo $cidade->getId_cidade(); ?>" <?php if( $cidade->getId_cidade() == $this->obj->getCidade()->getId_cidade() ){?>selected="selected"<?php } ?>>
+			<?php echo $cidade->getName(); ?>
+		</option>
+		<?php } ?>
+	</select>
 </div>
 
+<div class="form-group">
+	<label for="endereco">Endereço</label> 
+	<input type="text" name="endereco" id="endereco"  class="form-control" required="required" value="<?=$this->obj->getEndereco()?>" />
+</div>
 
+</div><!-- col-md-6 col-sm-6 col-lg-6 -->
+
+<div class="col-md-12col-sm-12 col-lg-12">
+	<div class="form-group">
+		<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" />
+		<a href="<?php echo URL; ?>fornecedor" class="btn btn-info">Cancelar</a>
+	</div>
 </div>
-</div>
+
+</div><!-- row -->
 
 </form>

@@ -18,6 +18,7 @@ class Peca_Model extends Model
 	private $date;
 	private $user;
 	private $fornecedor;
+	private $cor;
 	private $produto;
 	private $statuspeca;
 
@@ -32,6 +33,7 @@ class Peca_Model extends Model
 		$this->date = '';
 		$this->user = '';
 		$this->fornecedor = '';
+		$this->cor = '';
 		$this->produto = '';
 		$this->statuspeca = '';
 
@@ -73,6 +75,11 @@ class Peca_Model extends Model
 	public function setFornecedor( $fornecedor )
 	{
 		$this->fornecedor = $fornecedor;
+	}
+	
+	public function setCor( $cor )
+	{
+		$this->cor = $cor;
 	}
 	
 	public function setProduto( $produto )
@@ -121,6 +128,11 @@ class Peca_Model extends Model
 	public function getFornecedor()
 	{
 		return $this->fornecedor;
+	}
+	
+	public function getCor()
+	{
+		return $this->cor;
 	}
 
 	public function getProduto()
@@ -275,8 +287,6 @@ class Peca_Model extends Model
 			$result = $this->db->select( $sql );
 		}
 
-		
-		
 		return $this->montarLista($result);
 	}
 
@@ -288,6 +298,18 @@ class Peca_Model extends Model
 		
 		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
 		return $result[0];
+	}
+	
+	
+	public function obterTotalPecasPorFornecedor( $id_fornecedor )
+	{
+		$sql  = 'select count(p.id_peca) as total ';
+		$sql .= 'from peca as p ';
+		$sql .= "where p.id_fornecedor = :id_fornecedor ";
+		
+		$result = $this->db->select( $sql, array( "id_fornecedor" => $id_fornecedor ) );
+		return $result[0];
+		
 	}
 	
 	/** 
@@ -319,7 +341,8 @@ class Peca_Model extends Model
 		$this->setValor( $row["valor"] );
 		$this->setNomeFornecedor( $row['fornecedor'] );
 		$this->setDate( $row["date"] );
-	
+		$this->setCor( $row['cor'] );
+		
 		require_once 'models/user_model.php';
 		$objUser = new User_Model();
 		$this->setUser( $objUser->obterUser( $row["id_user"] ) );

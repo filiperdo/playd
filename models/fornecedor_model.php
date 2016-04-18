@@ -6,6 +6,9 @@
  *
  * Data: 15/03/2016
  */
+
+include_once 'cidade_model.php';
+
 class Fornecedor_Model extends Model
 {
 	/**
@@ -16,9 +19,12 @@ class Fornecedor_Model extends Model
 	private $telefone;
 	private $email;
 	private $banco;
-	private $cidade;
-	private $estado;
+	/* private $cidade;
+	private $estado; */
 	private $date;
+	private $endereco;
+	private $cidade;
+	public $pecas;
 
 	public function __construct()
 	{
@@ -29,9 +35,12 @@ class Fornecedor_Model extends Model
 		$this->telefone = '';
 		$this->email = '';
 		$this->banco = '';
-		$this->cidade = '';
-		$this->estado = '';
+		/* $this->cidade = '';
+		$this->estado = ''; */
 		$this->date = '';
+		$this->endereco = '';
+		$this->cidade = new Cidade_Model();
+		$this->pecas = '';
 	}
 
 	/** 
@@ -62,7 +71,7 @@ class Fornecedor_Model extends Model
 		$this->banco = $banco;
 	}
 
-	public function setCidade( $cidade )
+	/* public function setCidade( $cidade )
 	{
 		$this->cidade = $cidade;
 	}
@@ -70,13 +79,23 @@ class Fornecedor_Model extends Model
 	public function setEstado( $estado )
 	{
 		$this->estado = $estado;
-	}
+	} */
 
 	public function setDate( $date )
 	{
 		$this->date = $date;
 	}
 
+	public function setEndereco( $endereco )
+	{
+		$this->endereco = $endereco;
+	}
+	
+	public function setCidade( Cidade_Model $cidade )
+	{
+		$this->cidade = $cidade;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -105,7 +124,7 @@ class Fornecedor_Model extends Model
 		return $this->banco;
 	}
 
-	public function getCidade()
+	/* public function getCidade()
 	{
 		return $this->cidade;
 	}
@@ -113,13 +132,22 @@ class Fornecedor_Model extends Model
 	public function getEstado()
 	{
 		return $this->estado;
-	}
+	} */
 
 	public function getDate()
 	{
 		return $this->date;
 	}
 
+	public function getEndereco()
+	{
+		return $this->endereco;
+	}
+	
+	public function getCidade()
+	{
+		return $this->cidade;
+	}
 
 	/** 
 	* Metodo create
@@ -230,10 +258,19 @@ class Fornecedor_Model extends Model
 		$this->setTelefone( $row["telefone"] );
 		$this->setEmail( $row["email"] );
 		$this->setBanco( $row["banco"] );
-		$this->setCidade( $row["cidade"] );
-		$this->setEstado( $row["estado"] );
+		/* $this->setCidade( $row["cidade"] );
+		$this->setEstado( $row["estado"] ); */
 		$this->setDate( $row["date"] );
-
+		$this->setEndereco( $row["endereco"] );
+		
+		$objCidade = new Cidade_Model();
+		$objCidade->obterCidade( $row["id_cidade"] );
+		$this->setCidade( $objCidade );
+		
+		require_once 'models/peca_model.php';
+		$objPeca = new Peca_Model();
+		$this->pecas = $objPeca->obterTotalPecasPorFornecedor( $row["id_fornecedor"] );
+		
 		return $this;
 	}
 }

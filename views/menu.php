@@ -8,4 +8,5 @@ $menu = array(
 	"marca"			=> array("label" => "Marcas", "icon" 		=> "glyphicon glyphicon-copyright-mark"),
 	"produto"		=> array("label" => "Produtos", "icon" 		=> "glyphicon glyphicon-phone"),
 	"user"			=> array("label" => "Usuários", "icon" 		=> "glyphicon glyphicon-user"),	
+	"cidade"		=> array("label" => "Cidade", "icon" 		=> "glyphicon glyphicon-map-marker"),
 );
