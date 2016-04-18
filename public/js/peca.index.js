@@ -5,9 +5,7 @@ $(document).ready(function(){
 		$('#idPeca').val( $(this).attr('id') );
 		
 		$('#myModalLabel').html('Editar peca: ' + $(this).attr('id') );
-		
-		//$('#logPecaAjax').load('http://localhost/playd/logpeca/listLogAjax/' + $(this).attr('id'));
-		
+
 		$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
 	});
 	
@@ -22,6 +20,8 @@ $(document).ready(function(){
 			$('#gp-cor').css('display','none');
 		}
 		
+		$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
+
 	});
 	
 });
