@@ -20,6 +20,16 @@ class Fornecedor extends Controller {
 		$this->view->render( "footer" );
 	}
 
+	public function amount()
+	{
+		$this->view->title = "Quantitativo";
+		$this->view->listarQuantitativo = $this->model->listarQuantitativo( $_GET['id'] );
+		
+		$this->view->render( "header" );
+		$this->view->render( "fornecedor/amount" );
+		$this->view->render( "footer" );
+	}
+	
 	/** 
 	* Metodo editForm
 	*/
@@ -86,14 +96,14 @@ class Fornecedor extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			'name' => $_POST["name"], 
-			'telefone' => $_POST["telefone"], 
-			'email' => $_POST["email"], 
-			'banco' => $_POST["banco"], 
-			/* 'cidade' => $_POST["cidade"], 
-			'estado' => $_POST["estado"],  */
-			'endereco' => $_POST["endereco"],
-			'id_cidade' => $_POST["cidade"],
+			'name' 			=> $_POST["name"], 
+			'telefone' 		=> $_POST["telefone"], 
+			'email' 		=> $_POST["email"], 
+			'banco' 		=> $_POST["banco"], 
+			/* 'cidade' 	=> $_POST["cidade"], 
+			'estado' 		=> $_POST["estado"],  */
+			'endereco' 		=> $_POST["endereco"],
+			'id_cidade' 	=> $_POST["cidade"],
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

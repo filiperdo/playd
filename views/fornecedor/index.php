@@ -45,7 +45,11 @@
 	<tbody>
 	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
 	<tr>
- 		<td><?php echo $fornecedor->getName(); ?></td>
+ 		<td>
+ 			<a href="<?php echo URL;?>fornecedor/amount/?id=<?php echo $fornecedor->getId_fornecedor(); ?>">
+ 				<?php echo $fornecedor->getName(); ?>
+ 			</a>
+ 		</td>
  		<td><?php echo $fornecedor->pecas['total']; ?></td>
 		<td><?php echo $fornecedor->getTelefone(); ?></td>
 		<td><?php echo $fornecedor->getEmail(); ?></td>

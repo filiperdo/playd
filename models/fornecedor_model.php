@@ -19,8 +19,6 @@ class Fornecedor_Model extends Model
 	private $telefone;
 	private $email;
 	private $banco;
-	/* private $cidade;
-	private $estado; */
 	private $date;
 	private $endereco;
 	private $cidade;
@@ -35,8 +33,6 @@ class Fornecedor_Model extends Model
 		$this->telefone = '';
 		$this->email = '';
 		$this->banco = '';
-		/* $this->cidade = '';
-		$this->estado = ''; */
 		$this->date = '';
 		$this->endereco = '';
 		$this->cidade = new Cidade_Model();
@@ -70,16 +66,6 @@ class Fornecedor_Model extends Model
 	{
 		$this->banco = $banco;
 	}
-
-	/* public function setCidade( $cidade )
-	{
-		$this->cidade = $cidade;
-	}
-
-	public function setEstado( $estado )
-	{
-		$this->estado = $estado;
-	} */
 
 	public function setDate( $date )
 	{
@@ -123,16 +109,6 @@ class Fornecedor_Model extends Model
 	{
 		return $this->banco;
 	}
-
-	/* public function getCidade()
-	{
-		return $this->cidade;
-	}
-
-	public function getEstado()
-	{
-		return $this->estado;
-	} */
 
 	public function getDate()
 	{
@@ -210,6 +186,37 @@ class Fornecedor_Model extends Model
 		return $this->montarObjeto( $result[0] );
 	}
 
+	/**
+	 * Recebe o id de um fornecedor
+	 * Retorna o quantitativo de pecas por aparelho
+	 * @param unknown $id_fornecedor
+	 */
+	public function listarQuantitativo( $id_fornecedor )
+	{
+		$sql  = 'select '; 
+		$sql .= 'prod.name as nome_produto, ';
+		$sql .= 'm.name as nome_marca, ';
+		$sql .= 'p.valor, ';
+		$sql .= 'count(p.id_produto) as total ';
+		$sql .= 'from peca as p ';
+		$sql .= 'inner join produto as prod ';
+		$sql .= 'on prod.id_produto = p.id_produto ';
+		$sql .= 'inner join marca as m ';
+		$sql .= 'on m.id_marca = prod.id_marca ';
+		$sql .= 'where p.id_fornecedor = '. $id_fornecedor .' ';
+		$sql .= 'group by p.id_produto ';
+		
+		$result = $this->db->select( $sql );
+		
+		$objs = array();
+		if( !empty( $result ) )
+		{
+			foreach( $result as $row )
+				$objs[] = $row;
+		}
+		return $objs;
+	}
+	
 	/** 
 	* Metodo listarFornecedor
 	*/
@@ -220,8 +227,8 @@ class Fornecedor_Model extends Model
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where id_fornecedor like :id "; // Configurar o like com o campo necessario da tabela 
-			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
+			$sql .= "where name like :name "; // Configurar o like com o campo necessario da tabela 
+			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
 		}
 		else
 			$result = $this->db->select( $sql );
@@ -257,9 +264,7 @@ class Fornecedor_Model extends Model
 		$this->setName( $row["name"] );
 		$this->setTelefone( $row["telefone"] );
 		$this->setEmail( $row["email"] );
-		$this->setBanco( $row["banco"] );
-		/* $this->setCidade( $row["cidade"] );
-		$this->setEstado( $row["estado"] ); */
+		$this->setBanco( $row["banco"] );		
 		$this->setDate( $row["date"] );
 		$this->setEndereco( $row["endereco"] );
 		
