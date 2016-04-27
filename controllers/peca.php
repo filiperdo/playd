@@ -94,6 +94,8 @@ class Peca extends Controller {
 	{
 		require_once 'models/statuspeca_model.php';
 		
+		$this->model->db->beginTransaction();
+		
 		for( $i = 0; $i < $_POST['quantidade']; $i++ )
 		{
 			$data = array(
@@ -108,6 +110,9 @@ class Peca extends Controller {
 			$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 			
 		}
+		
+		$this->model->db->commit();
+		
 		header("location: " . URL . "peca?st=".$msg);
 	}
 

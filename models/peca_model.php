@@ -150,7 +150,7 @@ class Peca_Model extends Model
 	*/
 	public function create( $data )
 	{
-		$this->db->beginTransaction();
+		//$this->db->beginTransaction();
 
 		if( !$id_peca = $this->db->insert( "peca", $data ) ){
 			$this->db->rollBack();
@@ -177,7 +177,7 @@ class Peca_Model extends Model
 		 * Fim Datalog
 		 *************************************/
 		
-		$this->db->commit();
+		//$this->db->commit();
 		return true;
 	}
 
