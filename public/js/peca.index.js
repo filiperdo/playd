@@ -6,7 +6,8 @@ $(document).ready(function(){
 		
 		$('#myModalLabel').html('Editar peca: ' + $(this).attr('id') );
 
-		$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
+		//$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
+		$('#logPecaAjax').load('http://localhost/playd/logpeca/listLogAjax/' + $(this).attr('id'));
 	});
 	
 	$('#status').live('change',function(){
@@ -20,7 +21,8 @@ $(document).ready(function(){
 			$('#gp-cor').css('display','none');
 		}
 		
-		$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
+		//$('#logPecaAjax').load('http://www.playdisplay.com.br/system/logpeca/listLogAjax/' + $(this).attr('id'));
+		$('#logPecaAjax').load('http://localhost/playd/logpeca/listLogAjax/' + $(this).attr('id'));
 
 	});
 	

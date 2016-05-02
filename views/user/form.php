@@ -11,7 +11,7 @@
 </div>
 </div>
 <!-- /.row -->
-<form id="form1" name="form1" method="post" action="<?php echo URL;?>user/<?php echo $this->action;?>/">
+<form id="form1" name="form1" method="post" action="<?php echo URL;?>user/<?php echo $this->action;?>/" >
 
 <div class="row">
 
@@ -20,7 +20,7 @@
 
 <div class="form-group">
 	<label for="name">Name</label> 
-		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
+	<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>
 
 <div class="form-group">

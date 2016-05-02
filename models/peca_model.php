@@ -275,10 +275,10 @@ class Peca_Model extends Model
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where id_peca like :id "; // Configurar o like com o campo necessario da tabela
+			$sql .= "where id_peca = :id "; // Configurar o like com o campo necessario da tabela
 			$sql .= 'order by p.id_peca desc ';
 			$sql .= 'limit 100 ';
-			$result = $this->db->select( $sql, array("id" => "%{$_POST["like"]}%") );
+			$result = $this->db->select( $sql, array("id" => $_POST["like"]) );
 		}
 		else
 		{
