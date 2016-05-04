@@ -1,4 +1,5 @@
 
+    
 <!-- Page Heading -->
 <div class="row">
 	<div class="col-lg-12">
@@ -22,7 +23,7 @@
 
 <div class="form-group">
 	<label for="id_fornecedor">Fornecedor</label>
-	<select name="id_fornecedor" id="id_fornecedor" class="form-control">
+	<select name="id_fornecedor" id="id_fornecedor" class="form-control select2">
 	<option value="" disabled="disabled" selected="selected">Selecione o fornecedor</option>
 	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
 		<option value="<?php echo $fornecedor->getId_fornecedor();?>"><?php echo $fornecedor->getName();?></option>
@@ -67,3 +68,15 @@
 
 </form>
 
+<!-- Select2 -->
+<link rel="stylesheet" href="<?php echo URL; ?>util/select2/select2.min.css">
+<!-- Select2 -->
+<script src="<?php echo URL; ?>util/select2/select2.full.min.js"></script>
+
+<!-- Page script -->
+<script>
+$(function () {
+	//Initialize Select2 Elements
+	$(".select2").select2();
+});
+</script>

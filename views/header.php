@@ -28,6 +28,7 @@
     }
     ?>
     
+	
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo URL; ?>public/css/bootstrap.css" rel="stylesheet">
 
