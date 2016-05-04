@@ -214,7 +214,7 @@ class Peca_Model extends Model
 		 */
 		require_once 'logpeca_model.php';
 		$objLog = new Logpeca_Model();
-	
+		
 		$data_log = array(
 				'id_peca' 		=> $id,
 				'id_user' 		=> Session::get('userid'),
@@ -297,7 +297,7 @@ class Peca_Model extends Model
 		$sql .= 'where p.id_statuspeca = :id_status ';
 		
 		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
-		return $result[0];
+		return $result[0]['total'];
 	}
 	
 	

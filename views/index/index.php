@@ -8,45 +8,26 @@
 <!-- /.row -->
 
 <div class="row">
-	<div class="col-lg-3">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Em aberto</h3>
-			</div>
-			<div class="panel-body">
-				<h3><?php echo $this->getTotal['EM_ABERTO'];?></h3>
-			</div>  
-		</div>
+	<div class="col-lg-6 col-sm-6">
+	
+	<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Status</th>
+			<th>Qtde</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ( $this->objStatus->listarStatuspeca() as $status ) { ?>
+		<tr>
+			<td><span class="text-<?php echo $status->getClass();?>"><i class="<?php echo $status->getIcon(); ?>"></i> <?php echo $status->getName();?></span></td>
+			<td><span class="text-<?php echo $status->getClass();?>"><?php echo $this->objPeca->getTotalByStatus( $status->getId_statuspeca() );?></span></td>
+		</tr>
+	<?php } ?>
+	</tbody>
+	</table>
+	
 	</div>
-	<div class="col-lg-3">
-		<div class="panel panel-success">
-			<div class="panel-heading">
-				<h3 class="panel-title">Prontas Verdes</h3>
-			</div>
-			<div class="panel-body">
-				<h3><?php echo $this->getTotal['PRONTO_VERDE'];?></h3>
-			</div>  
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div class="panel panel-warning">
-			<div class="panel-heading">
-				<h3 class="panel-title">Prontas Amarelas</h3>
-			</div>
-			<div class="panel-body">
-				<h3><?php echo $this->getTotal['PRONTO_AMARELO'];?></h3>
-			</div>  
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title">Aguardando Flex</h3>
-			</div>
-			<div class="panel-body">
-				<h3><?php echo $this->getTotal['AGUARDANDO_FLEX'];?></h3>
-			</div>  
-		</div>
-	</div>
+	
 </div><!-- /.row -->
 

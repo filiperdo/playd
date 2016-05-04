@@ -20,6 +20,8 @@ class Statuspeca_Model extends Model
 	*/
 	private $statuspeca;
 	private $name;
+	private $class;
+	private $icon;
 
 	public function __construct()
 	{
@@ -27,6 +29,8 @@ class Statuspeca_Model extends Model
 
 		$this->id_statuspeca = '';
 		$this->name = '';
+		$this->class = '';
+		$this->icon = '';
 	}
 
 	/** 
@@ -42,6 +46,16 @@ class Statuspeca_Model extends Model
 		$this->name = $name;
 	}
 
+	public function setClass( $class )
+	{
+		$this->class = $class;
+	}
+	
+	public function setIcon( $icon )
+	{
+		$this->icon = $icon;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -55,6 +69,15 @@ class Statuspeca_Model extends Model
 		return $this->name;
 	}
 
+	public function getClass()
+	{
+		return $this->class;
+	}
+	
+	public function getIcon()
+	{
+		return $this->icon;
+	}
 
 	/** 
 	* Metodo create
@@ -156,6 +179,8 @@ class Statuspeca_Model extends Model
 	{
 		$this->setId_statuspeca( $row["id_statuspeca"] );
 		$this->setName( $row["name"] );
+		$this->setClass( $row['class'] );
+		$this->setIcon( $row['icon'] );
 
 		return $this;
 	}
