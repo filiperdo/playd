@@ -14,7 +14,7 @@ class Alerta
     private $arrayMsgOk;
     private $arrayMsgErro;
 
-    function __construct($msg = '')
+    function __construct( $msg = '' )
     {
         $this->arrayMsgErro = array();
         $this->arrayMsgOk = array();

@@ -228,6 +228,40 @@ class Peca_Model extends Model
 		/**
 		 * Fim Datalog
 		 *************************************/
+		
+		/**
+		 * Se for PRONTA VERDE ou PRONTA AMARELA
+		 * Atualiza o log novamente para ENTREGUE
+		 */
+		require_once 'models/statuspeca_model.php';
+		if( $data['id_statuspeca'] == Statuspeca_Model::PRONTO_AMARELO || $data['id_statuspeca'] == Statuspeca_Model::PRONTO_VERDE )
+		{
+			// Edita o status
+			$dados_peca = array(
+				'id_statuspeca' => Statuspeca_Model::ENTREGUE
+			);
+			
+			if( !$update = $this->db->update("peca", $dados_peca, "id_peca = {$id} ") ){
+				$this->db->rollBack();
+				return false;
+			}
+			// -------------------------
+			
+			// Edita o log
+			$data_log = array(
+					'id_peca' 		=> $id,
+					'id_user' 		=> Session::get('userid'),
+					'id_statuspeca' => Statuspeca_Model::ENTREGUE
+			);
+			
+			if( !$id_datalog = $this->db->insert( "logpeca", $data_log ) ){
+				$this->db->rollBack();
+				return false;
+			}
+		}
+		/**
+		 * Fim if
+		 *************************************/
 	
 		$this->db->commit();
 		return $update;
@@ -290,13 +324,22 @@ class Peca_Model extends Model
 		return $this->montarLista($result);
 	}
 
-	public function getTotalByStatus( $id_status )
+	public function getTotalByStatus( $id_status, $id_modelo = NULL )
 	{
 		$sql  = 'select count(*) as total ';
 		$sql .= 'from peca as p ';
 		$sql .= 'where p.id_statuspeca = :id_status ';
 		
-		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
+		if( $id_modelo )
+		{
+			$sql .= 'and p.id_modelo = :id_modelo ';
+			$result = $this->db->select( $sql, array( "id_status" => $id_status, 'id_modelo' => $id_modelo ) );
+		}
+		else
+		{
+			$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
+		}
+		
 		return $result[0]['total'];
 	}
 	

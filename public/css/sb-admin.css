@@ -17,6 +17,13 @@ body {
     }
 }
 
+@media (max-width: 767px) {
+  .ss {
+    display: none !important;
+  }
+}
+
+
 #wrapper {
     padding-left: 0;
 }

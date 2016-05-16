@@ -22,6 +22,7 @@ class Fornecedor_Model extends Model
 	private $date;
 	private $endereco;
 	private $cidade;
+	private $note;
 	public $pecas;
 
 	public function __construct()
@@ -37,6 +38,7 @@ class Fornecedor_Model extends Model
 		$this->endereco = '';
 		$this->cidade = new Cidade_Model();
 		$this->pecas = '';
+		$this->note = '';
 	}
 
 	/** 
@@ -82,6 +84,11 @@ class Fornecedor_Model extends Model
 		$this->cidade = $cidade;
 	}
 	
+	public function setNote( $note )
+	{
+		$this->note = $note;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -123,6 +130,11 @@ class Fornecedor_Model extends Model
 	public function getCidade()
 	{
 		return $this->cidade;
+	}
+	
+	public function getNote()
+	{
+		return $this->note;
 	}
 
 	/** 
@@ -267,6 +279,7 @@ class Fornecedor_Model extends Model
 		$this->setBanco( $row["banco"] );		
 		$this->setDate( $row["date"] );
 		$this->setEndereco( $row["endereco"] );
+		$this->setNote( $row['note'] );
 		
 		$objCidade = new Cidade_Model();
 		$objCidade->obterCidade( $row["id_cidade"] );

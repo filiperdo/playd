@@ -36,9 +36,9 @@
 	<tr>
 		<th>Name </th>
 		<th>Pecas </th>
-		<th>Telefone </th>
-		<th>email </th>
-		<th>Cidade </th>
+		<th class="ss">Telefone </th>
+		
+		<th class="ss">Cidade </th>
 		<th></th>
 	</tr>
 	</thead>
@@ -51,9 +51,9 @@
  			</a>
  		</td>
  		<td><?php echo $fornecedor->pecas['total']; ?></td>
-		<td><?php echo $fornecedor->getTelefone(); ?></td>
-		<td><?php echo $fornecedor->getEmail(); ?></td>
-		<td><?php echo $fornecedor->getCidade()->getName() . ' / '. $fornecedor->getCidade()->getEstado()->getUf(); ?></td>
+		<td class="ss"><?php echo $fornecedor->getTelefone(); ?></td>
+		
+		<td class="ss"><?php echo $fornecedor->getCidade()->getName() . ' / '. $fornecedor->getCidade()->getEstado()->getUf(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>fornecedor/form/<?php echo $fornecedor->getId_fornecedor();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>fornecedor/delete/<?php echo $fornecedor->getId_fornecedor();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>

@@ -13,9 +13,11 @@ class Index extends Controller {
         
         require_once 'models/peca_model.php';
         require_once 'models/statuspeca_model.php';
+        require_once 'models/produto_model.php';
         
         $this->view->objStatus = new Statuspeca_Model();
         $this->view->objPeca = new Peca_Model();
+        $this->view->objProduto = new Produto_Model();
         
         $this->view->render('header');
         $this->view->render('index/index');

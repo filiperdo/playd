@@ -34,7 +34,7 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Id_cidade </th>
+		
 		<th>Name </th>
 		<th>Estado </th>
 		<th></th>
@@ -43,7 +43,7 @@
 	<tbody>
 	<?php foreach( $this->listarCidade as $cidade ) { ?>
 	<tr>
- 		<td><?php echo $cidade->getId_cidade(); ?></td>
+ 		
 		<td><?php echo $cidade->getName(); ?></td>
 		<td><?php echo $cidade->getEstado()->getUf(); ?></td>
 		<td align="right">

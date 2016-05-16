@@ -28,6 +28,7 @@ class Logpeca_Model extends Model
 		$this->id_peca = '';
 		$this->id_user = '';
 		$this->status = '';
+		$this->user = '';
 	}
 
 	/** 
@@ -58,6 +59,11 @@ class Logpeca_Model extends Model
 		$this->id_user = $id_user;
 	}
 
+	public function setUser( User_Model $user )
+	{
+		$this->user = $user;
+	}
+	
 	public function setStatus( Statuspeca_Model $status )
 	{
 		$this->status = $status;
@@ -96,6 +102,10 @@ class Logpeca_Model extends Model
 		return $this->status;
 	}
 
+	public function getUser()
+	{
+		return $this->user;
+	}
 
 	/** 
 	* Metodo create
@@ -167,7 +177,7 @@ class Logpeca_Model extends Model
 		$sql  = "select * ";
 		$sql .= "from logpeca as l ";
 		$sql .= 'where l.id_peca = ' . $id_peca . ' ';
-		$sql .= 'order by l.date desc ';
+		$sql .= 'order by l.id_logpeca desc ';
 		
 		$result = $this->db->select( $sql );
 
@@ -209,6 +219,10 @@ class Logpeca_Model extends Model
 		require_once 'models/statuspeca_model.php';
 		$objStatus = new Statuspeca_Model();
 		$this->setStatus( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
+		
+		require_once 'models/user_model.php';
+		$objUser = new User_Model();
+		$this->setUser( $objUser->obterUser( $row['id_user'] ) );
 		
 		return $this;
 	}

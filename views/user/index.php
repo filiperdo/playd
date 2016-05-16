@@ -34,24 +34,22 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Id_user </th>
+		
 		<th>Name </th>
-		<th>Email </th>
+		<th class="ss">Email </th>
 		<th>Login </th>
-		<th>Password </th>
-		<th>Tipo </th>
+		<th class="ss">Tipo </th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach( $this->listarUser as $user ) { ?>
 	<tr>
- 		<td><?php echo $user->getId_user(); ?></td>
+ 		
 		<td><?php echo $user->getName(); ?></td>
-		<td><?php echo $user->getEmail(); ?></td>
+		<td class="ss"><?php echo $user->getEmail(); ?></td>
 		<td><?php echo $user->getLogin(); ?></td>
-		<td><?php echo '*****'; ?></td>
-		<td><?php echo $user->getTypeuser()->getName(); ?></td>
+		<td class="ss"><?php echo $user->getTypeuser()->getName(); ?></td>
 		<td align="right">
 			<a href="<?php echo URL;?>user/form/<?php echo $user->getId_user();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>user/delete/<?php echo $user->getId_user();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>

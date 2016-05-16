@@ -24,13 +24,16 @@ class Data
 		}
 	}
 	
-	static public function formataDataRetiraHora($data)
+	static public function formataDataRetiraHora( $data, $abrev = false )
 	{
 		if (!empty($data))
 		{
 			$d = explode(' ', $data);
 			$data_hora = implode('/', array_reverse(explode('-', $d[0]))) . ' ' . $d[1];
-			return substr($data_hora,0,10);
+			if( $abrev )
+				return substr($data_hora,0,5);
+			else
+				return substr($data_hora,0,10);
 		}
 	}
 	

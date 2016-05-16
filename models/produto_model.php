@@ -127,15 +127,19 @@ class Produto_Model extends Model
 	public function listarProduto()
 	{
 		$sql  = "select * ";
-		$sql .= "from produto ";
+		$sql .= "from produto as p ";
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where name like :name "; // Configurar o like com o campo necessario da tabela 
+			$sql .= "where p.name like :name "; // Configurar o like com o campo necessario da tabela 
+			$sql .= 'order by p.id_marca asc ';
 			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
 		}
 		else
+		{
+			$sql .= 'order by p.id_marca asc ';
 			$result = $this->db->select( $sql );
+		}
 
 		return $this->montarLista($result);
 	}
@@ -143,7 +147,7 @@ class Produto_Model extends Model
 	/**
 	 * Metodo listarProdutoPorMarca
 	 */
-	public function listarProdutoPorMarca( $id_marca )
+	public function listarProdutoPorMarca( $id_marca, $status = NULL )
 	{
 		$sql  = "select * ";
 		$sql .= "from produto as p ";
@@ -152,6 +156,28 @@ class Produto_Model extends Model
 		$result = $this->db->select( $sql );
 		
 		return $this->montarLista($result);
+	}
+	
+	/**
+	 * Lista os produtos por status
+	 * trazendo os totais de cada um
+	 * @param unknown $id_status
+	 */
+	public function listarProdutoPorStatus( $id_status )
+	{
+		$sql  = 'select ';
+		$sql .= 'prod.*, ';
+		$sql .= 'count(prod.id_produto) as total ';
+		$sql .= 'from peca as p ';
+		$sql .= 'inner join produto as prod ';
+		$sql .= 'on prod.id_produto = p.id_produto ';
+		$sql .= 'where p.id_statuspeca = :idStatus ';
+		$sql .= 'group by prod.id_produto ';
+		
+		$result = $this->db->select( $sql, array( 'idStatus' => $id_status ) );
+		
+		return $result;
+		
 	}
 	
 	/** 

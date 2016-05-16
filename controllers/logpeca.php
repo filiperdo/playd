@@ -103,7 +103,7 @@ class Logpeca extends Controller {
 			$html .= '<tr>';
 			$html .= '<td> ' . $log->getStatus()->getName() . '</td>';
 			$html .= '<td> ' . Data::formataDataRetiraHora($log->getDate()) . '</td>';
-			$html .= '<td> ' . $log->getId_user() . '</td>';
+			$html .= '<td> ' . $log->getUser()->getName() . '</td>';
 			$html .= '</tr>';
 		}
 	

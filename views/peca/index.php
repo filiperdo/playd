@@ -36,10 +36,10 @@
 	<tr>
 		<th></th>
 		<th>Codigo </th>
-		<th>Produto / Marca </th>
+		<th>Produto<span class="ss"> / Marca</span></th>
 		<th>Status </th>
-		<th>Fornecedor </th>
-		<th>User </th>
+		<th class="ss">Fornecedor </th>
+		<th class="ss">User </th>
 		<th>Data </th>
 		
 	</tr>
@@ -53,11 +53,11 @@
 			<a href="<?php echo URL;?>peca/delete/<?php echo $peca->getId_peca();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
 		</td>
  		<td><?php echo str_pad( $peca->getId_peca(), 3, "0", STR_PAD_LEFT); ?></td>
-		<td><?php echo $peca->getProduto()->getName() . ' / ' . $peca->getProduto()->getMarca()->getName(); ?></td>
-		<td><?php echo $peca->getStatuspeca()->getName(); ?></td>
-		<td><?php echo $peca->getFornecedor()->getName(); ?></td>
-		<td><?php echo $peca->getUser()->getName(); ?></td>
-		<td><?php echo Data::formataDataRetiraHora($peca->getDate()); ?></td>
+		<td><?php echo $peca->getProduto()->getName() . '<span class="ss"> / ' . $peca->getProduto()->getMarca()->getName() . '</span>'; ?></td>
+		<td><span class="text-<?php echo $peca->getStatuspeca()->getClass(); ?>"><i class="<?php echo $peca->getStatuspeca()->getIcon(); ?>"></i> <?php echo $peca->getStatuspeca()->getName(); ?></span></td>
+		<td class="ss"><?php echo $peca->getFornecedor()->getName(); ?></td>
+		<td class="ss"><?php echo $peca->getUser()->getName(); ?></td>
+		<td><?php echo Data::formataDataRetiraHora($peca->getDate(),true); ?></td>
 		
 	</tr>
 	<?php } ?>
@@ -79,7 +79,7 @@
 
 		<div class="row">
 		
-		<div class="col-md-5 col-sm-5 col-lg-5">
+		<div class="col-xs-12 col-sm-12 col-md-5">
 		
 			<input type="hidden" name="idPeca" id="idPeca" value="" />
 			<div class="form-group">
@@ -99,9 +99,8 @@
 		
 		</div>
 		
-		<div class="col-md-7 col-sm-7 col-lg-7">
+		<div class="col-xs-12 col-sm-12 col-md-7">
 		
-			
 			<table class="table table-striped sortable table-condensed">
 				<thead>
 					<tr>

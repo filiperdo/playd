@@ -82,6 +82,7 @@ class Fornecedor extends Controller {
 			/* 'cidade' 	=> $_POST["cidade"], 
 			'estado' 		=> $_POST["estado"],  */
 			'endereco' 		=> $_POST["endereco"],
+			'note'			=> $_POST['note'],
 			'id_cidade' 	=> $_POST["cidade"],
 		);
 
@@ -103,6 +104,7 @@ class Fornecedor extends Controller {
 			/* 'cidade' 	=> $_POST["cidade"], 
 			'estado' 		=> $_POST["estado"],  */
 			'endereco' 		=> $_POST["endereco"],
+			'note'			=> $_POST['note'],
 			'id_cidade' 	=> $_POST["cidade"],
 		);
 

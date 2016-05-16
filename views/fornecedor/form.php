@@ -67,6 +67,12 @@
 	<input type="text" name="endereco" id="endereco"  class="form-control" required="required" value="<?=$this->obj->getEndereco()?>" />
 </div>
 
+<div class="form-group">
+	<label for="note">Observação</label> 
+	<textarea rows="3" name="note" id="note"  class="form-control" cols=""><?=$this->obj->getNote()?></textarea>
+
+</div>
+
 </div><!-- col-md-6 col-sm-6 col-lg-6 -->
 
 <div class="col-md-12col-sm-12 col-lg-12">
