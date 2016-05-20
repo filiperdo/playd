@@ -324,21 +324,22 @@ class Peca_Model extends Model
 		return $this->montarLista($result);
 	}
 
-	public function getTotalByStatus( $id_status, $id_modelo = NULL )
+	public function getTotalByStatus( $id_status, $contar_log = false )
 	{
-		$sql  = 'select count(*) as total ';
-		$sql .= 'from peca as p ';
-		$sql .= 'where p.id_statuspeca = :id_status ';
-		
-		if( $id_modelo )
+		if( $contar_log )
 		{
-			$sql .= 'and p.id_modelo = :id_modelo ';
-			$result = $this->db->select( $sql, array( "id_status" => $id_status, 'id_modelo' => $id_modelo ) );
+			$sql  = 'select distinct count(*) as total  ';
+			$sql .= 'from logpeca as p ';
+			$sql .= 'where p.id_statuspeca = :id_status ';
 		}
 		else
 		{
-			$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
+			$sql  = 'select count(*) as total  ';
+			$sql .= 'from peca as p ';
+			$sql .= 'where p.id_statuspeca = :id_status ';
 		}
+		
+		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
 		
 		return $result[0]['total'];
 	}

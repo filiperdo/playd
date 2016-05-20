@@ -29,12 +29,11 @@
 	<tbody>
 	<?php foreach( $this->listarQuantitativo as $amount ) { ?>
 	<tr>
- 		
 		<td><?php echo $amount['nome_produto'] . ' / ' . $amount['nome_marca'] ; ?></td>
 		<td><?php echo 'R$ ' . $amount['valor']; ?></td>
 		<td><?php echo $amount['total']; ?></td>
 		<td align="right"></td>
-		</tr>
+	</tr>
 	<?php } ?>
 	</tbody>
 </table>
