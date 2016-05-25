@@ -244,7 +244,7 @@ class Fornecedor_Model extends Model
 		}
 		else
 			$result = $this->db->select( $sql );
-
+		
 		return $this->montarLista($result);
 	}
 

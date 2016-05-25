@@ -50,7 +50,17 @@
 	
 	<!-- STYLE default -->
     <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
-
+	
+	<?php 
+    if (isset($this->css)) 
+    {
+        foreach ($this->css as $css)
+        {
+        	echo '<link href="'. URL .'public/css/'. $css .'" rel="stylesheet">';
+        }
+    }
+    ?>
+	
 </head>
 
 <body>

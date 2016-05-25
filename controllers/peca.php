@@ -87,6 +87,39 @@ class Peca extends Controller {
 		$this->view->render( "footer" );
 	}
 
+
+	/**
+	 * Metodo report // relatorio
+	 */
+	public function report()
+	{
+		$this->view->title = "Relatórios";
+		$this->view->js[] = 'bootstrap-datepicker.js';
+		$this->view->css[] = 'bootstrap-datepicker.css';
+		
+		require_once 'models/peca_model.php';
+		$this->view->objPeca = new Peca_Model();
+		
+		require_once 'models/fornecedor_model.php';
+		$objFornecedor = new Fornecedor_Model();
+		$this->view->listarFornecedor = $objFornecedor->listarFornecedor();
+		
+		require_once 'models/statuspeca_model.php';
+		$objStatus = new Statuspeca_Model();
+		$this->view->listarStatus = $objStatus->listarStatuspeca();
+		
+		if( isset( $_POST['fornecedor'] ) )
+		{
+			$objFornecedor->obterFornecedor( $_POST['fornecedor'] );
+			$this->view->nomeFornecedor = $objFornecedor->getName();
+		}
+		
+		$this->view->render('header');
+		$this->view->render('peca/report');
+		$this->view->render('footer');
+	}
+	
+	
 	/** 
 	* Metodo create
 	*/

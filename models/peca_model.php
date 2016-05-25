@@ -344,6 +344,43 @@ class Peca_Model extends Model
 		return $result[0]['total'];
 	}
 	
+	/**
+	 * RELATORIO
+	 * Emiti um relatorio mostrando as quantidades de peças por data, status e fornecedor
+	 * @param unknown $date_ini
+	 * @param unknown $data_fim
+	 * @param array $status
+	 * @param unknown $id_fornecedor
+	 */
+	public function reportByStatus( $date_ini, $data_fim, Array $status, $id_fornecedor )
+	{
+		$status_str = implode( ',', $status );
+		
+		$sql  = 'select '; 
+		$sql .= 'prod.name as nome_produto, '; 
+		$sql .= 'm.name as nome_marca,  ';
+		$sql .= 'p.valor, ';
+		$sql .= 'count(p.id_produto) as total  ';
+		$sql .= 'from peca as p  ';
+		$sql .= 'inner join produto as prod  ';
+		$sql .= 'on prod.id_produto = p.id_produto ';
+		$sql .= 'inner join marca as m  ';
+		$sql .= 'on m.id_marca = prod.id_marca  ';
+		$sql .= 'where p.id_fornecedor = '. $id_fornecedor .' ';
+		$sql .= 'and p.id_statuspeca in ('. $status_str .') ';
+		$sql .= "and p.date between '". Data::formataDataBD($date_ini) ." 00:00:00' and '". Data::formataDataBD($data_fim) ." 23:59:59' ";
+		$sql .= 'group by p.id_produto ';
+		
+		$result = $this->db->select( $sql );
+	
+		$objs = array();
+		if( !empty( $result ) )
+		{
+			foreach( $result as $row )
+				$objs[] = $row;
+		}
+		return $objs;
+	}
 	
 	public function obterTotalPecasPorFornecedor( $id_fornecedor )
 	{
