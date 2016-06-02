@@ -44,7 +44,8 @@
 
 <div class="form-group">
 	<label for="estado">Estado</label>
-	<select name="estado" class="form-control" required="required">
+	<select name="estado" id="estado" class="form-control" required="required">
+		<option>Selecione o estado</option>
 		<?php foreach( $this->listarEstado as $estado ){?>
 		<option value="<?php echo $estado->getId_estado(); ?>"><?php echo $estado->getName(); ?></option>
 		<?php } ?>
@@ -53,12 +54,8 @@
 
 <div class="form-group">
 	<label for="cidade">Cidade</label>
-	<select name="cidade" class="form-control" required="required">
-		<?php foreach( $this->listarCidade as $cidade ){?>
-		<option value="<?php echo $cidade->getId_cidade(); ?>" <?php if( $cidade->getId_cidade() == $this->obj->getCidade()->getId_cidade() ){?>selected="selected"<?php } ?>>
-			<?php echo $cidade->getName(); ?>
-		</option>
-		<?php } ?>
+	<select name="cidade" id="cidade" class="form-control">
+		<!-- carrega o conteudo via ajax -->
 	</select>
 </div>
 

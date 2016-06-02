@@ -38,7 +38,8 @@ class Fornecedor extends Controller {
 		$this->view->title = "Cadastrar Fornecedor";
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
-
+		$this->view->js[] = 'fornecedor.form.js';
+		
 		/**
 		 * Instancia da classe Estado
 		 */
@@ -121,5 +122,28 @@ class Fornecedor extends Controller {
 		$this->model->delete( $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
 		header("location: " . URL . "fornecedor?st=".$msg);
+	}
+	
+	
+	/**
+	 *
+	 * @param unknown $id_estado
+	 */
+	public function listCityByState( $id_estado )
+	{
+		require 'models/cidade_model.php';
+		$objCidade = new Cidade_Model();
+	
+		$html  = '';
+	
+		foreach( $objCidade->listarCidadePorEstado( $id_estado ) as $cidade )
+		{
+			$html .= '<option value="' . $cidade->getId_cidade() . '"> ';
+			$html .= $cidade->getName();
+			$html .= '</option>';
+		}
+	
+		ini_set('default_charset', 'ISO-8859-1');
+		echo $html;
 	}
 }
