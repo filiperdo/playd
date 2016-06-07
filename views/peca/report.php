@@ -83,16 +83,16 @@
 			<thead>
 			<tr>
 				<th>Produto</th>
-				<th>Valor</th>
 				<th>Total</th>
+				<th>Valor</th>
 			</tr>
 			</thead>
 			<tbody>
 			<?php foreach ( $this->objPeca->reportByStatus( $_POST['data_ini'], $_POST['data_fim'], $_POST['status'], $_POST['fornecedor'] ) as $report ) { ?>
 			<tr>
 				<td><?php echo $report['nome_produto'].' / '.$report['nome_marca'];?></td>
+		 		<td><?php echo $report['total'];?></td>
 		 		<td><?php echo $report['valor'];?></td>
-				<td><?php echo $report['total'];?></td>
 			</tr>
 			<?php } ?>
 			</tbody>
