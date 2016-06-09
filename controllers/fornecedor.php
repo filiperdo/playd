@@ -131,16 +131,16 @@ class Fornecedor extends Controller {
 	 */
 	public function listCityByState( $id_estado )
 	{
-		require 'models/cidade_model.php';
+		require_once 'models/cidade_model.php';
 		$objCidade = new Cidade_Model();
-	
+		
 		$html  = '';
 	
 		foreach( $objCidade->listarCidadePorEstado( $id_estado ) as $cidade )
 		{
 			$html .= '<option value="' . $cidade->getId_cidade() . '"> ';
 			$html .= $cidade->getName();
-			$html .= '</option>';
+			$html .= '</option>'; 
 		}
 	
 		ini_set('default_charset', 'ISO-8859-1');

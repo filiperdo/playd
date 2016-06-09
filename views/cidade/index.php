@@ -34,19 +34,20 @@
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		
 		<th>Name </th>
 		<th>Estado </th>
+		<th>Visitas</th>
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach( $this->listarCidade as $cidade ) { ?>
 	<tr>
- 		
 		<td><?php echo $cidade->getName(); ?></td>
 		<td><?php echo $cidade->getEstado()->getUf(); ?></td>
+		<td><a href="<?php echo URL?>visita/?id_cidade=<?php echo $cidade->getId_cidade(); ?>"><?php echo $cidade->getTotalVisitas(); ?></a></td>
 		<td align="right">
+			<a href="<?php echo URL;?>visita/form/?cidade=<?php echo $cidade->getId_cidade();?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-map-marker"></i> Visita</a>
 			<a href="<?php echo URL;?>cidade/form/<?php echo $cidade->getId_cidade();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>cidade/delete/<?php echo $cidade->getId_cidade();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
 		</td>

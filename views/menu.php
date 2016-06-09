@@ -9,4 +9,5 @@ $menu = array(
 	"produto"		=> array("label" => "Produtos", "icon" 		=> "glyphicon glyphicon-phone"),
 	"user"			=> array("label" => "Usuários", "icon" 		=> "glyphicon glyphicon-user"),	
 	"cidade"		=> array("label" => "Cidade", "icon" 		=> "glyphicon glyphicon-map-marker"),
+	"visita"		=> array("label" => "Visitas", "icon" 		=> "glyphicon glyphicon-map-marker"),
 );

@@ -125,6 +125,19 @@ class Cidade_Model extends Model
 		return $this->montarObjeto( $result[0] );
 	}
 
+	/**
+	 * Retorna o total de visitas
+	 */
+	public function getTotalVisitas()
+	{
+		$sql  = "select count(*) as total ";
+		$sql .= "from visita as v ";
+		$sql .= "where v.id_cidade = :id ";
+		
+		$result = $this->db->select( $sql, array("id" => $this->getId_cidade()) );
+		return $result[0]['total'];
+	}
+	
 	/** 
 	* Metodo listarCidade
 	*/

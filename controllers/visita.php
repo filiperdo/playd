@@ -1,6 +1,6 @@
 <?php 
 
-class Cidade extends Controller {
+class Visita extends Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -12,12 +12,12 @@ class Cidade extends Controller {
 	*/
 	public function index()
 	{
-		$this->view->title = "Cidade";
-		$this->view->listarCidade = $this->model->listarCidade();
-		$this->view->getTotalvisitas = $this->model->getTotalVisitas();
-
+		$this->view->title = "Visita";
+		$this->view->listarVisita = $this->model->listarVisita();
+		$this->view->model = $this->model;
+		
 		$this->view->render( "header" );
-		$this->view->render( "cidade/index" );
+		$this->view->render( "visita/index" );
 		$this->view->render( "footer" );
 	}
 
@@ -26,22 +26,19 @@ class Cidade extends Controller {
 	*/
 	public function form( $id = NULL )
 	{
-		$this->view->title = "Cadastrar Cidade";
+		$this->view->title = "Cadastrar Visita";
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
-
-		/**
-		 * Instancia da classe Estado
-		 */
-		require_once 'models/estado_model.php';
-		$objEstado = new Estado_Model();
-		$this->view->listarEstado = $objEstado->listarEstado();
+		$this->view->id_cidade = isset( $_GET['cidade'] ) ? $_GET['cidade'] : '';
+		
+		$this->view->js[] = 'bootstrap-datepicker.js';
+		$this->view->css[] = 'bootstrap-datepicker.css';		
 		
 		if( $id ) 
 		{
-			$this->view->title = "Editar Cidade";
+			$this->view->title = "Editar Visita";
 			$this->view->action = "edit/".$id;
-			$this->view->obj = $this->model->obterCidade( $id );
+			$this->view->obj = $this->model->obterVisita( $id );
 
 			if ( empty( $this->view->obj ) ) {
 				die( "Valor invalido!" );
@@ -49,7 +46,7 @@ class Cidade extends Controller {
 		}
 
 		$this->view->render( "header" );
-		$this->view->render( "cidade/form" );
+		$this->view->render( "visita/form" );
 		$this->view->render( "footer" );
 	}
 
@@ -59,13 +56,14 @@ class Cidade extends Controller {
 	public function create()
 	{
 		$data = array(
-			'name' 		=> $_POST["name"], 
-			'id_estado' => $_POST["estado"], 
+			'obs' 			=> $_POST["obs"], 
+			'data' 			=> Data::formataDataBD( $_POST["data"] ), 
+			'id_cidade' 	=> $_POST["id_cidade"], 
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
-		header("location: " . URL . "cidade?st=".$msg);
+		header("location: " . URL . "visita?st=".$msg);
 	}
 
 	/** 
@@ -74,13 +72,13 @@ class Cidade extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			'name' 		=> $_POST["name"], 
-			'id_estado' => $_POST["estado"], 
+			'obs' 			=> $_POST["obs"], 
+			'data' 			=> Data::formataDataBD( $_POST["data"] )
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
-		header("location: " . URL . "cidade?st=".$msg);
+		header("location: " . URL . "visita?st=".$msg);
 	}
 
 	/** 
@@ -90,6 +88,6 @@ class Cidade extends Controller {
 	{
 		$this->model->delete( $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
-		header("location: " . URL . "cidade?st=".$msg);
+		header("location: " . URL . "visita?st=".$msg);
 	}
 }

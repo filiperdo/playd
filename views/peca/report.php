@@ -24,7 +24,7 @@
 				<div class="col-sm-8">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-sound-dolby"></i></span>
-					<select name="fornecedor" class="form-control select2" required="required">
+					<select name="fornecedor" class="form-control " required="required">
 						<option disabled="disabled" selected="selected">Selecione o Fornecedor</option>
 						<?php foreach ( $this->listarFornecedor as $fornecedor ) { ?>
 						<option value="<?php echo $fornecedor->getId_fornecedor(); ?>"><?php echo $fornecedor->getName(); ?></option>
@@ -54,8 +54,6 @@
 				</div>
 				
 			</div>
-			
-			
 			
 			<h4>Status a ser considerado</h4>
 			

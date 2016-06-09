@@ -22,7 +22,7 @@
 <input type="hidden" name="nome_fornecedor" id="nome_fornecedor" value="" />
 
 <div class="form-group">
-	<label for="id_fornecedor">Fornecedor</label>
+	<label for="id_fornecedor">Fornecedor <a href="<?php echo URL?>fornecedor/form" class="btn btn-xs btn-success">Cadastrar Fornecedor</a></label>
 	<select name="id_fornecedor" id="id_fornecedor" class="form-control select2">
 	<option value="" disabled="disabled" selected="selected">Selecione o fornecedor</option>
 	<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
