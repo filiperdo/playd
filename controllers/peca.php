@@ -39,6 +39,8 @@ class Peca extends Controller {
 		$this->view->js[] = 'peca.form.js';
 		$this->view->obj = $this->model;
 		
+		$this->view->gfornecedor = isset( $_GET['f'] ) ? $_GET['f'] : '';
+		
 		/*************************************
 		 * Instancia do fornecedor
 		 */

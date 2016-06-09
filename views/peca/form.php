@@ -13,6 +13,8 @@
 </div>
 <!-- /.row -->
 
+<?php if (isset($_GET["st"])) { $objAlert = new Alerta($_GET["st"]); } ?>
+
 <form id="form1" name="form1" method="post" action="<?php echo URL;?>peca/<?php echo $this->action;?>/">
 
 <div class="row">
@@ -22,6 +24,7 @@
 <input type="hidden" name="nome_fornecedor" id="nome_fornecedor" value="" />
 
 <div class="form-group">
+<<<<<<< HEAD
 	<label for="id_fornecedor">Fornecedor <a href="<?php echo URL?>fornecedor/form" class="btn btn-xs btn-success">Cadastrar Fornecedor</a></label>
 	<select name="id_fornecedor" id="id_fornecedor" class="form-control select2">
 	<option value="" disabled="disabled" selected="selected">Selecione o fornecedor</option>
@@ -29,6 +32,25 @@
 		<option value="<?php echo $fornecedor->getId_fornecedor();?>"><?php echo $fornecedor->getName();?></option>
 	<?php } ?>
 	</select>
+=======
+	<label for="id_fornecedor">Fornecedor</label>
+	<div class="row">
+		<div class="col-md-8">
+			<select name="id_fornecedor" id="id_fornecedor" class="form-control select2">
+			<option value="" disabled="disabled" selected="selected">Selecione o fornecedor</option>
+			
+			<?php foreach( $this->listarFornecedor as $fornecedor ) { ?>
+				<option value="<?php echo $fornecedor->getId_fornecedor();?>" <?php if( $this->gfornecedor == $fornecedor->getId_fornecedor() ){?>selected="selected"<?php }?>>
+					<?php echo $fornecedor->getName();?>
+				</option>
+			<?php } ?>
+			
+			</select>
+		</div>
+		<div class="col-md-4"><a href="<?php echo URL?>fornecedor/form" class="btn btn-sm btn-success">Cadastrar Fornecedor</a></div>
+	</div>
+	
+>>>>>>> 02ebefb538987b5fbf4948c0a0b1f5c9e3664dc3
 </div>
 
 <div class="form-group">

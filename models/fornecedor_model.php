@@ -150,7 +150,7 @@ class Fornecedor_Model extends Model
 		}
 
 		$this->db->commit();
-		return true;
+		return $id;
 	}
 
 	/** 
