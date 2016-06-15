@@ -33,6 +33,8 @@
 			<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 		</div>
 		
+		<h5 class="page-header">Materiais</h5>
+		
 		<div class="form-group row">
 			<div class="col-md-3 ">
 				<label for="aro" >Aro</label> 
