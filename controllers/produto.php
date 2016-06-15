@@ -15,6 +15,7 @@ class Produto extends Controller {
 		$this->view->title = "Produto";
 		$this->view->listarProduto = $this->model->listarProduto();
 
+		
 		$this->view->render( "header" );
 		$this->view->render( "produto/index" );
 		$this->view->render( "footer" );
@@ -58,11 +59,15 @@ class Produto extends Controller {
 	*/
 	public function create()
 	{
-		$data = array( 
-			'name' 		=> $_POST["name"],
-			'id_marca'	=> $_POST['marca']	
+		$data = array(
+			'name' 			=> $_POST["name"],
+			'id_marca'		=> $_POST['marca'],
+			'aro'			=> $_POST['aro'],
+			'cola'			=> $_POST['cola'],
+			'vidro'			=> $_POST['vidro'],
+			'polarizador'	=> $_POST['polarizador']
 		);
-
+		
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
 		header("location: " . URL . "produto?st=".$msg);
@@ -74,8 +79,12 @@ class Produto extends Controller {
 	public function edit( $id )
 	{
 		$data = array(
-			'name' 		=> $_POST["name"],
-			'id_marca'	=> $_POST['marca']
+			'name' 			=> $_POST["name"],
+			'id_marca'		=> $_POST['marca'],
+			'aro'			=> $_POST['aro'],
+			'cola'			=> $_POST['cola'],
+			'vidro'			=> $_POST['vidro'],
+			'polarizador'	=> $_POST['polarizador']
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );

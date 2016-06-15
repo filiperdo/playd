@@ -14,6 +14,10 @@ class Produto_Model extends Model
 	private $produto;
 	private $name;
 	private $marca;
+	private $aro;
+	private $cola;
+	private $vidro;
+	private $polarizador;
 
 	public function __construct()
 	{
@@ -42,6 +46,26 @@ class Produto_Model extends Model
 		$this->marca = $marca;
 	}
 	
+	public function setAro( $aro )
+	{
+		$this->aro = $aro;
+	}
+	
+	public function setCola( $cola )
+	{
+		$this->cola = $cola;
+	}
+	
+	public function setVidro( $vidro )
+	{
+		$this->vidro = $vidro;
+	}
+	
+	public function setPolarizador( $polarizador )
+	{
+		$this->polarizador = $polarizador;
+	}
+	
 	/** 
 	* Metodos get's
 	*/
@@ -58,6 +82,26 @@ class Produto_Model extends Model
 	public function getMarca()
 	{
 		return $this->marca;
+	}
+	
+	public function getAro()
+	{
+		return $this->aro;
+	}
+	
+	public function getCola()
+	{
+		return $this->cola;
+	}
+	
+	public function getVidro()
+	{
+		return $this->vidro;
+	}
+	
+	public function getPolarizador()
+	{
+		return $this->polarizador;
 	}
 
 	/** 
@@ -211,6 +255,11 @@ class Produto_Model extends Model
 		$objMarca = new Marca_Model();
 		$this->setMarca( $objMarca->obterMarca( $row['id_marca'] ) );
 
+		$this->setAro( $row["aro"] );
+		$this->setCola( $row["cola"] );
+		$this->setVidro( $row["vidro"] );
+		$this->setPolarizador( $row["polarizador"] );
+		
 		return $this;
 	}
 }
