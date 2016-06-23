@@ -5,7 +5,7 @@
 
 <head>
 
-    <meta charset="iso-8859-1">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='<?php echo URL; ?>public/img/ico.ico' rel='shortcut icon' type='image/x-icon'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,6 @@
     }
     ?>
     
-	
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo URL; ?>public/css/bootstrap.css" rel="stylesheet">
 

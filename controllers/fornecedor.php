@@ -87,9 +87,15 @@ class Fornecedor extends Controller {
 			'id_cidade' 	=> $_POST["cidade"],
 		);
 
-		$id_fornecedor = $this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
+		if( $id_fornecedor = $this->model->create( $data ) )
+		{
+			$msg = base64_encode( "OPERACAO_SUCESSO" );
+		}
+		else {
+			$msg = base64_encode( "OPERACAO_ERRO" );
+		}
 
-		header( "location: " . URL . "peca/form/?st=".$msg."f=" . $id_fornecedor );
+		header( "location: " . URL . "peca/form/?st=".$msg."&f=" . $id_fornecedor );
 	}
 
 	/** 
