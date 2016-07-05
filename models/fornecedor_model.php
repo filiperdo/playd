@@ -240,10 +240,14 @@ class Fornecedor_Model extends Model
 		if ( isset( $_POST["like"] ) )
 		{
 			$sql .= "where name like :name "; // Configurar o like com o campo necessario da tabela 
+			$sql .= "order by name asc ";
 			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
 		}
 		else
+		{
+			$sql .= "order by name asc ";
 			$result = $this->db->select( $sql );
+		}
 		
 		return $this->montarLista($result);
 	}

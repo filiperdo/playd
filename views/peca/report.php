@@ -19,19 +19,29 @@
 	<div class="col-md-6">
 		<form action="<?php echo URL;?>peca/report" method="post" class="form-horizontal">
 		<input type="hidden" name="action" value="report">
-			
+			<h4>Fornecedor</h4>
 			<div class="form-group">
+			
 				<div class="col-sm-8">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-sound-dolby"></i></span>
-					<select name="fornecedor" class="form-control " required="required">
-						<option disabled="disabled" selected="selected">Selecione o Fornecedor</option>
-						<?php foreach ( $this->listarFornecedor as $fornecedor ) { ?>
-						<option value="<?php echo $fornecedor->getId_fornecedor(); ?>"><?php echo $fornecedor->getName(); ?></option>
-						<?php } ?>
-					</select>
-				</div>
-				</div>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-sound-dolby"></i></span>
+						<select name="fornecedor" class="form-control " required="required">
+							<option value="todos">TODOS</option>
+							<?php foreach ( $this->listarFornecedor as $fornecedor ) { ?>
+							<option value="<?php echo $fornecedor->getId_fornecedor(); ?>"><?php echo $fornecedor->getName(); ?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div><!-- col-sm-8 -->
+					
+				<div class="col-sm-4">
+					<div class="checkbox">
+					    <label>
+					      <input type="checkbox" name="checkbox-power" value="1" checked="checked"> Considerar Power
+					    </label>
+					</div>
+				</div><!-- col-sm-4 -->
+				
 			</div>
 			
 			<h4>Per&iacute;odo a ser considerado</h4>
@@ -41,7 +51,7 @@
 				<div class="col-sm-4">
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-calendar"></i></span>
-						<input type="text" name="data_ini"  class="form-control datepicker" placeholder="__/__/____" />
+						<input type="text" name="data_ini" required="required" class="form-control datepicker" placeholder="__/__/____" />
 					</div>
 				</div> 
 				
@@ -56,14 +66,15 @@
 			</div>
 			
 			<h4>Status a ser considerado</h4>
-			
-			<?php foreach ( $this->listarStatus as $status ) { ?>
-			<div class="checkbox">
-				<label class="checkbox">
-				<input type="checkbox" name="status[]" id="" value="<?php echo $status->getId_statuspeca(); ?>"><?php echo $status->getName(); ?></label>
+			<div class="form-group">
+				<div class="col-sm-8">
+					<select name="status" class="form-control " required="required">
+						<?php foreach ( $this->listarStatus as $status ) { ?>
+						<option value="<?php echo $status->getId_statuspeca(); ?>"><?php echo $status->getName(); ?></option>
+						<?php } ?>
+					</select>
+				</div>
 			</div>
-			<?php } ?>
-			
 			<div class="control-group" style="margin-top: 20px">
 				<input type="submit" name="emitir" id="emitir" class="btn btn-info" value="Emitir relat&oacute;rio" />
 			</div>
@@ -73,9 +84,8 @@
 	<?php if( isset( $_POST['action'] ) ) { ?>
 	<div class="col-md-6">
 		<h5><?php echo '<strong>Fornecedor:</strong> ' . $this->nomeFornecedor ; ?></h5>
-		<h5><?php echo '<strong>Status:</strong> ' . $_POST['status'][0]; ?></h5>
-		<h5><?php echo '<strong>Período:</strong> ' . $_POST['data_ini'] . ' - ' . $_POST['data_fim']; ?></h5>
-	
+		<h5><?php echo '<strong>Status:</strong> <span class="text-'. $this->objStatus->getClass() .'"><i class="' . $this->objStatus->getIcon() .'"></i> ' . $this->objStatus->getName() . '</span>'; ?></h5>
+		<h5><?php echo '<strong>PerÃ­odo:</strong> ' . $_POST['data_ini'] . ' - ' . $_POST['data_fim']; ?></h5>
 	
 		<table class="table table-striped sortable table-condensed">
 			<thead>

@@ -12,7 +12,7 @@ class Peca extends Controller {
 	*/
 	public function index()
 	{
-		$this->view->title = "Peças";
+		$this->view->title = "PeÃ§as";
 		$this->view->listarPeca = $this->model->listarPeca();
 		$this->view->js[] = 'peca.index.js';
 		
@@ -34,7 +34,7 @@ class Peca extends Controller {
 	*/
 	public function form( $id = NULL )
 	{
-		$this->view->title = "Cadastrar Peça";
+		$this->view->title = "Cadastrar PeÃ§a";
 		$this->view->action = "create";
 		$this->view->js[] = 'peca.form.js';
 		$this->view->obj = $this->model;
@@ -75,7 +75,7 @@ class Peca extends Controller {
 		
 		if( $id ) 
 		{
-			$this->view->title = "Editar Peça";
+			$this->view->title = "Editar PeÃ§a";
 			$this->view->action = "edit/".$id;
 			$this->view->obj = $this->model->obterPeca( $id );
 
@@ -95,12 +95,15 @@ class Peca extends Controller {
 	 */
 	public function report()
 	{
-		$this->view->title = "Relatórios";
+		$this->view->title = "RelatÃ³rios";
 		$this->view->js[] = 'bootstrap-datepicker.js';
 		$this->view->css[] = 'bootstrap-datepicker.css';
+		$this->view->nomeStatus = '';
 		
 		require_once 'models/peca_model.php';
 		$this->view->objPeca = new Peca_Model();
+		
+		
 		
 		require_once 'models/fornecedor_model.php';
 		$objFornecedor = new Fornecedor_Model();
@@ -112,8 +115,17 @@ class Peca extends Controller {
 		
 		if( isset( $_POST['fornecedor'] ) )
 		{
-			$objFornecedor->obterFornecedor( $_POST['fornecedor'] );
-			$this->view->nomeFornecedor = $objFornecedor->getName();
+			$objStatus->obterStatuspeca($_POST['status']);
+			$this->view->objStatus = $objStatus;
+			
+			if( $_POST['fornecedor'] != 'todos' )
+			{
+				$objFornecedor->obterFornecedor( $_POST['fornecedor'] );
+				$this->view->nomeFornecedor = $objFornecedor->getName();
+			}
+			else {
+				$this->view->nomeFornecedor = 'TODOS';
+			}
 		}
 		
 		$this->view->render('header');
