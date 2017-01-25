@@ -1,23 +1,24 @@
-<?php 
+<?php
 
-/** 
+/**
  * Classe Visita
- * @author __ 
+ * @author __
  *
  * Data: 09/06/2016
- */ 
+ */
 
 include_once 'cidade_model.php';
 
 class Visita_Model extends Model
 {
-	/** 
-	* Atributos Private 
+	/**
+	* Atributos Private
 	*/
 	private $id_visita;
 	private $obs;
 	private $data;
 	private $cidade;
+	private $custo;
 
 	public function __construct()
 	{
@@ -27,9 +28,10 @@ class Visita_Model extends Model
 		$this->obs = '';
 		$this->data = '';
 		$this->cidade = new Cidade_Model();
+		$this->custo = '';
 	}
 
-	/** 
+	/**
 	* Metodos set's
 	*/
 	public function setId_visita( $id_visita )
@@ -52,7 +54,12 @@ class Visita_Model extends Model
 		$this->cidade = $cidade;
 	}
 
-	/** 
+	public function setCusto( $custo )
+	{
+		$this->custo = $custo;
+	}
+
+	/**
 	* Metodos get's
 	*/
 	public function getId_visita()
@@ -75,8 +82,13 @@ class Visita_Model extends Model
 		return $this->cidade;
 	}
 
+	public function getCusto()
+	{
+		return $this->custo;
+	}
 
-	/** 
+
+	/**
 	* Metodo create
 	*/
 	public function create( $data )
@@ -92,7 +104,7 @@ class Visita_Model extends Model
 		return true;
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $data, $id )
@@ -108,14 +120,14 @@ class Visita_Model extends Model
 		return $update;
 	}
 
-	/** 
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )
 	{
 		$this->db->beginTransaction();
 
-		if( !$delete = $this->db->delete("visita", "id_visita = {$id} ") ){ 
+		if( !$delete = $this->db->delete("visita", "id_visita = {$id} ") ){
 			$this->db->rollBack();
 			return false;
 		}
@@ -124,7 +136,7 @@ class Visita_Model extends Model
 		return $delete;
 	}
 
-	/** 
+	/**
 	* Metodo obterVisita
 	*/
 	public function obterVisita( $id_visita )
@@ -134,10 +146,13 @@ class Visita_Model extends Model
 		$sql .= "where id_visita = :id ";
 
 		$result = $this->db->select( $sql, array("id" => $id_visita) );
-		return $this->montarObjeto( $result[0] );
+		if( !empty( $result ) )
+			return $this->montarObjeto( $result[0] );
+		else
+			return $this;
 	}
 
-	/** 
+	/**
 	* Metodo listarVisita
 	*/
 	public function listarVisita()
@@ -145,12 +160,12 @@ class Visita_Model extends Model
 		$sql  = "select * ";
 		$sql .= "from visita as v ";
 		$sql .= "order by v.data desc ";
-		
+
 		$result = $this->db->select( $sql );
 
 		return $this->montarLista($result);
 	}
-	
+
 	/**
 	 * Listar visita por cidade
 	 * @param unknown $id_cidade
@@ -161,13 +176,13 @@ class Visita_Model extends Model
 		$sql  = "select * ";
 		$sql .= "from visita as v ";
 		$sql .= "where v.id_cidade = :id ";
-		
+
 		$result = $this->db->select( $sql, array("id" => $id_cidade) );
-		
+
 		return $this->montarLista( $result );
 	}
 
-	/** 
+	/**
 	* Metodo montarLista
 	*/
 	private function montarLista( $result )
@@ -186,7 +201,7 @@ class Visita_Model extends Model
 		return $objs;
 	}
 
-	/** 
+	/**
 	* Metodo montarObjeto
 	*/
 	private function montarObjeto( $row )
@@ -198,6 +213,8 @@ class Visita_Model extends Model
 		$objCidade = new Cidade_Model();
 		$objCidade->obterCidade( $row["id_cidade"] );
 		$this->setCidade( $objCidade );
+
+		$this->setCusto( $row['custo'] );
 
 		return $this;
 	}

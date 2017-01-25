@@ -1,12 +1,15 @@
 <!-- Page Heading -->
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header"><?php echo $this->title; ?></h1>
+		<div class="x_panel">
+		<div class="x_title">
+		<h2 class="page-header"><?php echo $this->title.'s'; ?></h2>
+		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6">
 				<ol class="breadcrumb">
 					<li><a href="index.php">Home</a></li>
-					<li class="active"><a href="<?php echo URL;?>cidade"><?php echo $this->title; ?></a></li>
+					<li class="active"><a href="<?php echo URL;?>cidade"><?php echo $this->title.'s'; ?></a></li>
 				</ol>
 			</div>
 			<div class="col-lg-4 col-md-3">
@@ -26,15 +29,14 @@
 			</div>
 		</div>
 	</div>
-</div>
-<!-- /.row -->
 
+<div class="x_content">
 <?php if (isset($_GET["st"])) { $objAlert = new Alerta($_GET["st"]); } ?>
 
 <table class="table table-striped sortable table-condensed">
 	<thead>
 	<tr>
-		<th>Name </th>
+		<th style="text-align:left">Name </th>
 		<th>Estado </th>
 		<th>Visitas</th>
 		<th></th>
@@ -43,10 +45,10 @@
 	<tbody>
 	<?php foreach( $this->listarCidade as $cidade ) { ?>
 	<tr>
-		<td><?php echo $cidade->getName(); ?></td>
+		<td style="text-align:left"><?php echo $cidade->getName(); ?></td>
 		<td><?php echo $cidade->getEstado()->getUf(); ?></td>
 		<td><a href="<?php echo URL?>visita/?id_cidade=<?php echo $cidade->getId_cidade(); ?>"><?php echo $cidade->getTotalVisitas(); ?></a></td>
-		<td align="right">
+		<td style="text-align:right">
 			<a href="<?php echo URL;?>visita/form/?cidade=<?php echo $cidade->getId_cidade();?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-map-marker"></i> Visita</a>
 			<a href="<?php echo URL;?>cidade/form/<?php echo $cidade->getId_cidade();?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a href="<?php echo URL;?>cidade/delete/<?php echo $cidade->getId_cidade();?>" class="delete btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
@@ -56,12 +58,16 @@
 	</tbody>
 </table>
 
+</div>
+</div>
+</div>
+</div>
 
 <script>
 $(function() {
 	$(".delete").click(function(e) {
 		var c = confirm("Deseja realmente deletar este registro?");
 		if (c == false) return false;
-	}); 
+	});
  });
 </script>

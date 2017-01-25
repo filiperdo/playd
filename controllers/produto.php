@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Produto extends Controller {
 
@@ -7,7 +7,7 @@ class Produto extends Controller {
 		Auth::handleLogin();
 	}
 
-	/** 
+	/**
 	* Metodo index
 	*/
 	public function index()
@@ -15,13 +15,13 @@ class Produto extends Controller {
 		$this->view->title = "Produto";
 		$this->view->listarProduto = $this->model->listarProduto();
 
-		
+
 		$this->view->render( "header" );
 		$this->view->render( "produto/index" );
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo editForm
 	*/
 	public function form( $id = NULL )
@@ -37,8 +37,8 @@ class Produto extends Controller {
 		$objMarca = new Marca_Model();
 		$this->view->listarMarca = $objMarca->listarMarca();
 		/******************************************/
-		
-		if( $id ) 
+
+		if( $id )
 		{
 			$this->view->title = "Editar Produto";
 			$this->view->action = "edit/".$id;
@@ -54,7 +54,7 @@ class Produto extends Controller {
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo create
 	*/
 	public function create()
@@ -62,18 +62,19 @@ class Produto extends Controller {
 		$data = array(
 			'name' 			=> $_POST["name"],
 			'id_marca'		=> $_POST['marca'],
-			'aro'			=> $_POST['aro'],
-			'cola'			=> $_POST['cola'],
-			'vidro'			=> $_POST['vidro'],
-			'polarizador'	=> $_POST['polarizador']
+			'aro'			=> Data::formataMoedaBD($_POST['aro']),
+			'cola'			=> Data::formataMoedaBD($_POST['cola']),
+			'vidro'			=> Data::formataMoedaBD($_POST['vidro']),
+			'polarizador'	=> Data::formataMoedaBD($_POST['polarizador']),
+			'lcd'			=> Data::formataMoedaBD($_POST['lcd'])
 		);
-		
+
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
 
 		header("location: " . URL . "produto?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $id )
@@ -81,10 +82,11 @@ class Produto extends Controller {
 		$data = array(
 			'name' 			=> $_POST["name"],
 			'id_marca'		=> $_POST['marca'],
-			'aro'			=> $_POST['aro'],
-			'cola'			=> $_POST['cola'],
-			'vidro'			=> $_POST['vidro'],
-			'polarizador'	=> $_POST['polarizador']
+			'aro'			=> Data::formataMoedaBD($_POST['aro']),
+			'cola'			=> Data::formataMoedaBD($_POST['cola']),
+			'vidro'			=> Data::formataMoedaBD($_POST['vidro']),
+			'polarizador'	=> Data::formataMoedaBD($_POST['polarizador']),
+			'lcd'			=> Data::formataMoedaBD($_POST['lcd'])
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -92,7 +94,7 @@ class Produto extends Controller {
 		header("location: " . URL . "produto?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )

@@ -2,17 +2,20 @@
 <!-- Page Heading -->
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header"><?php echo $this->title; ?></h1>
-		<ol class="breadcrumb">
-			<li><a href="<?php echo URL; ?>">Home</a></li>
-			<li><a href="<?php echo URL; ?>fornecedor"><?php echo $this->title; ?></a></li>
-			<li class="active"><?php echo $this->title; ?></li>
-		</ol>
-	</div>
-</div>
-<!-- /.row -->
+		<div class="x_panel">
+		<div class="x_title">
+			<h2 class="page-header"><?php echo $this->title; ?></h2>
+			<div class="clearfix"></div>
+			<ol class="breadcrumb">
+				<li><a href="<?php echo URL; ?>">Home</a></li>
+				<li><a href="<?php echo URL; ?>fornecedor">Fornecedores</a></li>
+				<li class="active"><?php echo $this->title; ?></li>
+			</ol>
+		</div>
 
 
+
+<div class="x_content">
 
 <form id="form1" name="form1" method="post" action="<?php echo URL;?>fornecedor/<?php echo $this->action;?>/">
 
@@ -22,22 +25,22 @@
 <input type="hidden" name="idFornecedor" value="<?=$this->obj->getId_fornecedor()?>" />
 
 <div class="form-group">
-	<label for="name">Name</label> 
+	<label for="name">Name</label>
 		<input type="text" name="name" id="name"  class="form-control" required="required" value="<?=$this->obj->getName()?>" />
 </div>
 
 <div class="form-group">
-	<label for="telefone">Telefone</label> 
+	<label for="telefone">Telefone</label>
 	<input type="text" name="telefone" id="telefone"  class="form-control" required="required" value="<?=$this->obj->getTelefone()?>" />
 </div>
 
 <div class="form-group">
-	<label for="email">E-mail</label> 
+	<label for="email">E-mail</label>
 	<input type="text" name="email" id="email"  class="form-control" required="required" value="<?=$this->obj->getEmail()?>" />
 </div>
 
 <div class="form-group">
-	<label for="banco">Dados banc·rios</label> 
+	<label for="banco">Dados banc√°rios</label>
 	<input type="text" name="banco" id="banco"  class="form-control" required="required" value="<?=$this->obj->getBanco()?>" />
 </div>
 
@@ -57,18 +60,18 @@
 
 <div class="form-group">
 	<label for="cidade">Cidade</label>
-	<select name="cidade" id="cidade" class="form-control">
+	<select name="cidade" id="cidade" required="required" class="form-control">
 		<!-- carrega o conteudo via ajax -->
 	</select>
 </div>
 
 <div class="form-group">
-	<label for="endereco">EndereÁo</label> 
+	<label for="endereco">Endere√ßo</label>
 	<input type="text" name="endereco" id="endereco"  class="form-control" required="required" value="<?=$this->obj->getEndereco()?>" />
 </div>
 
 <div class="form-group">
-	<label for="note">ObservaÁ„o</label> 
+	<label for="note">Observa√ß√£o</label>
 	<textarea rows="3" name="note" id="note"  class="form-control" cols=""><?=$this->obj->getNote()?></textarea>
 
 </div>
@@ -85,3 +88,9 @@
 </div><!-- row -->
 
 </form>
+
+
+</div>
+</div>
+</div>
+</div>

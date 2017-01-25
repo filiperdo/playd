@@ -1,15 +1,18 @@
-<?php 
+<?php
 
-/** 
+/**
  * Classe Peca
- * @author __ 
+ * @author __
  *
  * Data: 02/03/2016
  */
+
+require_once 'models/visita_model.php';
+
 class Peca_Model extends Model
 {
-	/** 
-	* Atributos Private 
+	/**
+	* Atributos Private
 	*/
 	private $peca;
 	private $codigo;
@@ -21,6 +24,7 @@ class Peca_Model extends Model
 	private $cor;
 	private $produto;
 	private $statuspeca;
+	private $visita;
 
 	public function __construct()
 	{
@@ -36,10 +40,10 @@ class Peca_Model extends Model
 		$this->cor = '';
 		$this->produto = '';
 		$this->statuspeca = '';
-
+		$this->visita = new Visita_Model();
 	}
 
-	/** 
+	/**
 	* Metodos set's
 	*/
 	public function setId_peca( $id_peca )
@@ -61,38 +65,43 @@ class Peca_Model extends Model
 	{
 		$this->nome_fornecedor = $nome_fornecedor;
 	}
-	
+
 	public function setDate( $date )
 	{
 		$this->date = $date;
 	}
-	
+
 	public function setUser( $user )
 	{
 		$this->user = $user;
 	}
-	
+
 	public function setFornecedor( $fornecedor )
 	{
 		$this->fornecedor = $fornecedor;
 	}
-	
+
 	public function setCor( $cor )
 	{
 		$this->cor = $cor;
 	}
-	
+
 	public function setProduto( $produto )
 	{
 		$this->produto = $produto;
 	}
-	
+
 	public function setStatuspeca( $statuspeca )
 	{
 		$this->statuspeca = $statuspeca;
 	}
-	
-	/** 
+
+	public function setVisita( Visita_Model $visita )
+	{
+		$this->visita = $visita;
+	}
+
+	/**
 	* Metodos get's
 	*/
 	public function getId_peca()
@@ -109,7 +118,7 @@ class Peca_Model extends Model
 	{
 		return $this->valor;
 	}
-	
+
 	public function getNomeFornecedor()
 	{
 		return $this->nome_fornecedor;
@@ -129,7 +138,7 @@ class Peca_Model extends Model
 	{
 		return $this->fornecedor;
 	}
-	
+
 	public function getCor()
 	{
 		return $this->cor;
@@ -145,7 +154,12 @@ class Peca_Model extends Model
 		return $this->statuspeca;
 	}
 
-	/** 
+	public function getVisita()
+	{
+		return $this->visita;
+	}
+
+	/**
 	* Metodo create
 	*/
 	public function create( $data )
@@ -156,7 +170,7 @@ class Peca_Model extends Model
 			$this->db->rollBack();
 			return false;
 		}
-		
+
 		/************************************
 		 * Inicio do Datalog
 		 */
@@ -168,7 +182,7 @@ class Peca_Model extends Model
 			'id_user' 		=> Session::get('userid'),
 			'id_statuspeca' => Statuspeca_Model::EM_ABERTO,
 		);
-		
+
 		if( !$id = $this->db->insert( "logpeca", $data_log ) ){
 			$this->db->rollBack();
 			return false;
@@ -176,12 +190,12 @@ class Peca_Model extends Model
 		/**
 		 * Fim Datalog
 		 *************************************/
-		
+
 		//$this->db->commit();
 		return true;
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $data, $id )
@@ -192,35 +206,35 @@ class Peca_Model extends Model
 			$this->db->rollBack();
 			return false;
 		}
-		
+
 		$this->db->commit();
 		return $update;
 	}
-	
+
 	/**
 	 * Metodo edit
 	 */
 	public function editStatus( $data, $id )
 	{
 		$this->db->beginTransaction();
-	
+
 		if( !$update = $this->db->update("peca", $data, "id_peca = {$id} ") ){
 			$this->db->rollBack();
 			return false;
 		}
-	
+
 		/**
 		 * Inicio do Datalog
 		 */
 		require_once 'logpeca_model.php';
 		$objLog = new Logpeca_Model();
-		
+
 		$data_log = array(
 				'id_peca' 		=> $id,
 				'id_user' 		=> Session::get('userid'),
 				'id_statuspeca' => $data['id_statuspeca']
 		);
-	
+
 		if( !$id_datalog = $this->db->insert( "logpeca", $data_log ) ){
 			$this->db->rollBack();
 			return false;
@@ -228,7 +242,7 @@ class Peca_Model extends Model
 		/**
 		 * Fim Datalog
 		 *************************************/
-		
+
 		/**
 		 * Se for PRONTA VERDE ou PRONTA AMARELA
 		 * Atualiza o log novamente para ENTREGUE
@@ -240,20 +254,20 @@ class Peca_Model extends Model
 			$dados_peca = array(
 				'id_statuspeca' => Statuspeca_Model::ENTREGUE
 			);
-			
+
 			if( !$update = $this->db->update("peca", $dados_peca, "id_peca = {$id} ") ){
 				$this->db->rollBack();
 				return false;
 			}
 			// -------------------------
-			
+
 			// Edita o log
 			$data_log = array(
 					'id_peca' 		=> $id,
 					'id_user' 		=> Session::get('userid'),
 					'id_statuspeca' => Statuspeca_Model::ENTREGUE
 			);
-			
+
 			if( !$id_datalog = $this->db->insert( "logpeca", $data_log ) ){
 				$this->db->rollBack();
 				return false;
@@ -262,22 +276,22 @@ class Peca_Model extends Model
 		/**
 		 * Fim if
 		 *************************************/
-	
+
 		$this->db->commit();
 		return $update;
 	}
-	
-	/** 
+
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )
 	{
 		$this->db->beginTransaction();
-		
+
 		/**
 		 * Deleta a peca
 		 */
-		if( !$delete = $this->db->delete("peca", "id_peca = {$id} ") ){ 
+		if( !$delete = $this->db->delete("peca", "id_peca = {$id} ") ){
 			$this->db->rollBack();
 			return false;
 		}
@@ -286,7 +300,7 @@ class Peca_Model extends Model
 		return $delete;
 	}
 
-	/** 
+	/**
 	* Metodo obterPeca
 	*/
 	public function obterPeca( $id_peca )
@@ -299,7 +313,7 @@ class Peca_Model extends Model
 		return $this->montarObjeto( $result[0] );
 	}
 
-	/** 
+	/**
 	* Metodo listarPeca
 	*/
 	public function listarPeca()
@@ -338,12 +352,12 @@ class Peca_Model extends Model
 			$sql .= 'from peca as p ';
 			$sql .= 'where p.id_statuspeca = :id_status ';
 		}
-		
+
 		$result = $this->db->select( $sql, array( "id_status" => $id_status ) );
-		
+
 		return $result[0]['total'];
 	}
-	
+
 	/**
 	 * RELATORIO
 	 * Emiti um relatorio mostrando as quantidades de pecas por data, status e fornecedor
@@ -355,9 +369,9 @@ class Peca_Model extends Model
 	public function reportByStatus( $date_ini, $data_fim, $status, $id_fornecedor )
 	{
 		//$status_str = implode( ',', $status );
-		
-		$sql  = 'select '; 
-		$sql .= 'prod.name as nome_produto, '; 
+
+		$sql  = 'select ';
+		$sql .= 'prod.name as nome_produto, ';
 		$sql .= 'm.name as nome_marca,  ';
 		$sql .= 'p.valor, ';
 		$sql .= 'count(p.id_produto) as total  ';
@@ -367,19 +381,21 @@ class Peca_Model extends Model
 		$sql .= 'inner join marca as m  ';
 		$sql .= 'on m.id_marca = prod.id_marca  ';
 		$sql .= "where p.date between '". Data::formataDataBD( $date_ini ) ." 00:00:00' and '". Data::formataDataBD( $data_fim ) ." 23:59:59' ";
-		$sql .= "and p.id_statuspeca = {$status} ";
+
+		if( $status != 'todos' )
+			$sql .= "and p.id_statuspeca = {$status} ";
 		//$sql .= 'and p.id_statuspeca in ('. $status_str .') ';
-		
+
 		if( $id_fornecedor != 'todos' )
 			$sql .= 'and p.id_fornecedor = '. $id_fornecedor .' ';
-		
+
 		if( !isset($_POST['checkbox-power']) )
 			$sql .= 'and p.id_fornecedor != 6 '; // id 6 = Power
-		
+
 		$sql .= 'group by p.id_produto ';
-		
+
 		$result = $this->db->select( $sql );
-	
+
 		$objs = array();
 		if( !empty( $result ) )
 		{
@@ -388,19 +404,19 @@ class Peca_Model extends Model
 		}
 		return $objs;
 	}
-	
+
 	public function obterTotalPecasPorFornecedor( $id_fornecedor )
 	{
 		$sql  = 'select count(p.id_peca) as total ';
 		$sql .= 'from peca as p ';
 		$sql .= "where p.id_fornecedor = :id_fornecedor ";
-		
+
 		$result = $this->db->select( $sql, array( "id_fornecedor" => $id_fornecedor ) );
 		return $result[0];
-		
+
 	}
-	
-	/** 
+
+	/**
 	* Metodo montarLista
 	*/
 	private function montarLista( $result )
@@ -419,7 +435,7 @@ class Peca_Model extends Model
 		return $objs;
 	}
 
-	/** 
+	/**
 	* Metodo montarObjeto
 	*/
 	private function montarObjeto( $row )
@@ -430,25 +446,29 @@ class Peca_Model extends Model
 		$this->setNomeFornecedor( $row['fornecedor'] );
 		$this->setDate( $row["date"] );
 		$this->setCor( $row['cor'] );
-		
+
 		require_once 'models/user_model.php';
 		$objUser = new User_Model();
 		$this->setUser( $objUser->obterUser( $row["id_user"] ) );
-		
+
 		require_once 'models/fornecedor_model.php';
 		$objFornecedor = new Fornecedor_Model();
 		$this->setFornecedor( $objFornecedor->obterFornecedor( $row["id_fornecedor"] ) );
-		
+
 		require_once 'models/produto_model.php';
 		$objProduto = new Produto_Model();
 		$this->setProduto( $objProduto->obterProduto( $row["id_produto"] ) );
-		
+
 		require_once 'models/statuspeca_model.php';
 		$objStatus = new Statuspeca_Model();
 		$this->setStatuspeca( $objStatus->obterStatuspeca( $row["id_statuspeca"] ) );
-		
+
+		require_once 'models/visita_model.php';
+		$objVisita = new Visita_Model();
+		$this->setVisita( $objVisita->obterVisita( $row['id_visita'] ) );
+
 		return $this;
 	}
-	
+
 }
 ?>

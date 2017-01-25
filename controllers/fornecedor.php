@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Fornecedor extends Controller {
 
@@ -7,7 +7,7 @@ class Fornecedor extends Controller {
 		Auth::handleLogin();
 	}
 
-	/** 
+	/**
 	* Metodo index
 	*/
 	public function index()
@@ -24,13 +24,13 @@ class Fornecedor extends Controller {
 	{
 		$this->view->title = "Quantitativo";
 		$this->view->listarQuantitativo = $this->model->listarQuantitativo( $_GET['id'] );
-		
+
 		$this->view->render( "header" );
 		$this->view->render( "fornecedor/amount" );
 		$this->view->render( "footer" );
 	}
-	
-	/** 
+
+	/**
 	* Metodo editForm
 	*/
 	public function form( $id = NULL )
@@ -39,22 +39,22 @@ class Fornecedor extends Controller {
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
 		$this->view->js[] = 'fornecedor.form.js';
-		
+
 		/**
 		 * Instancia da classe Estado
 		 */
 		require_once 'models/estado_model.php';
 		$objEstado = new Estado_Model();
 		$this->view->listarEstado = $objEstado->listarEstadosUtilizados();
-		
+
 		/**
 		 * Instancia da classe Cidade
 		 */
 		require_once 'models/cidade_model.php';
 		$objCidade = new Cidade_Model();
 		$this->view->listarCidade = $objCidade->listarCidadePorEstado( 25 ); // Sao paulo
-		
-		if( $id ) 
+
+		if( $id )
 		{
 			$this->view->title = "Editar Fornecedor";
 			$this->view->action = "edit/".$id;
@@ -70,17 +70,17 @@ class Fornecedor extends Controller {
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo create
 	*/
 	public function create()
 	{
 		$data = array(
-			'name' 			=> $_POST["name"], 
-			'telefone' 		=> $_POST["telefone"], 
-			'email' 		=> $_POST["email"], 
-			'banco' 		=> $_POST["banco"], 
-			/* 'cidade' 	=> $_POST["cidade"], 
+			'name' 			=> $_POST["name"],
+			'telefone' 		=> $_POST["telefone"],
+			'email' 		=> $_POST["email"],
+			'banco' 		=> $_POST["banco"],
+			/* 'cidade' 	=> $_POST["cidade"],
 			'estado' 		=> $_POST["estado"],  */
 			'endereco' 		=> $_POST["endereco"],
 			'note'			=> $_POST['note'],
@@ -98,17 +98,17 @@ class Fornecedor extends Controller {
 		header( "location: " . URL . "peca/form/?st=".$msg."&f=" . $id_fornecedor );
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $id )
 	{
 		$data = array(
-			'name' 			=> $_POST["name"], 
-			'telefone' 		=> $_POST["telefone"], 
-			'email' 		=> $_POST["email"], 
-			'banco' 		=> $_POST["banco"], 
-			/* 'cidade' 	=> $_POST["cidade"], 
+			'name' 			=> $_POST["name"],
+			'telefone' 		=> $_POST["telefone"],
+			'email' 		=> $_POST["email"],
+			'banco' 		=> $_POST["banco"],
+			/* 'cidade' 	=> $_POST["cidade"],
 			'estado' 		=> $_POST["estado"],  */
 			'endereco' 		=> $_POST["endereco"],
 			'note'			=> $_POST['note'],
@@ -120,7 +120,7 @@ class Fornecedor extends Controller {
 		header("location: " . URL . "fornecedor?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )
@@ -129,8 +129,8 @@ class Fornecedor extends Controller {
 
 		header("location: " . URL . "fornecedor?st=".$msg);
 	}
-	
-	
+
+
 	/**
 	 *
 	 * @param unknown $id_estado
@@ -139,17 +139,16 @@ class Fornecedor extends Controller {
 	{
 		require_once 'models/cidade_model.php';
 		$objCidade = new Cidade_Model();
-		
+
 		$html  = '';
-	
+
 		foreach( $objCidade->listarCidadePorEstado( $id_estado ) as $cidade )
 		{
 			$html .= '<option value="' . $cidade->getId_cidade() . '"> ';
 			$html .= $cidade->getName();
-			$html .= '</option>'; 
+			$html .= '</option>';
 		}
-	
-		ini_set('default_charset', 'ISO-8859-1');
+
 		echo $html;
 	}
 }

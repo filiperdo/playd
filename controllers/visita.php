@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Visita extends Controller {
 
@@ -7,7 +7,7 @@ class Visita extends Controller {
 		//Auth::handleLogin();
 	}
 
-	/** 
+	/**
 	* Metodo index
 	*/
 	public function index()
@@ -15,13 +15,13 @@ class Visita extends Controller {
 		$this->view->title = "Visita";
 		$this->view->listarVisita = $this->model->listarVisita();
 		$this->view->model = $this->model;
-		
+
 		$this->view->render( "header" );
 		$this->view->render( "visita/index" );
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo editForm
 	*/
 	public function form( $id = NULL )
@@ -30,11 +30,11 @@ class Visita extends Controller {
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
 		$this->view->id_cidade = isset( $_GET['cidade'] ) ? $_GET['cidade'] : '';
-		
+
 		$this->view->js[] = 'bootstrap-datepicker.js';
-		$this->view->css[] = 'bootstrap-datepicker.css';		
-		
-		if( $id ) 
+		$this->view->css[] = 'bootstrap-datepicker.css';
+
+		if( $id )
 		{
 			$this->view->title = "Editar Visita";
 			$this->view->action = "edit/".$id;
@@ -50,15 +50,16 @@ class Visita extends Controller {
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo create
 	*/
 	public function create()
 	{
 		$data = array(
-			'obs' 			=> $_POST["obs"], 
-			'data' 			=> Data::formataDataBD( $_POST["data"] ), 
-			'id_cidade' 	=> $_POST["id_cidade"], 
+			'obs' 			=> $_POST["obs"],
+			'data' 			=> Data::formataDataBD( $_POST["data"] ),
+			'id_cidade' 	=> $_POST["id_cidade"],
+			'custo'			=> Data::formataMoedaBD($_POST['custo'])
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -66,14 +67,15 @@ class Visita extends Controller {
 		header("location: " . URL . "visita?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $id )
 	{
 		$data = array(
-			'obs' 			=> $_POST["obs"], 
-			'data' 			=> Data::formataDataBD( $_POST["data"] )
+			'obs' 			=> $_POST["obs"],
+			'data' 			=> Data::formataDataBD( $_POST["data"] ),
+			'custo'			=> Data::formataMoedaBD($_POST['custo'])
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -81,7 +83,7 @@ class Visita extends Controller {
 		header("location: " . URL . "visita?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )

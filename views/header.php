@@ -1,118 +1,161 @@
 <?php Session::init(); ?>
-<?php include_once 'menu.php';?>    
+<?php include_once 'menu.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?=(isset($this->title)) ? $this->title : SYSTEM_NAME; ?> </title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href='<?php echo URL; ?>public/img/ico.ico' rel='shortcut icon' type='image/x-icon'>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <!-- Bootstrap core CSS -->
 
-    <title><?=(isset($this->title)) ? $this->title : SYSTEM_NAME; ?></title>
+  <link href="<?php echo URL?>public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo URL?>public/fonts/css/font-awesome.min.css" rel="stylesheet">
+  <link href="<?php echo URL?>public/css/animate.min.css" rel="stylesheet">
 
-    <!-- jQuery -->
-    <script src="<?php echo URL; ?>public/js/jquery.min.js"></script>
-    <script src="<?php echo URL; ?>public/js/angular.min.js"></script>
-    
-    <?php 
-    if (isset($this->js)) 
+  <!-- Custom styling plus plugins -->
+  <link href="<?php echo URL?>public/css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="<?php echo URL?>public/css/maps/jquery-jvectormap-2.0.3.css" />
+  <link href="<?php echo URL?>public/css/icheck/flat/green.css" rel="stylesheet" />
+  <link href="<?php echo URL?>public/css/floatexamples.css" rel="stylesheet" type="text/css" />
+
+  <script src="<?php echo URL?>public/js/jquery.min.js"></script>
+  <script src="<?php echo URL?>public/js/nprogress.js"></script>
+  <script src="<?php echo URL?>public/js/khas.js"></script>
+
+	<?php
+    if (isset($this->js))
     {
         foreach ($this->js as $js)
         {
             echo '<script type="text/javascript" src="'.URL.'public/js/'.$js.'"></script>';
         }
     }
-    ?>
-    
-    <!-- Bootstrap Core CSS -->
-    <link href="<?php echo URL; ?>public/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="<?php echo URL; ?>public/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="<?php echo URL; ?>public/css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="<?php echo URL; ?>public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	
-	<!-- STYLE default -->
-    <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
-	
-	<?php 
-    if (isset($this->css)) 
+    if (isset($this->css))
     {
-        foreach ($this->css as $css)
-        {
-        	echo '<link href="'. URL .'public/css/'. $css .'" rel="stylesheet">';
-        }
+    	foreach ($this->css as $css)
+    	{
+    		echo '<link href="'. URL .'public/css/'. $css .'" rel="stylesheet">';
+    	}
     }
     ?>
-	
+
+  <!--[if lt IE 9]>
+        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+        <![endif]-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
 </head>
 
-<body>
 
-    <div id="wrapper">
+<body class="nav-md">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php"><?php echo SYSTEM_NAME; ?></a>
+  <div class="container body">
+
+    <div class="main_container">
+
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="index.html" class="site_title"><i class="fa fa-gears"></i> <span><?php echo SYSTEM_NAME; ?></span></a>
+          </div>
+          <div class="clearfix"></div>
+
+          <!-- menu prile quick info -->
+          <div class="profile" style="margin-bottom: 25px">
+            <div class="profile_pic">
+              <img src="<?php echo URL?>public/img/user.png" alt="..." class="img-circle profile_img">
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo Session::get('user_name'); ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon-edit"></i>&nbsp;&nbsp;&nbsp;&nbsp;Editar perfil</a>
-                        </li>
-                        <!-- <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i>&nbsp;&nbsp;&nbsp;&nbsp;Inbox</a>
-                        </li>-->
-                        
-                        <li class="divider"></li>
-                        <li>
-                            <a href="<?php echo URL?>login/logout"><i class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Sair</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-	                <?php foreach( $menu as $key => $item ) { ?>
-				        <li>
-				        	<a href="<?php echo URL . $key; ?>">
-				        		<i class="<?php echo $item['icon']?>"></i> <?php echo $item['label']; ?> 
-				        	</a>
-				        </li>
-			        <?php } ?>
+            <div class="profile_info">
+              <span>Bem vindo,</span>
+              <h2><?php echo Session::get('user_name'); ?> </h2>
+            </div>
+          </div>
+          <!-- /menu prile quick info -->
+
+          <br /><br /><br />
+
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+
+              <ul class="nav side-menu">
+
+                <?php foreach( $menu as $key => $item ) { ?>
+			        <li>
+			        	<a href="<?php echo URL . $key; ?>">
+			        		<i class="<?php echo $item['icon']?>"></i> <?php echo $item['label']; ?>
+			        	</a>
+			        </li>
+		        <?php } ?>
+
+              </ul>
+            </div>
+
+          </div>
+          <!-- /sidebar menu -->
+
+          <!-- /menu footer buttons -->
+          <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Settings">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+              <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+          </div>
+          <!-- /menu footer buttons -->
+        </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+
+        <div class="nav_menu">
+          <nav class="" role="navigation">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="<?php echo URL?>public/img/user.png" alt=""><?php echo Session::get('user_name'); ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                  <li><a href="<?=URL?>user/form/<?=Session::get('userid')?>">  Editar perfil</a></li>
+                  <li><a href="<?php echo URL?>login/logout"><i class="fa fa-sign-out pull-right"></i> Sair</a>
+                  </li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+              </li>
 
-        <div id="page-wrapper">
 
-            <div class="container-fluid">
+
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+      <!-- /top navigation -->
+
+
+      <!-- page content -->
+      <div class="right_col" role="main">

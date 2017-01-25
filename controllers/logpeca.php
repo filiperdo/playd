@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Logpeca extends Controller {
 
@@ -7,7 +7,7 @@ class Logpeca extends Controller {
 		Auth::handleLogin();
 	}
 
-	/** 
+	/**
 	* Metodo index
 	*/
 	public function index()
@@ -20,7 +20,7 @@ class Logpeca extends Controller {
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo editForm
 	*/
 	public function form( $id = NULL )
@@ -29,7 +29,7 @@ class Logpeca extends Controller {
 		$this->view->action = "create";
 		$this->view->obj = $this->model;
 
-		if( $id ) 
+		if( $id )
 		{
 			$this->view->title = "Editar Logpeca";
 			$this->view->action = "edit/".$id;
@@ -45,16 +45,16 @@ class Logpeca extends Controller {
 		$this->view->render( "footer" );
 	}
 
-	/** 
+	/**
 	* Metodo create
 	*/
 	public function create()
 	{
 		$data = array(
-			'color' 		=> $_POST["color"], 
-			'date' 			=> $_POST["date"], 
-			'id_peca' 		=> $_POST["id_peca"], 
-			'id_user' 		=> $_POST["id_user"], 
+			'color' 		=> $_POST["color"],
+			'date' 			=> $_POST["date"],
+			'id_peca' 		=> $_POST["id_peca"],
+			'id_user' 		=> $_POST["id_user"],
 		);
 
 		$this->model->create( $data ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -62,16 +62,16 @@ class Logpeca extends Controller {
 		header("location: " . URL . "logpeca?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $id )
 	{
 		$data = array(
-			'color' 			=> $_POST["color"], 
-			'date' 				=> $_POST["date"], 
-			'id_peca' 			=> $_POST["id_peca"], 
-			'id_user' 			=> $_POST["id_user"], 
+			'color' 			=> $_POST["color"],
+			'date' 				=> $_POST["date"],
+			'id_peca' 			=> $_POST["id_peca"],
+			'id_user' 			=> $_POST["id_user"],
 		);
 
 		$this->model->edit( $data, $id ) ? $msg = base64_encode( "OPERACAO_SUCESSO" ) : $msg = base64_encode( "OPERACAO_ERRO" );
@@ -79,7 +79,7 @@ class Logpeca extends Controller {
 		header("location: " . URL . "logpeca?st=".$msg);
 	}
 
-	/** 
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )
@@ -88,7 +88,7 @@ class Logpeca extends Controller {
 
 		header("location: " . URL . "logpeca?st=".$msg);
 	}
-	
+
 	/**
 	 * Lista os logs de uma peca
 	 * Montando uma tr para exibir via ajax
@@ -97,18 +97,17 @@ class Logpeca extends Controller {
 	public function listLogAjax( $id_peca )
 	{
 		$html  = '';
-	
+
 		foreach ( $this->model->listarLogpeca( $id_peca ) as $log )
 		{
 			$html .= '<tr>';
-			$html .= '<td> ' . $log->getStatus()->getName() . '</td>';
+			$html .= '<td style="text-align:left"> ' . $log->getStatus()->getName() . '</td>';
 			$html .= '<td> ' . Data::formataDataRetiraHora($log->getDate()) . '</td>';
 			$html .= '<td> ' . $log->getUser()->getName() . '</td>';
 			$html .= '</tr>';
 		}
-	
-		ini_set('default_charset', 'ISO-8859-1');
+
 		echo $html;
 	}
-	
+
 }

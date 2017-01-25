@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-/** 
+/**
  * Classe Produto
  * @author __ Filipe Rodrigues | filiperdo@gmail.com
  *
@@ -8,8 +8,8 @@
  */
 class Produto_Model extends Model
 {
-	/** 
-	* Atributos Private 
+	/**
+	* Atributos Private
 	*/
 	private $produto;
 	private $name;
@@ -18,6 +18,7 @@ class Produto_Model extends Model
 	private $cola;
 	private $vidro;
 	private $polarizador;
+	private $lcd;
 
 	public function __construct()
 	{
@@ -26,9 +27,14 @@ class Produto_Model extends Model
 		$this->id_produto = '';
 		$this->name = '';
 		$this->marca = '';
+		$this->aro = '';
+		$this->cola = '';
+		$this->vidro = '';
+		$this->polarizador = '';
+		$this->lcd = '';
 	}
 
-	/** 
+	/**
 	* Metodos set's
 	*/
 	public function setId_produto( $id_produto )
@@ -45,28 +51,33 @@ class Produto_Model extends Model
 	{
 		$this->marca = $marca;
 	}
-	
+
 	public function setAro( $aro )
 	{
 		$this->aro = $aro;
 	}
-	
+
 	public function setCola( $cola )
 	{
 		$this->cola = $cola;
 	}
-	
+
 	public function setVidro( $vidro )
 	{
 		$this->vidro = $vidro;
 	}
-	
+
 	public function setPolarizador( $polarizador )
 	{
 		$this->polarizador = $polarizador;
 	}
-	
-	/** 
+
+	public function setLcd( $lcd )
+	{
+		$this->lcd = $lcd;
+	}
+
+	/**
 	* Metodos get's
 	*/
 	public function getId_produto()
@@ -83,28 +94,33 @@ class Produto_Model extends Model
 	{
 		return $this->marca;
 	}
-	
+
 	public function getAro()
 	{
 		return $this->aro;
 	}
-	
+
 	public function getCola()
 	{
 		return $this->cola;
 	}
-	
+
 	public function getVidro()
 	{
 		return $this->vidro;
 	}
-	
+
 	public function getPolarizador()
 	{
 		return $this->polarizador;
 	}
 
-	/** 
+	public function getLcd()
+	{
+		return $this->lcd;
+	}
+
+	/**
 	* Metodo create
 	*/
 	public function create( $data )
@@ -120,7 +136,7 @@ class Produto_Model extends Model
 		return true;
 	}
 
-	/** 
+	/**
 	* Metodo edit
 	*/
 	public function edit( $data, $id )
@@ -136,14 +152,14 @@ class Produto_Model extends Model
 		return $update;
 	}
 
-	/** 
+	/**
 	* Metodo delete
 	*/
 	public function delete( $id )
 	{
 		$this->db->beginTransaction();
 
-		if( !$delete = $this->db->delete("produto", "id_produto = {$id} ") ){ 
+		if( !$delete = $this->db->delete("produto", "id_produto = {$id} ") ){
 			$this->db->rollBack();
 			return false;
 		}
@@ -152,7 +168,7 @@ class Produto_Model extends Model
 		return $delete;
 	}
 
-	/** 
+	/**
 	* Metodo obterProduto
 	*/
 	public function obterProduto( $id_produto )
@@ -165,7 +181,7 @@ class Produto_Model extends Model
 		return $this->montarObjeto( $result[0] );
 	}
 
-	/** 
+	/**
 	* Metodo listarProduto
 	*/
 	public function listarProduto()
@@ -175,7 +191,7 @@ class Produto_Model extends Model
 
 		if ( isset( $_POST["like"] ) )
 		{
-			$sql .= "where p.name like :name "; // Configurar o like com o campo necessario da tabela 
+			$sql .= "where p.name like :name "; // Configurar o like com o campo necessario da tabela
 			$sql .= 'order by p.id_marca asc ';
 			$result = $this->db->select( $sql, array("name" => "%{$_POST["like"]}%") );
 		}
@@ -196,12 +212,12 @@ class Produto_Model extends Model
 		$sql  = "select * ";
 		$sql .= "from produto as p ";
 		$sql .= 'where p.id_marca = ' . $id_marca . ' ';
-		
+
 		$result = $this->db->select( $sql );
-		
+
 		return $this->montarLista($result);
 	}
-	
+
 	/**
 	 * Lista os produtos por status
 	 * trazendo os totais de cada um
@@ -217,14 +233,14 @@ class Produto_Model extends Model
 		$sql .= 'on prod.id_produto = p.id_produto ';
 		$sql .= 'where p.id_statuspeca = :idStatus ';
 		$sql .= 'group by prod.id_produto ';
-		
+
 		$result = $this->db->select( $sql, array( 'idStatus' => $id_status ) );
-		
+
 		return $result;
-		
+
 	}
-	
-	/** 
+
+	/**
 	* Metodo montarLista
 	*/
 	private function montarLista( $result )
@@ -243,14 +259,14 @@ class Produto_Model extends Model
 		return $objs;
 	}
 
-	/** 
+	/**
 	* Metodo montarObjeto
 	*/
 	private function montarObjeto( $row )
 	{
 		$this->setId_produto( $row["id_produto"] );
 		$this->setName( $row["name"] );
-		
+
 		require_once 'models/marca_model.php';
 		$objMarca = new Marca_Model();
 		$this->setMarca( $objMarca->obterMarca( $row['id_marca'] ) );
@@ -259,7 +275,8 @@ class Produto_Model extends Model
 		$this->setCola( $row["cola"] );
 		$this->setVidro( $row["vidro"] );
 		$this->setPolarizador( $row["polarizador"] );
-		
+		$this->setLcd( $row['lcd'] );
+
 		return $this;
 	}
 }
